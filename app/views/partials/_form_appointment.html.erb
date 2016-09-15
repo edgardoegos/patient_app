@@ -1,0 +1,456 @@
+<h1>Appointment</h1>
+
+<fieldset>
+    <h2>Appointment Information</h2>
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="form-group">
+                <label class="control-label lbl-consultation-date">Consultation Date *</label>
+                <div id="fld-consultation-date">
+                    <div class="input-group date">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        <%= text_field_tag "patient[appointments][consultation_date]", DateTime.now.to_date.strftime('%d/%m/%Y'), :class => "form-control required", :data => { :name => "consultation-date" } %>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-last-name">Last Name *</label>
+                        <%= hidden_field_tag "patient[appointments][patient_id]", 0, :class => "form-control", :data => { :name => "patient-id" } %>
+                        <%= text_field_tag "patient[appointments][last_name]", "", :class => "form-control required", :data => { :name => "last-name" } %>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label lbl-first-name">First Name *</label>
+                        <%= text_field_tag "patient[appointments][first_name]", "", :class => "form-control required", :data => { :name => "first-name" } %>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label lbl-middle-name">Middle Name *</label>
+                        <%= text_field_tag "patient[appointments][middle_name]", "", :class => "form-control required", :data => { :name => "middle-name" } %>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-systolic">Systolic *</label>
+                        <%= text_field_tag "patient[appointments][systolic]", "120", :class => "form-control touchspin required", :data => { :name => "systolic" } %>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label lbl-diastolic">Diastolic *</label>
+                        <%= text_field_tag "patient[appointments][diastolic]", "80", :class => "form-control touchspin required", :data => { :name => "diastolic" } %>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label lbl-weight">Weight (kg) *</label>
+                        <%= text_field_tag "patient[appointments][weight]", "", :class => "form-control required", :data => { :name => "weight" } %>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label lbl-complaint">Chief Complaint</label>
+                        <%= text_area_tag "patient[appointments][complaint]", "", :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <div class="col-lg-2">
+            <div class="text-center">
+                <div style="margin-top: 20px">
+                    <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<h1>Patient</h1>
+<fieldset>
+    <div id="dv-new-patient-container">
+        <h2>Patient Personal Information <small>(* are all required fields)</small></h2>
+        <div class="hr-line-dashed"></div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="control-label lbl-last-name">Last Name *</label>
+                            <%= text_field_tag "patient[last_name]", "", :class => "form-control required", :data => { :name => "last-name" } %>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label lbl-first-name">First Name *</label>
+                            <%= text_field_tag "patient[first_name]", "", :class => "form-control required", :data => { :name => "first-name" } %>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label lbl-middle-name">Middle Name *</label>
+                            <%= text_field_tag "patient[middle_name]", "", :class => "form-control required", :data => { :name => "middle-name" } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <label class="control-label lbl-birth-date">Birth Date</label>
+                            <div id="fld-birth-date">
+                                <div class="input-group date">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <%= text_field_tag "patient[birth_date]", "", :class => "form-control required", :data => { :name => "birth-date" } %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">Gender <large>*</large></label>
+                            <br \>
+                            <% Patient.genders.each do |k, v| %>
+                                <div class="radio radio-info radio-inline">
+                                    <%= radio_button_tag "patient[gender]", k, id: k, checked: v == 1 ? "checked" : "" %>
+                                    <%= label_tag "patient[gender]", k == "male" ? "Male" : "Female", :value => v  %>
+                                </div>
+                            <% end %>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label">Civil Status <large>*</large></label>
+                            <%= select_tag("patient[civil_status]", options_for_select(Patient.civil_statuses.collect{ |k, v| [k.humanize.titlecase, k]}), { :class => 'form-control m-b' }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <label class="control-label lbl-address">Address <large>*</large></label>
+                        <%= text_field_tag "patient[address]", "", autofocus: true, class: "form-control required", :data => { :name => "address" } %>
+                    </div>
+                    <div class="col-xs-4">
+                        <label class="control-label lbl-contact">Contact <large>*</large></label>
+                        <%= text_field_tag "patient[contact]", "", autofocus: true, class: "form-control required", data: { mask: "(99) 9999?9-9999", :name => "contact" } %>
+                        <span class="help-block">(09) 99999-9999</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="control-label lbl-occupation">Occupation <large>*</large></label>
+                        <%= text_field_tag "patient[occupation]", "", autofocus: true, class: "form-control required", :data => { :name => "occupation" } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label class="control-label">Blood Type</label>
+                        <%= text_field_tag "patient[blood_type]", "", autofocus: true, class: "form-control"  %>
+                    </div>
+                    <div class="col-xs-4">
+                        <label class="control-label lbl-weight">Weight (kg) <large>*</large></label>
+                        <%= text_field_tag "patient[weight]", "", autofocus: true, class: "form-control required", :data => { :name => "weight" } %>
+                    </div>
+                    <div class="col-xs-4">
+                        <label class="control-label lbl-height">Height (ft) <large>*</large></label>
+                        <%= text_field_tag "patient[height]", "", autofocus: true, class: "form-control required", :data => { :name => "height" } %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label class="control-label">Menarche</label>
+                        <%= select_year(0, {:start_year => Time.now.year, :end_year => 1980}, {:class => "form-control m-b", :name => "patient[medical_record][menarche]"})  %>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="control-label lbl-gravida">Gravida</label>
+                        <%= text_field_tag "patient[medical_record][gravida]", 0, :class => "form-control touchspin", :data => { :name => "gravida" } %>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="control-label lbl-para">Para</label>
+                        <%= text_field_tag "patient[medical_record][para]", 0, :class => "form-control touchspin", :data => { :name => "para" } %>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="control-label lbl-t">T</label>
+                        <%= text_field_tag "patient[medical_record][t]", 0, :class => "form-control touchspin", :data => { :name => "t" } %>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="control-label lbl-t">P</label>
+                        <%= text_field_tag "patient[medical_record][p]", 0, :class => "form-control touchspin", :data => { :name => "p" } %>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="control-label lbl-a">A</label>
+                        <%= text_field_tag "patient[medical_record][a]", 0, :class => "form-control touchspin", :data => { :name => "a" } %>
+                    </div>
+                    <div class="col-xs-1">
+                        <label class="control-label lbl-l">L</label>
+                        <%= text_field_tag "patient[medical_record][l]", 0, :class => "form-control touchspin", :data => { :name => "l" } %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <label class="control-label lbl-ob-history">OB History</label>
+                    <%= text_area_tag "patient[medical_record][ob_history]", "", :class => "form-control", :style => "height: 100px;", :data => { :name => "ob-history" }%>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div id="dv-patient-container" class="hidden">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="jumbotron">
+                    <h1>Patient already registered</h1>
+                    <p>Please procceed to our next step.</p>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="text-center">
+                    <div style="margin-top: 20px">
+                        <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<h1>Review</h1>
+<fieldset>
+    <h2>Appointment</h2>
+    <div class="hr-line-dashed"></div>
+    <div class="row">
+        <div class="col-md-4 mp0i">
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-6">
+                        <label class="control-label lbl-consultation-date">Consultation Date:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-consultation-date" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-6">
+                        <label class="control-label lbl-consultation-date">Systolic:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-systolic" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+             <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-6">
+                        <label class="control-label lbl-consultation-date">Diastolic:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-diastolic" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+             <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-6">
+                        <label class="control-label lbl-consultation-date">Weight:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-weight" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Chief Complaint:</label>
+                    </div>
+                    <div class="col-md-8 mp0i">
+                        <p id="p-complaint" class="review-display">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Patient Information</h2>
+    <div class="hr-line-dashed"></div>
+    <div class="row">
+        <div class="col-md-6 mp0i">
+             <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Name:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-name" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Date of Birth:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-birth-date" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Gender:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-gender" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Civil Status:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-civil-status" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Address:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-address" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Contact:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-contact" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Occupation:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-occupation" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Weight (kg):</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-weight-2" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Height (ft):</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-height" class="review-display"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mp0i">
+            <div class="form-group">
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Blood Type:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-blood-type" class="review-display"></p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Menarche:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-menarche" class="review-display"></p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Gravida:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-gravida" class="review-display">0</p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">Para:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-para" class="review-display">0</p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">T:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-t" class="review-display">0</p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">P:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-p" class="review-display">0</p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">A:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-a" class="review-display">0</p>
+                    </div>
+                </div>
+                <div class="col-md-12 mp0i">
+                    <div class="col-md-4">
+                        <label class="control-label lbl-consultation-date">L:</label>
+                    </div>
+                    <div class="col-md-6 mp0i">
+                        <p id="p-l" class="review-display">0</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mp0i">
+            <div class="col-md-12">
+                <label class="control-label lbl-consultation-date">OB History:</label>
+                <p id="p-ob-history" class="review-display">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+        </div>
+    </div>
+    
+</fieldset>
+
+

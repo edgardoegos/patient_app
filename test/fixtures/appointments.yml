@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cconsultation_date: 2016-09-14 15:45:17
+  first_name: MyString
+  last_name: MyString
+  middle_name: MyString
+  systolic: 1
+  diastolic: 1
+  weight: MyString
+  complaint: MyText
+  status: 1
+
+two:
+  cconsultation_date: 2016-09-14 15:45:17
+  first_name: MyString
+  last_name: MyString
+  middle_name: MyString
+  systolic: 1
+  diastolic: 1
+  weight: MyString
+  complaint: MyText
+  status: 1

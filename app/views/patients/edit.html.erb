@@ -1,0 +1,125 @@
+<%= stylesheet_link_tag 'patients', media: 'all', 'data-turbolinks-track' => true %>
+<style>
+    .input-group-btn-vertical .bootstrap-touchspin-down {
+        margin: -7px 0 0 -1px !important;
+    }
+    
+    .required {
+        color: #ca4440;
+    }
+    
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Edit Patient</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="<%= root_url %>">Home</a>
+            </li>
+            <li>
+                <a href="<%= patients_path %>">Patients</a>
+            </li>
+            <li class="active">
+                <strong>Edit Patient</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <%= form_for @patient, url: { action: "update" }, :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
+                        <%= render partial: partials[:form][:patient], :locals => { :f => f, :title => "Edit Patient" } %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+    window.onload = function () {
+      
+        var success = getUrlParameter('success');
+    
+       if (success == 1){
+             toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('successfully created.', 'Patient');
+        } else if (success == 2) {
+             toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('successfully Update.', 'Patient');
+        } else if (success == 3) {
+             toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                showMethod: 'slideDown',
+                timeOut: 4000
+            };
+            toastr.success('successfully deleted.', 'Patient');
+        }
+        
+    }
+
+        
+    $(function() {
+
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+    });
+    
+     var getUrlParameter = function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+     }
+    
+</script>
+
+<% end %>
