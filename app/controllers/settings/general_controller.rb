@@ -25,7 +25,7 @@ class Settings::GeneralController < ApplicationController
     private
     
     def settings_params
-        params.require(:setting).permit(:name, :logo, body: [:app_name, :app_tagline, :admin_email, :app_description])
+        params.require(:setting).permit(:name, :logo, body: [:app_name, :app_initials, :admin_email, :app_description])
     end
     
 end

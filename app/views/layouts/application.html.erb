@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>INSPINIA | Responsive admin theme</title>
 
+    <!-- Include style per-controller - vendor plugins -->
+    <%= stylesheet_link_tag "#{params[:controller] + '_' + params[:action]}" if ::Rails.application.assets.find_asset("#{params[:controller] + '_' + params[:action]}.css") %>
     <!-- Main css styles -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     
-    <!-- Include style per-controller - vendor plugins -->
-    <%= stylesheet_link_tag "#{params[:controller] + '_' + params[:action]}" if ::Rails.application.assets.find_asset("#{params[:controller] + '_' + params[:action]}.css") %>
 
 </head>
 <body>

@@ -21,3 +21,5 @@
 //= require bootstrap-markdown/markdown.js
 //= require jeditable/jquery.jeditable.js
 //= require dataTables/datatables.min.js
+
+//= require application/appointments/new.js

@@ -15,7 +15,8 @@ class AppointmentsController < ApplicationController
     def create
         
         if !Appointment.save_appointment(appointment_params).nil?
-            redirect_to appointments_path(success: 1)
+            flash[:success] = "Appointment successfully created"
+            redirect_to appointments_path
         end
     
     end
@@ -24,7 +25,8 @@ class AppointmentsController < ApplicationController
        @appointment = Appointment.find(params[:id])
         
         if @appointment.update(update_appointment_params)
-            redirect_to appointments_path(success: 2)
+            flash[:success] = "Appointment successfully updated."
+            redirect_to appointments_path
         end
     end
     
