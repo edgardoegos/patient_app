@@ -1,0 +1,32 @@
+.img-preview-sm {
+    height: 102px;
+    width: 446px;
+    border: 1px solid;
+    background: gainsboro;
+}
+.mdl-img-preview-sm {
+    height: 160px;
+    width: 446px;
+    background: #dcdcdc;
+}
+
+#frm-company-logo {
+    margin: 15px 0 0 0;
+}
+
+.dv-btn-command-container {
+     margin: 15px 0 0 0;
+}
+
+.image-crop {
+    min-height: 320px;
+    background: white;
+}
+
+.navbar-top-links .dropdown-alerts {
+    width: 180px !important;
+}
+
+.navbar-top-links .dropdown-menu li a {
+    padding: 0 !important;
+}

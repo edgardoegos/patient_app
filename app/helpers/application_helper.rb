@@ -19,6 +19,7 @@ module ApplicationHelper
 			:form => {
                 :patient => @@partials + "form_patient",
                 :appointment => @@partials + "form_appointment",
+                :user => @@partials + "form_user",
 			}
 		}
 	end
@@ -78,4 +79,96 @@ module ApplicationHelper
         end
     end
     
+    # ======= NOTIFICATION ======================
+    
+    def flash_notifications
+        message = flash[:error] || flash[:success]
+
+        if message
+          type = flash.keys[0].to_s
+          javascript_tag %Q{$.notification({ message:"#{message}", type:"#{type}" });}
+        end
+    end
+    
+    def app_settings
+        Setting.first
+    end
+
+    # ======= Role Permission ============================================
+
+    def super_and_admin_roles
+        return roles_include(roles.keys[0..1])
+    end
+
+    def author_role
+        return roles_include(roles.keys[3])
+    end
+
+    def editor_role
+        return roles_include(roles.keys[2])
+    end
+
+    def roles_include(allowed_roles)
+        return allowed_roles.include?(current_user.role)
+    end
+
+    def roles
+        User.roles
+    end
+
+    def permissions
+        {
+            settings: {
+                general: {
+                    allowed: [0, 1]
+                },
+                user_management: {
+                    allowed: [0, 1]
+                }
+            },
+            patients: {
+                allowed: [:all]
+            },
+            appointments: {
+                allowed: [:all]
+            }
+        }
+    end
+
+    def check_authorization
+        
+        permission = permissions.stringify_keys
+
+        params[:controller].split('/').each do |key|
+            if permission.has_key?(key)
+                permission = permission[key].stringify_keys
+            end
+        end
+
+        @@permission = permission.deep_symbolize_keys
+
+        unless @@permission[:allowed] == [:all]
+            unless @@permission[:allowed].include?(roles[current_user.role])
+                
+                flash[:error] = "Permission Denied!"
+                redirect_to root_path
+                return
+            end
+        end
+        
+    end
+
+    def get_active_nav(nav_name)
+        case params[:controller]
+        when "application"
+          if nav_name == params[:action]
+              return "active" 
+          end 
+        else
+          if nav_name == params[:controller]
+              return "active" 
+          end
+        end 
+    end
+
 end

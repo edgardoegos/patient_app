@@ -1,0 +1,188 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>User Management</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="<%= root_path %>">Home</a>
+            </li>
+            <li>
+                <a>Settings</a>
+            </li>
+            <li class="active">
+                <strong>General</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>All form elements <small>With custom checbox and radion elements.</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <h4>Application <span class="semi-bold">Logo</span></h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="image-crop">
+                                <% if !@setting.logo.present? %>
+                                    <img src="<%= image_path('empty-state-grid.png') %>">
+                                <% else %>
+                                    <img src="<%= @setting.logo.url(:original) %>">
+
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Preview image</h4>
+                            <div class="col-md-12 mp0i">
+                                <div class="img-preview img-preview-sm"></div>
+                                <p>Recomended photo size: 446 × 102</p>
+                            </div>
+                            <div class="col-md-12 mp0i">
+                                <%= form_for @setting, url: { action: "update" }, :html => { :multipart => true, :class => "", :id => "frm-company-logo" } do |f| %>
+                                    <%= f.hidden_field :logo, class: "hide" %>
+                                    <label title="Upload image file" for="inputImage" class="btn btn-white ">
+                                        <input type="file" class="hide" id="inputImage" accept="image/*">
+                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Upload your photo
+                                    </label>
+                                    <button type="button" id="btn-crop" class="btn btn-info">Set as company logo</button>
+                                <% end %>
+                            </div>
+                            <div class="col-md-12 mp0i">
+                                <h4>Crop Tools</h4>
+                                <div class="dv-btn-command-container">
+                                    <div class="btn-group">
+                                        <button class="btn btn-white btn-sm btn-small" id="zoomIn" type="button"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+                                        <button class="btn btn-white btn-sm btn-small" id="zoomOut" type="button"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+                                        <button class="btn btn-white btn-sm btn-small" id="rotateRight" type="button"><i class="fa fa-undo"></i></button>
+                                        <button class="btn btn-white btn-sm btn-small" id="rotateLeft" type="button"><i class="fa fa-repeat"></i></button>
+                                        <button class="btn btn-white btn-sm btn-small" id="btn-reload" type="button"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>All form elements <small>With custom checbox and radion elements.</small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">Config option 1</a>
+                            </li>
+                            <li><a href="#">Config option 2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <%= form_for @setting, url: { action: "update" }, :html => { :multipart => true, :class => "form-no-horizontal-spacing", :id => "frm-company-settings" } do |f| %>
+                        <div class="row">
+                            <div class="col-md-6">    
+
+                                <div class="row form-row">
+                                  <div class="col-md-12">
+                                      <div class="form-group">
+                                            <label class="form-label">Company Name</label>
+                                            <div class="controls">
+                                                <%= text_field_tag "setting[body][app_name]", @setting.body["app_name"], :class => "form-control" %>
+                                            </div>
+                                      </div>
+                                  </div>
+                                </div>
+
+                                <div class="row form-row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Company Tagline</label>
+                                            <div class="controls">
+                                                <%= text_field_tag "setting[body][app_tagline]", @setting.body["app_tagline"], :class => "form-control" %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="row form-row">
+                                  <div class="col-md-12">
+                                      <div class="form-group">
+                                            <label class="form-label">Company Email</label>
+                                            <div class="controls">
+                                                <%= text_field_tag "setting[body][admin_email]", @setting.body["admin_email"], :class => "form-control" %>
+                                            </div>
+                                      </div>
+                                  </div>
+                                </div>
+
+                                <div class="row form-row">
+                                  <div class="col-md-12">
+                                    <div class="form-group">
+                                            <label class="form-label">Company Description</label>
+                                            <div class="controls">
+                                                <%= text_field_tag "setting[body][app_description]", @setting.body["app_description"], :class => "form-control" %>
+                                            </div>
+                                      </div>
+                                  </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="pull-left">
+
+                                    </div>
+                                    <div class="pull-right">
+                                      <button class="btn btn-info btn-cons" type="submit"><i class="icon-ok"></i> Update</button>
+                                      <button class="btn btn-white btn-cons" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

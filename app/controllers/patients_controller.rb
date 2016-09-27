@@ -1,5 +1,9 @@
 class PatientsController < ApplicationController
     
+    include ApplicationHelper
+    
+    before_action :check_authorization
+    
     def index
         @patients = Patient.all
     end

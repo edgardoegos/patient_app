@@ -6,19 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>INSPINIA | Responsive admin theme</title>
 
-    <!-- Include style per-controller - vendor plugins -->
-    <%= stylesheet_link_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.css") %>
-
     <!-- Main css styles -->
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-
-    <!-- Main javascript files -->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
+    
+    <!-- Include style per-controller - vendor plugins -->
+    <%= stylesheet_link_tag "#{params[:controller] + '_' + params[:action]}" if ::Rails.application.assets.find_asset("#{params[:controller] + '_' + params[:action]}.css") %>
 
 </head>
 <body>
-
 <!-- Skin configuration box -->
 <!-- <%= render 'layouts/skinconfig' %> -->
 
@@ -48,13 +43,16 @@
 
     </div>
     <!-- End wrapper-->
-
+    
+    <!-- Main javascript files -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <!-- Include javascript per-controller - vendor plugins -->
-    <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
-
+    <%= javascript_include_tag "#{ params[:controller] + '_' + params[:action]}", 'data-turbolinks-track' => true %>
+    
     <!-- Include javascript per-view -->
     <!-- For demo purpose we include javascript in view but you can easily start SeedProject and organize it with Rails asset pipeline as you want -->
     <%= yield :javascript %>
+    ./    <%= flash_notifications -%>
 
 </body>
 </html>

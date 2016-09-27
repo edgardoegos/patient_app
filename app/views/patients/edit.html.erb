@@ -63,38 +63,6 @@
 <% content_for :javascript do %>
 
 <script type="text/javascript">
-    window.onload = function () {
-      
-        var success = getUrlParameter('success');
-    
-       if (success == 1){
-             toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 4000
-            };
-            toastr.success('successfully created.', 'Patient');
-        } else if (success == 2) {
-             toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 4000
-            };
-            toastr.success('successfully Update.', 'Patient');
-        } else if (success == 3) {
-             toastr.options = {
-                closeButton: true,
-                progressBar: true,
-                showMethod: 'slideDown',
-                timeOut: 4000
-            };
-            toastr.success('successfully deleted.', 'Patient');
-        }
-        
-    }
-
         
     $(function() {
 

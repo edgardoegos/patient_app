@@ -23,8 +23,53 @@ module AngularProject
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
       
-    config.assets.precompile += [ 'appviews.css', 'cssanimations.css', 'dashboard.css', 'forms.css', 'gallery.css', 'graphs.css', 'mailbox.css', 'miscellaneous.css', 'pages.css', 'tables.css', 'uielements.css', 'widgets.css', 'commerce.css', 'settings/users.css', 'patients.css', 'appointments.css' ]
-    config.assets.precompile += [ 'appviews.js', 'cssanimations.js', 'dashboard.js', 'forms.js', 'gallery.js', 'graphs.js', 'mailbox.js', 'miscellaneous.js', 'pages.js', 'tables.js', 'uielements.js', 'widgets.js', 'commerce.js', 'settings/users.js', 'patients.js', 'appointments.js' ]
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+      
+    config.assets.precompile += [ 
+        'appviews.css', 
+        'cssanimations.css', 
+        'dashboard.css', 
+        'forms.css', 
+        'gallery.css', 
+        'graphs.css', 
+        'mailbox.css', 
+        'miscellaneous.css', 
+        'pages.css', 
+        'tables.css', 
+        'uielements.css', 
+        'widgets.css', 
+        'commerce.css', 
+        'settings/users.css', 
+        'patients.css', 
+        'appointments.css', 
+        'settings/user_management_index.css', 
+        'settings/user_management_new.css',
+        'settings/user_management_edit.css',
+        'settings/general_index.css'
+    ]
+      
+    config.assets.precompile += [ 
+        'appviews.js', 
+        'cssanimations.js', 
+        'dashboard.js', 
+        'forms.js', 
+        'gallery.js',
+        'graphs.js', 
+        'mailbox.js', 
+        'miscellaneous.js', 
+        'pages.js', 
+        'tables.js', 
+        'uielements.js', 
+        'widgets.js', 
+        'commerce.js', 
+        'settings/users.js', 
+        'patients.js', 
+        'appointments.js', 
+        'settings/user_management_index.js',
+        'settings/user_management_new.js', 
+        'settings/user_management_edit.js',
+        'settings/general_index.js'
+    ]
       
       
       

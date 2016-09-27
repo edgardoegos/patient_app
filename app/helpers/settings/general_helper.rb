@@ -1,0 +1,2 @@
+module Settings::GeneralHelper
+end

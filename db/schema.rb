@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914135549) do
+ActiveRecord::Schema.define(version: 20160927111812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 20160914135549) do
     t.string   "contact"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string   "name"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.text     "body"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -68,6 +79,12 @@ ActiveRecord::Schema.define(version: 20160914135549) do
     t.string   "last_name"
     t.integer  "role"
     t.integer  "status"
+    t.integer  "gender",                 default: 0,  null: false
+    t.datetime "birth_date"
+    t.string   "address"
+    t.string   "country"
+    t.string   "postal_code"
+    t.string   "phone_number"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

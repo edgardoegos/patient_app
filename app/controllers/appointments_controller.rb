@@ -1,5 +1,9 @@
 class AppointmentsController < ApplicationController
     
+    include ApplicationHelper
+    
+    before_action :check_authorization
+    
     def index
         @appointments = Appointment.get_todays_appointments
     end

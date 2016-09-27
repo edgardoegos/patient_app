@@ -528,3 +528,39 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   display: block;
   width: 220px;
 }
+
+.navbar-top-links .dropdown-alerts {
+    width: 180px !important;
+}
+
+.navbar-top-links .dropdown-menu li a {
+    padding: 0 !important;
+}
+
+#btn-logout {
+    background: none!important;
+    border: none;
+ 
+    ine-height: 25px;
+    color: #2a2e36;
+    margin: 4px;
+    border-radius: 3px;
+    text-align: left;
+    
+    display: block;
+    padding: 3px 2px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    
+    width: 152px;
+}
+
+#btn-logout:hover {
+ background: #f5f5f5 !important;   
+}
+#btn-logout:focus {
+  outline: none;
+}
