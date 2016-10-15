@@ -1,0 +1,14 @@
+  .select2-selection {
+        border: 1px solid #e5e6e7 !important;
+        border-radius: 0 !important;
+        height: 34px !important;
+    }
+    .select2-selection .select2-selection__rendered {
+        padding-top: 1px !important;
+        padding-left: 10px !important;
+    }
+    
+    .select2-selection .select2-selection__arrow {
+        top: 4px !important;
+        right: 7px !important;
+    }

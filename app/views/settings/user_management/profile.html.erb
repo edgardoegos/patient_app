@@ -1,0 +1,59 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>My Profile</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= root_url %>">Home</a>
+      </li>
+      <li>
+        <a>Settings</a>
+      </li>
+      <li class="active">
+        <strong>My Profile</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+    <a href="<%= settings_user_management_edit_profile_path %>" class="btn btn-success pull-right" style="margin: 30px 0 0 0;"><i class="fa fa-pencil-square-o"></i> Edit Personal Information</a>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-md-2">
+              <div class="dv-user-info-wrapper">
+                <div class="dv-user-profile-pic">
+                  <% if @user.avatar.present? %>
+                      <img class="img-circle" src="<%= @user.avatar.url(:original) %>"  alt="" data-src="<%= @user.avatar.url(:original) %>" data-src-retina="<%= @user.avatar.url(:medium) %>" width="150" height="150" />
+                  <% else %>
+                      <img class="img-circle" src="<%= image_path('empty-state-avatar-1.png') %>" width="150" height="150">
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-10">
+            <div class="dv-container-personal-info">
+              <div class="row-fluid">
+                <address>
+                  <strong><%= @user.first_name %> <%= @user.last_name %></strong><br>
+                  <abbr title="Email">Email: </abbr> <a href="#"><%= @user.email %></a><br>
+                  <abbr title="Phone">Birthdate:</abbr> <%= format_date(@user.birth_date, "%Y %B %d") %>
+                </address>
+                <address class="margin-bottom-20 margin-top-10">
+                  <strong><%= @user.country %></strong><br>
+                  <abbr title="Address">Address:</abbr> <%= @user.address %>, <%= @user.postal_code %><br>
+                  <abbr title="Phone">Phone:</abbr> <%= @user.phone_number %>
+                </address>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

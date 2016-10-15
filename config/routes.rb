@@ -42,7 +42,10 @@ Rails.application.routes.draw do
     get '/appointments/history' => 'appointments#history', :as => :appointment_history
     
     resources :appointments
-    
+    resources :history
+    resources :follow_ups
     resources :patients
+
+    resources :search
     
 end

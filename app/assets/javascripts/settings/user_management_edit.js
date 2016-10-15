@@ -1,4 +1,4 @@
-//= require iCheck/icheck.min.js
+e//= require iCheck/icheck.min.js
 //= require staps/jquery.steps.min.js
 //= require validate/jquery.validate.min.js
 //= require dropzone/dropzone.js

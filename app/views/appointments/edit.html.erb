@@ -1,0 +1,82 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Edit Appointment</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="<%= root_path %>">Home</a>
+            </li>
+            <li>
+                <a href="<%= appointments_path %>">Appointments</a>
+            </li>
+            <li>
+                 <strong class="active">Edit Appointment</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3><%= get_patient_by_id(@appointment.patient_id) %></h3>
+                            <%= form_for @appointment, url: { action: "update" }, :html => { :multipart => true, :class => "wizard-big", :id => "frm-edit-appointment"} do |f| %>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="control-label lbl-consultation-date">Consultation Date *</label>
+                                            <div id="fld-consultation-date">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <%= f.text_field :consultation_date, value: format_date(@appointment.consultation_date, "%d/%m/%Y"), autofocus: true, class: "form-control ", required: true %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="control-label lbl-complaint">Status</label>
+                                            <%= select_tag("appointment[status]", options_for_select(Appointment.statuses.collect{ |k, v| [k.humanize.titlecase, k]}, @appointment.status), { :class => 'select2_demo_1 form-control' }) %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                     <div class="row">
+                                        <div class="col-md-4">
+                                            <label class="control-label lbl-systolic">Systolic *</label>
+                                            <%= f.text_field :systolic, autofocus: true, class: "form-control touchspin required", required: true %>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label lbl-diastolic">Diastolic *</label>
+                                            <%= f.text_field :diastolic, autofocus: true, class: "form-control touchspin required", required: true %>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label lbl-weight">Weight (kg) *</label>
+                                            <%= f.text_field :weight, autofocus: true, class: "form-control  required", required: true %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label class="control-label lbl-complaint">Chief Complaint</label>
+                                            <%= text_area_tag "appointment[complaint]", @appointment['complaint'], :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" } %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 pull-right">
+                                        <a href="<%= appointments_path %>" class="btn btn-white pull-right">Cancel</a>
+                                        <button class="btn btn-success pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>
+                                    </div>
+                                </div>
+                          <% end%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 /*
     Common
+
 */
 
 .wizard,
@@ -111,7 +112,7 @@
 .wizard > .steps .current a:hover,
 .wizard > .steps .current a:active
 {
-    background: #1AB394;
+    background: #1c84c6;
     color: #fff;
     cursor: default;
 }
@@ -120,7 +121,7 @@
 .wizard > .steps .done a:hover,
 .wizard > .steps .done a:active
 {
-    background: #6fd1bd;
+    background: rgba(28, 132, 213, 0.62);
     color: #fff;
 }
 
@@ -251,7 +252,7 @@
 .wizard > .actions a:hover,
 .wizard > .actions a:active
 {
-    background: #1AB394;
+    background: #1c84c6;
     color: #fff;
     display: block;
     padding: 0.5em 1em;

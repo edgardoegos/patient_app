@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>INSPINIA | Responsive admin theme</title>
+    <title><%= app_settings.body["app_name"] %></title>
+    <%= csrf_meta_tag %>
 
     <!-- Include style per-controller - vendor plugins -->
     <%= stylesheet_link_tag "#{params[:controller] + '_' + params[:action]}" if ::Rails.application.assets.find_asset("#{params[:controller] + '_' + params[:action]}.css") %>
@@ -52,7 +53,30 @@
     <!-- Include javascript per-view -->
     <!-- For demo purpose we include javascript in view but you can easily start SeedProject and organize it with Rails asset pipeline as you want -->
     <%= yield :javascript %>
-    ./    <%= flash_notifications -%>
+
+        <script type="text/javascript">
+
+          $('.btn-signout').click(function () {
+            $.ajax({
+              type: "DELETE",
+              url: "/signout",
+              beforeSend: function(xhr) {
+                var token = $('meta[name="csrf-token"]').attr('content');
+                if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+              },
+              success: function (data) {
+                location.reload();
+              },
+              error: function (data) {
+                console.log('Failed: ' + JSON.stringify(data));
+              }
+            });
+          });
+
+        </script>
+
+    <%= flash_notifications -%>
+
 
 </body>
 </html>

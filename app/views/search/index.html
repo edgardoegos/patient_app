@@ -1,0 +1,48 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-9">
+        <h2>	Search Page</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="<%= root_path %>">Home</a>
+            </li>
+            <li>
+                Extra Pages
+            </li>
+            <li class="active">
+                <strong>	Search Page</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <h2>
+                        2,160 results found for: <span class="text-navy">“<%= params[:search][:query_strings] %>”</span>
+                    </h2>
+                    <small>Request time  (0.23 seconds)</small>
+
+                    <% @patient_results.each do |result| %>
+                        <div class="hr-line-dashed"></div>
+                        <div class="search-result">
+                            <h3><a href="#"><%= "#{ result.last_name + ", " + result.first_name + " " + result.middle_name  }" %></a></h3>
+                            <p class="search-link"><%= result.address %></p>
+                            <p>
+                                <%= result.medical_record["ob_history"] %>
+                            </p>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                    <% end %>
+                    <div class="text-center">
+                        <div class="btn-group">
+                            <%= will_paginate @patient_results, :previous_label => "&laquo;", :next_label => "&raquo;", renderer: BootstrapPagination::Rails %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

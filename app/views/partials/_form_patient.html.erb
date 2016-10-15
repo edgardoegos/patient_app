@@ -1,6 +1,5 @@
 <h3>Patient's personal information <small>(* are all required fields)</small></h3>
 
-<div class="hr-line-dashed"></div>
 <div class="form-group">
     <div class="col-xs-4">
         <label class="control-label">Last Name <large class="required">*</large></label>
@@ -114,38 +113,11 @@
         <%= text_area_tag "patient[medical_record][ob_history]", @patient.medical_record['ob_history'], :class => "form-control", :style => "height: 100px;" %>
     </div>
 </div>
+
+<div class="hr-line-dashed"></div>
 <div class="form-group">
     <div class="col-md-6 pull-right">
         <a href="<%= patients_path %>" class="btn btn-white pull-right">Cancel</a>
-        <button class="btn btn-primary pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>
+        <button class="btn btn-success pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>
     </div>
 </div>
-
-<% content_for :javascript do %>
-
-<script type="text/javascript">
-
-
-    $(function() {
-
-        $('#data_3 .input-group.date').datepicker({
-            startView: 2,
-            todayBtn: "linked",
-            keyboardNavigation: false,
-            forceParse: false,
-            autoclose: true,
-            format: 'dd/mm/yyyy'
-        });
-
-
-        $(".touchspin").TouchSpin({
-            verticalbuttons: true,
-            buttondown_class: 'btn btn-white',
-            buttonup_class: 'btn btn-white'
-        });
-        
-    });
-
-</script>
-
-<% end %>

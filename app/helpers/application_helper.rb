@@ -19,11 +19,16 @@ module ApplicationHelper
 			:form => {
                 :patient => @@partials + "form_patient",
                 :appointment => @@partials + "form_appointment",
+                :follow_up => @@partials + "form_follow_up",
                 :user => @@partials + "form_user",
 			}
 		}
-	end
-    
+    end
+
+    def get_current_user(id)
+        User.find(id)
+    end
+
     def format_date(datetime, format)
 		return "" if datetime == nil
 		datetime.localtime.strftime(format)
@@ -126,6 +131,12 @@ module ApplicationHelper
                     allowed: [0, 1]
                 }
             },
+            search: {
+                allowed: [:all]
+            },
+            history: {
+                allowed: [:all]
+            },
             patients: {
                 allowed: [:all]
             },
@@ -169,6 +180,28 @@ module ApplicationHelper
               return "active" 
           end
         end 
+    end
+
+    def get_patient_by_id(id)
+        @patient = Patient.find(id)
+
+        if !@patient.nil?
+            return "#{  @patient.last_name + ', ' + @patient.first_name +  ' ' + @patient.middle_name }"
+        end
+
+    end
+
+    def get_appointment_current_status(status, button_name)
+        if status == button_name
+            if status == "complete"
+                return "success"
+            else
+                return "warning"
+            end
+        else
+            return "white"
+        end
+
     end
 
 end

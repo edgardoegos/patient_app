@@ -55,7 +55,46 @@ class Settings::UserManagementController < ApplicationController
             redirect_to settings_user_management_index_path
         end
     end
-    
+
+    def profile
+        @user = User.find(params[:id])
+    end
+
+    def edit_profile
+        @user = User.find(params[:id])
+    end
+
+    def update_profile
+
+        @user = User.find(params[:id])
+
+        if @user.update(user_params)
+            flash[:success] = "User successfully updated."
+            redirect_to settings_user_management_profile_path(params[:id])
+        else
+            flash[:error] = @user.errors.full_messages.first
+            redirect_to settings_user_management_profile_path(params[:id])
+        end
+
+    end
+
+    def account_settings
+        @user = User.find(params[:id])
+    end
+
+    def update_account_settings
+
+        @user = User.find(params[:id])
+
+        if @user.update(user_params)
+            flash[:success] = "Account settings successfully updated."
+            redirect_to settings_user_management_account_settings_path(params[:id])
+        else
+            flash[:error] = @user.errors.full_messages.first
+            redirect_to settings_user_management_account_settings_path(params[:id])
+        end
+    end
+
     private
     
     def get_all_users

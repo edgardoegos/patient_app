@@ -5,7 +5,9 @@ class AppointmentsController < ApplicationController
     before_action :check_authorization
     
     def index
-        @appointments = Appointment.get_todays_appointments
+        @appointments_overdue = Appointment.get_all_overdue_appointment
+        @appointments_current = Appointment.get_current_appointment
+        @appointments_future = Appointment.get_future_appointment
     end
     
     def new 
@@ -13,12 +15,18 @@ class AppointmentsController < ApplicationController
     end
     
     def create
-        
-        if !Appointment.save_appointment(appointment_params).nil?
+
+        @type = "appointment";
+
+        if !Appointment.save_appointment(appointment_params, @type).nil?
             flash[:success] = "Appointment successfully created"
             redirect_to appointments_path
         end
     
+    end
+    
+    def edit
+        @appointment = Appointment.find(params[:id])
     end
     
     def update
@@ -42,12 +50,12 @@ class AppointmentsController < ApplicationController
     
     def appointment_params
         params.require(:patient).permit(:last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
-            appointments: [:patient_id, :consultation_date, :first_name, :last_name, :middle_name, :systolic, :diastolic, :weight, :complaint, :status],
+            appointments: [:patient_id, :consultation_date, :systolic, :diastolic, :weight, :complaint, :status, :appointment_type],
             medical_record: [:menarche, :gravida, :para, :t, :p, :a, :l, :ob_history])
     end
     
     def update_appointment_params
-        params.require(:appointment).permit(:patient_id, :consultation_date, :first_name, :last_name, :middle_name, :systolic, :diastolic, :weight, :complaint, :status)
+        params.require(:appointment).permit(:patient_id, :consultation_date, :systolic, :diastolic, :weight, :complaint, :status)
 
     end
     

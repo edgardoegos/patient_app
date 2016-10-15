@@ -1,6 +1,6 @@
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
-        <div><h1 class="logo-name">IN+</h1></div>
+        <div><h6 class="logo-name"><%= app_settings.body["app_name"] %></h6></div>
         <h3>Welcome to IN+</h3>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "m-t") do |f| %>
             <div class="form-group">
@@ -17,7 +17,7 @@
                 </div>
             </div>
         
-            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+            <button type="submit" class="btn btn-success block full-width m-b">Login</button>
 
             <a href="#"><small>Forgot password?</small></a>
         <% end %>

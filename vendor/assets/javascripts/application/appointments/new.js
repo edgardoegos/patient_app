@@ -1,5 +1,5 @@
 $(function() {
-    
+
     $("#wizard").steps();
     $("#frm-appointment").steps({
         bodyTag: "fieldset",
@@ -69,6 +69,9 @@ $(function() {
             var form = $(this);
             // Submit form input
             form.submit();
+        },
+        onCanceled:function (event) {
+            window.location.href = "/appointments";
         }
     }).validate({
         errorPlacement: function (error, element) {
@@ -85,10 +88,9 @@ $(function() {
         }
     });
 
-    
     $('.actions').find('li:nth-child(3)').addClass('hidden');
+    // $('.actions').find('li:nth-child(4) a').attr("href", "/appointments");
     $('#fld-consultation-date .input-group.date').datepicker({
-        startView: 2,
         todayBtn: "linked",
         keyboardNavigation: false,
         forceParse: false,
@@ -120,8 +122,8 @@ $(function() {
         autoclose: true,
         format: 'dd/mm/yyyy'
     });
-    
-    
+
+    $(".select2_demo_1").select2();
 });
     
 function checkPatientIfRegistered() {
