@@ -72,8 +72,8 @@
       <file leaf-file-name="patient.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+            <state relative-caret-position="140">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -518,12 +518,12 @@
       <workItem from="1475571948156" duration="14033000" />
       <workItem from="1476403458102" duration="59463000" />
       <workItem from="1476562060526" duration="3126000" />
-      <workItem from="1476565623690" duration="6697000" />
+      <workItem from="1476565623690" duration="7015000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88162000" />
+    <option name="totallyTimeSpent" value="88480000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="31" width="1440" height="839" extended-state="6" />
@@ -961,8 +961,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="61" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+        <state relative-caret-position="140">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>

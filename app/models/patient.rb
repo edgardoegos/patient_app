@@ -11,7 +11,7 @@ class Patient < ActiveRecord::Base
 
     def self.get_patient_latest_complete_appointment
 
-        subquery = "SELECT appointments.id from appointments where appointments.patient_id = patients.id order by appointments.consultation_date desc limit 1"
+        subquery = "SELECT appointments.id from appointments where appointments.patient_id = patients.id AND appointment_type = 0 order by appointments.consultation_date desc limit 1"
 
         return self.select("patients.*, appointments.id as appointment_id")
                             .joins("LEFT OUTER JOIN appointments AS appointments ON appointments.patient_id = patients.id AND appointments.id = ( #{ subquery } )")
