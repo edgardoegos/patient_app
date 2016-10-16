@@ -20,10 +20,9 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <h2>
-                        2,160 results found for: <span class="text-navy">“<%= params[:search][:query_strings] %>”</span>
+                        <%= @patient_results.count %> results found for: <span class="text-navy">“<%= params[:search][:query_strings] %>”</span>
                     </h2>
-                    <small>Request time  (0.23 seconds)</small>
-
+                    <!--<small>Request time  (0.23 seconds)</small>-->
                     <% @patient_results.each do |result| %>
                         <div class="hr-line-dashed"></div>
                         <div class="search-result">
@@ -45,4 +44,3 @@
         </div>
     </div>
 </div>
-
