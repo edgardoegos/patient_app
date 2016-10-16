@@ -142,6 +142,9 @@ module ApplicationHelper
             },
             appointments: {
                 allowed: [:all]
+            },
+            follow_ups: {
+                allowed: [:all]
             }
         }
     end
