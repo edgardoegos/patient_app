@@ -44,7 +44,7 @@
                                             <td><%= appointment_current.patient_id %></td>
                                             <td><a href="<%= edit_appointment_path(appointment_current.id) %>"><%= get_patient_by_id(appointment_current.patient_id) %></a></td>
                                             <td><%= format_date(appointment_current.consultation_date, "%Y %B %d") %></td>
-                                            <td><%= appointment_current.complaint %></td>
+                                            <td class="ellipsis"><%= appointment_current.complaint %></td>
                                             <td><%= appointment_current.appointment_type.humanize.titlecase %></td>
                                             <td class="center">
                                               <% if  appointment_current.status != "complete" %>
@@ -97,7 +97,7 @@
                               <td><%= appointment.patient_id %></td>
                               <td><a href="<%= edit_appointment_path(appointment.id) %>"><%= get_patient_by_id(appointment.patient_id) %></a></td>
                               <td><%= format_date(appointment.consultation_date, "%Y %B %d") %></td>
-                              <td><%= appointment.complaint %></td>
+                              <td class="ellipsis"><%= appointment.complaint %></td>
                               <td><%= appointment.appointment_type.humanize.titlecase %></td>
                               <td><%= appointment.status.titlecase %></td>
                               <td class="center" >
@@ -144,7 +144,7 @@
                                   <td><%= appointment.patient_id %></td>
                                   <td><%= get_patient_by_id(appointment.patient_id) %></td>
                                   <td><%= format_date(appointment.consultation_date, "%Y %B %d") %></td>
-                                  <td><%= appointment.complaint %></td>
+                                  <td class="ellipsis"><%= appointment.complaint %></td>
                                   <td><%= appointment.appointment_type.humanize.titlecase %></td>
                                   <td><%= appointment.status.titlecase %></td>
                                   <td class="center">

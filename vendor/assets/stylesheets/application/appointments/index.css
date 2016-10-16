@@ -8,3 +8,11 @@
     #tbl-appointments_wrapper {
         margin: 10px 0 0 0 !important;
     }
+
+    .ellipsis {
+        width: 25%;
+        max-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
