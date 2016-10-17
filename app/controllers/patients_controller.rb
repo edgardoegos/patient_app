@@ -2,7 +2,7 @@ class PatientsController < ApplicationController
     
     include ApplicationHelper
     
-    before_action :check_authorization
+    before_action :check_authorization, :get_hmo_list
     
     def index
         @patients = Patient.all
@@ -19,7 +19,8 @@ class PatientsController < ApplicationController
         @patient.age = get_age(patient_params[:birth_date])
         
         if @patient.save
-            redirect_to patients_path(success: 1)
+            flash[:success] = "Patient successfully created."
+            redirect_to patients_path
         end
 
     end
@@ -33,12 +34,17 @@ class PatientsController < ApplicationController
         @patient = Patient.find(params[:id])
         
         if @patient.update(patient_params)
-            redirect_to edit_patient_path(id: params[:id], success: 2)
+            flash[:success] = "Patient successfully updated."
+            redirect_to edit_patient_path(id: params[:id])
         end
         
     end
     
     private
+
+    def get_hmo_list
+        @hmo = HealthMaintenanceOrganization.all
+    end
     
     def get_age(birth_date)
         
@@ -57,7 +63,7 @@ class PatientsController < ApplicationController
     end
     
     def patient_params
-        params.require(:patient).permit(:last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
+        params.require(:patient).permit(:hmo_id, :last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
             medical_record: [:menarche, :gravida, :para, :t, :p, :a, :l, :ob_history])
     end
 end

@@ -22,6 +22,7 @@ class Appointment < ActiveRecord::Base
         
             @patient = Patient.new
 
+            @patient.hmo_id =  patient_appointment_params[:hmo_id]
             @patient.last_name = patient_appointment_params[:last_name]
             @patient.first_name = patient_appointment_params[:first_name]
             @patient.middle_name = patient_appointment_params[:middle_name]

@@ -1,6 +1,13 @@
 <h3>Patient's personal information <small>(* are all required fields)</small></h3>
 
 <div class="form-group">
+  <div class="col-xs-4">
+    <label class="control-label">Health Care Provider<large class="required">*</large></label>
+    <%= f.select(:hmo_id, options_for_select(@hmo.collect{ |k, v| [k.name.titlecase, k.id]}.insert(0, "None"), @patient.hmo_id), {}, { :class => 'form-control m-b' }) %>
+  </div>
+</div>
+
+<div class="form-group">
     <div class="col-xs-4">
         <label class="control-label">Last Name <large class="required">*</large></label>
         <%= f.text_field :last_name, autofocus: true, class: "form-control", required: true %>
@@ -42,7 +49,7 @@
     </div>
     <div class="col-xs-4">
         <label class="control-label">Civil Status <large class="required">*</large></label>
-        <%= f.select(:civil_status, options_for_select(Patient.civil_statuses.collect{ |k, v| [k.humanize.titlecase, k]}), {}, { :class => 'form-control m-b' }) %>
+        <%= f.select(:civil_status, options_for_select(Patient.civil_statuses.collect{ |k, v| [k.humanize.titlecase, k]}, @patient.civil_status), {}, { :class => 'form-control m-b' }) %>
     </div>
 </div>
 <div class="form-group">

@@ -28,7 +28,7 @@ module AngularProject
     config.assets.precompile += [ 
         'appviews.css', 
         'cssanimations.css', 
-        'dashboard.css', 
+        'dashboard_index.css',
         'forms.css', 
         'gallery.css', 
         'graphs.css', 
@@ -56,13 +56,15 @@ module AngularProject
         'settings/user_management_edit.css',
         'settings/user_management_edit_profile.css',
         'settings/user_management_account_settings.css',
+        'settings/health_maintenance_organizations_index.css',
+        'settings/health_maintenance_organizations_edit.css',
         'settings/general_index.css'
     ]
       
     config.assets.precompile += [ 
         'appviews.js', 
         'cssanimations.js', 
-        'dashboard.js', 
+        'dashboard_index.js',
         'forms.js', 
         'gallery.js',
         'graphs.js', 
@@ -90,6 +92,8 @@ module AngularProject
         'settings/user_management_edit.js',
         'settings/user_management_edit_profile.js',
         'settings/user_management_account_settings.js',
+        'settings/health_maintenance_organizations_index.js',
+        'settings/health_maintenance_organizations_edit.js',
         'settings/general_index.js'
     ]
       

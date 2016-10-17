@@ -2,7 +2,7 @@ class AppointmentsController < ApplicationController
     
     include ApplicationHelper
     
-    before_action :check_authorization
+    before_action :check_authorization, :get_hmo_list
     
     def index
         @appointments_overdue = Appointment.get_all_overdue_appointment
@@ -47,9 +47,13 @@ class AppointmentsController < ApplicationController
     end
     
     private
+
+    def get_hmo_list
+        @hmo = HealthMaintenanceOrganization.all
+    end
     
     def appointment_params
-        params.require(:patient).permit(:last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
+        params.require(:patient).permit(:hmo_id, :last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
             appointments: [:patient_id, :consultation_date, :systolic, :diastolic, :weight, :complaint, :status, :appointment_type],
             medical_record: [:menarche, :gravida, :para, :t, :p, :a, :l, :ob_history])
     end

@@ -1,6 +1,12 @@
 $(function() {
 
+    var dateToday = new Date();
+    dateToday.setDate(dateToday.getDate() + 1);
+
     $("#wizard").steps();
+
+
+
     $("#frm-appointment").steps({
         bodyTag: "fieldset",
         onStepChanging: function (event, currentIndex, newIndex) {
@@ -88,6 +94,9 @@ $(function() {
         }
     });
 
+    var dateToday = new Date();
+    dateToday.setDate(dateToday.getDate() + 1);
+
     $('.actions').find('li:nth-child(3)').addClass('hidden');
     // $('.actions').find('li:nth-child(4) a').attr("href", "/appointments");
     $('#fld-consultation-date .input-group.date').datepicker({
@@ -97,23 +106,24 @@ $(function() {
         autoclose: true,
         format: 'dd/mm/yyyy'
     });
-   
+
     $(".touchspin").TouchSpin({
         verticalbuttons: true,
         buttondown_class: 'btn btn-white',
         buttonup_class: 'btn btn-white',
         max: 200,
     });
-    
+
     $('#fld-consultation-date .input-group.date').datepicker({
         todayBtn: "linked",
+        startDate: dateToday,
         keyboardNavigation: false,
         forceParse: false,
-        calendarWeeks: true,
         autoclose: true,
-        format: 'dd/mm/yyyy'
+        format: 'dd/mm/yyyy',
+        showOn: 'button'
     });
-    
+
     $('#fld-birth-date .input-group.date').datepicker({
         startView: 2,
         todayBtn: "linked",

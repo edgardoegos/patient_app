@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-xs-12">
             <label class="control-label lbl-consultation-date">Consultation Date *</label>
-            <div id="fld-birth-date">
+            <div id="fld-consultation-date">
               <div class="input-group date">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 <%= text_field_tag "patient[appointments][consultation_date]", DateTime.now.to_date.strftime('%d/%m/%Y'), :class => "form-control required", :data => { :name => "consultation-date" } %>
@@ -76,7 +76,19 @@
         <h2>Patient Personal Information <small>(* are all required fields)</small></h2>
         <div class="hr-line-dashed"></div>
         <div class="row">
-            <div class="col-lg-12">
+
+          <div class="col-lg-12">
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-4">
+                  <label class="control-label">Health Care Provider<large class="required">*</large></label>
+                  <%= select_tag("patient[hmo_id]", options_for_select(@hmo.collect{ |k, v| [k.name.titlecase, k.id]}.insert(0, "None")), { :class => 'form-control m-b' }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-4">

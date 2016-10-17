@@ -127,6 +127,9 @@ module ApplicationHelper
                 general: {
                     allowed: [0, 1]
                 },
+                health_maintenance_organizations: {
+                    allowed: [0, 1]
+                },
                 user_management: {
                     allowed: [0, 1]
                 }

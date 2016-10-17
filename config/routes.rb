@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         put 'general/update'
 
         resources :general
+        resources :health_maintenance_organizations
         resources :categories
 
         get 'user_management/:id/profile' => 'user_management#profile', :as => :user_management_profile

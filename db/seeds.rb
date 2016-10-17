@@ -27,3 +27,10 @@ User.create(username: 'super_administrator', email: 'john.doe@mailinator.com', f
 User.create(username: 'administrator', email: 'mary.moe.doe@mailinator.com', first_name: "Mary", last_name: "Moe", role: 1, status: 1, gender: 1, birth_date: "23/2/1989", address: "P.O. Box 283 8562 Fusce Rd. Frederick Nebraska", country: "United States", postal_code: "20620", phone_number: "(09) 21287-2335", :password => "admin.password", :password_confirmation => "admin.password")
 User.create(username: 'assistant', email: 'flex.sharp@mailinator.com', first_name: "Felix", last_name: "Sharp", role: 2, status: 1, gender: 0, birth_date: "14/5/1990", address: "Celeste Slater 606-3727 Ullamcorper. Street Roseville NH", country: "United States", postal_code: "11523", phone_number: "(09) 22713-8616", :password => "admin.password", :password_confirmation => "admin.password")
 User.create(username: 'staff', email: 'thomas.yeah@mailinator.com', first_name: "Thomas", last_name: "Yeah", role: 3, status: 1, gender: 0, birth_date: "23/9/1979", address: "Theodore Lowe Ap #867-859 Sit Rd. Azusa New York", country: "United States", postal_code: "39531", phone_number: "(09) 23514-4230", :password => "admin.password", :password_confirmation => "admin.password")
+
+
+HealthMaintenanceOrganization.create(name: "Maxicare", description: "");
+HealthMaintenanceOrganization.create(name: "Intellicare", description: "");
+HealthMaintenanceOrganization.create(name: "Asianlife", description: "");
+HealthMaintenanceOrganization.create(name: "Philcare", description: "");
+HealthMaintenanceOrganization.create(name: "Cocolife", description: "");
