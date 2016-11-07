@@ -1,7 +1,7 @@
 <div class="middle-box text-center loginscreen  animated fadeInDown">
     <div>
-        <div><h6 class="logo-name"><%= app_settings.body["app_name"] %></h6></div>
-        <h3>Welcome to IN+</h3>
+        <div class="col-lg-12"><h6 class="logo-name"><%= app_settings.body["app_name"] %></h6></div>
+        <br \>
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "m-t") do |f| %>
             <div class="form-group">
                 <%= f.text_field :username, autofocus: true, class: "form-control", placeholder: "Username", required: true %>
@@ -21,7 +21,6 @@
 
             <a href="#"><small>Forgot password?</small></a>
         <% end %>
-        <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2015</small> </p>
     </div>
 </div>
 
