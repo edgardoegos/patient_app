@@ -144,12 +144,20 @@ function checkPatientIfRegistered() {
 
     $.get( "/api/v1/get_patient_by_name", { last_name: last_name, first_name: first_name, middle_name: middle_name  } )
         .done(function( data ) {
-
+            console.log('data: ' + JSON.stringify(data))
             if (data.length != 0) {
+
+
                 console.log('data.id: ' + data.id)
+
+                var first_name = data.first_name;
+                var last_name = data.last_name;
+                var middle_name = data.middle_name;
+
                 $('#dv-new-patient-container').addClass('hidden');
                 $('#dv-patient-container').removeClass('hidden');
                 $('#patient_appointments_patient_id').val(data.id);
+                $('#dv-patient-container').find('h1').text(last_name + ', ' + first_name + ' ' + middle_name + " is already registered")
 
                 // Disable fields
                 $('#dv-new-patient-container').find('input').prop("disabled", true);

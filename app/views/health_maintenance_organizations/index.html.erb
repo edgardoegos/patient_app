@@ -9,7 +9,7 @@
         <a href="">Settings</a>
       </li>
       <li class="active">
-        <strong>Edit Health Maintenance Organization</strong>
+        <strong>Health Maintenance Organization</strong>
       </li>
     </ol>
   </div>
@@ -40,8 +40,8 @@
                   <td><%= hmo.name %></td>
                   <td><%= hmo.description %></td>
                   <td class="center">
-                    <a href="<%= edit_settings_health_maintenance_organization_path(hmo.id) %>" class="btn btn-primary btn-xs" ><i class="fa fa-pencil-square-o"></i></a>
-                    <a href="javascript:void(0);" class="btn btn-danger btn-xs btn-delete" data-hmo="<%= hmo.to_json %>"><i class="fa fa-trash"></i></a>
+                  <a href="<%= edit_health_maintenance_organization_path(hmo.id) %>" class="btn btn-primary btn-xs" ><i class="fa fa-pencil-square-o"></i></a>
+                  <a href="javascript:void(0);" class="btn btn-danger btn-xs btn-delete" data-hmo="<%= hmo.to_json %>"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
             <% end %>
@@ -60,25 +60,25 @@
     <div class="col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-content">
-          <h3>Edit <span class="semi-bold"></span></h3><br \>
+          <h3>Create <span class="semi-bold"></span></h3><br \>
           <div class="row">
-            <div class="col-md-12">
-              <%= form_for @hmo, url: { action: "update" }, :html => { :multipart => true, :id => "form-condensed" } do |f| %>
-                  <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="hmo[name]" value="<%= @hmo.name %>">
-                  </div>
-                  <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" class="form-control" name="hmo[description]" value="<%= @hmo.description %>">
-                  </div>
-                  <div class="hr-line-dashed"></div>
-                  <div class="pull-right">
-                    <button class="btn btn-sm btn-success m-t-n-xs" type="submit"><strong>Create</strong></button>
-                    <a href="<%= settings_health_maintenance_organizations_path %>"  class="btn btn-sm btn-default m-t-n-xs" type="button"><strong>Cancel</strong></a>
-                  </div>
-              <% end %>
-            </div>
+              <div class="col-md-12">
+                <%= form_for @hmo, url: { action: "create" }, :html => { :multipart => true, :id => "form-condensed" } do |f| %>
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input type="text" class="form-control" name="hmo[name]">
+                    </div>
+                    <div class="form-group">
+                      <label>Description</label>
+                      <input type="text" class="form-control" name="hmo[description]">
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="pull-right">
+                      <button class="btn btn-sm btn-success m-t-n-xs" type="submit"><strong>Create</strong></button>
+                      <a href="<%= root_path %>"  class="btn btn-sm btn-default m-t-n-xs" type="button"><strong>Cancel</strong></a>
+                    </div>
+                <% end %>
+              </div>
           </div>
         </div>
       </div>

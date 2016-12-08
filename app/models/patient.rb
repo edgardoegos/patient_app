@@ -1,13 +1,32 @@
 class Patient < ActiveRecord::Base
     
     has_many :appointments
-    
+    has_many :patient_attachments
+
+    attr_accessor :patient_attachments
+
     accepts_nested_attributes_for :appointments, allow_destroy: true
+    accepts_nested_attributes_for :patient_attachments, allow_destroy: true
     
     enum gender: [:male, :female]
     enum civil_status: [:single ,:married, :widowed, :divorced, :separated]
     
     serialize :medical_record, JSON
+
+    after_save :save_patient_attachments
+
+    def save_patient_attachments
+        if !self.patient_attachments.nil?
+            self.patient_attachments.each_with_index do |patient_attachment, index|
+                @patient_attachment = PatientAttachment.new
+                @patient_attachment.patient_id = self.id
+                @patient_attachment.attachment_type = PatientAttachment.types[patient_attachment[:type]]
+                @patient_attachment.document = patient_attachment[:document]
+                @patient_attachment.document_file_name = patient_attachment[:file_name]
+                @patient_attachment.save
+            end
+        end
+    end
 
     def self.get_patient_latest_complete_appointment
 

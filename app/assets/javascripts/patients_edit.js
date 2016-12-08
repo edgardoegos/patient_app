@@ -22,4 +22,10 @@
 //= require jeditable/jquery.jeditable.js
 //= require dataTables/datatables.min.js
 
+//= require fileinput/plugins/canvas-to-blob.min.js
+//= require fileinput/plugins/sortable.min.js
+//= require fileinput/plugins/purify.min.js
+//= require fileinput/fileinput.min.js
+//= require fileinput//themes/fa/theme.js
+
 //= require application/patients/edit.js

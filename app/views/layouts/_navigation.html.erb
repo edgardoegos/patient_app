@@ -56,13 +56,20 @@
                     <i class="fa fa-history"></i> <span class="nav-label" data-i18n="nav.metrics">History</span>
                 <% end %>
             </li>
+
+            <% if super_and_admin_roles %>
+              <li class="<%= is_active_controller('health_maintenance_organizations') %>">
+                <%= link_to health_maintenance_organizations_path do %>
+                    <i class="fa fa-medkit"></i> <span class="nav-label" data-i18n="nav.metrics">HMO</span>
+                <% end %>
+              </li>
+            <% end %>
             
             <% if super_and_admin_roles %>
                 <li class="<%= is_active_path('settings') %>">
                     <a href=""><i class="fa fa-cogs"></i> <span class="nav-label" data-i18n="nav.dashboard">Settings</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse <%= is_active_controller('dashboards') %>">
                         <li><%= link_to "General", settings_general_index_path %></li>
-                        <li><%= link_to "H  .  M  .  O   .", settings_health_maintenance_organizations_path %></li>
                         <li><%= link_to "User Management", settings_user_management_index_path %></li>
                     </ul>
                 </li>

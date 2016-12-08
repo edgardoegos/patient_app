@@ -11,7 +11,9 @@
         </ol>
     </div>
     <div class="col-lg-2">
+      <% if staff_role != true %>
         <a class="btn btn-success pull-right" style="margin: 30px 0 0 0;" href="#modal-form" data-toggle="modal"><i class="fa fa-plus"></i> Make Appointment</a>
+      <% end %>
     </div>
 </div>
 
@@ -35,31 +37,41 @@
                                         <th>Record Date</th>
                                         <th>Complaint</th>
                                         <th>Type</th>
-                                        <th>Status</th>
+                                        <% if staff_role != true %>
+                                          <th>Status</th>
+                                        <% end %>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <% @appointments_current.each do |appointment_current|  %>
                                         <tr class="gradeX">
                                             <td><%= appointment_current.patient_id %></td>
-                                            <td><a href="<%= edit_appointment_path(appointment_current.id) %>"><%= get_patient_by_id(appointment_current.patient_id) %></a></td>
+                                            <td>
+                                              <% if staff_role != true %>
+                                                <a href="<%= edit_appointment_path(appointment_current.id) %>"><%= get_patient_by_id(appointment_current.patient_id) %></a>
+                                              <% else %>
+                                                  <%= get_patient_by_id(appointment_current.patient_id) %>
+                                              <% end %>
+                                            </td>
                                             <td><%= format_date(appointment_current.consultation_date, "%Y %B %d") %></td>
                                             <td class="ellipsis"><%= appointment_current.complaint %></td>
                                             <td><%= appointment_current.appointment_type.humanize.titlecase %></td>
-                                            <td class="center">
-                                              <% if  appointment_current.status != "complete" %>
-                                                <div class="btn-group" data-appointment-id="<%= appointment_current.id %>" data-patient="<%= get_patient_by_id(appointment_current.patient_id) %>">
-                                                  <button class="btn btn-<%= get_appointment_current_status(appointment_current.status, "queued") %> btn-xs btn-status-<%= appointment_current.id %> btn-current-status" type="button"  data-type="queued">Queued</button>
-                                                  <button class="btn btn-<%= get_appointment_current_status(appointment_current.status, "inprogress") %> btn-xs btn-status-<%= appointment_current.id  %> btn-current-status" type="button" data-type="inprogress">Inprogress</button>
-                                                  <button class="btn btn-<%= get_appointment_current_status(appointment_current.status, "complete") %> btn-xs btn-status-<%= appointment_current.id  %> btn-current-status-complete" type="button" data-type="complete">Complete</button>
-                                                </div>
-                                              <% else %>
+                                            <% if staff_role != true %>
+                                              <td class="center">
+                                                <% if  appointment_current.status != "complete" %>
                                                   <div class="btn-group" data-appointment-id="<%= appointment_current.id %>" data-patient="<%= get_patient_by_id(appointment_current.patient_id) %>">
-                                                    <button class="btn btn-white btn-xs" type="button"  data-type="queued" disabled>Queued</button>
-                                                    <button class="btn btn-white btn-xs" type="button" data-type="inprogress" disabled>Inprogress</button>
-                                                    <button class="btn btn-success btn-xs" type="button" data-type="complete">Completed</button>
-                                                  </dwhite<% end %>
-                                            </td>
+                                                    <button class="btn btn-<%= get_appointment_current_status(appointment_current.status, "queued") %> btn-xs btn-status-<%= appointment_current.id %> btn-current-status" type="button"  data-type="queued">Queued</button>
+                                                    <button class="btn btn-<%= get_appointment_current_status(appointment_current.status, "inprogress") %> btn-xs btn-status-<%= appointment_current.id  %> btn-current-status" type="button" data-type="inprogress">Inprogress</button>
+                                                    <button class="btn btn-<%= get_appointment_current_status(appointment_current.status, "complete") %> btn-xs btn-status-<%= appointment_current.id  %> btn-current-status-complete" type="button" data-type="complete">Complete</button>
+                                                  </div>
+                                                <% else %>
+                                                    <div class="btn-group" data-appointment-id="<%= appointment_current.id %>" data-patient="<%= get_patient_by_id(appointment_current.patient_id) %>">
+                                                      <button class="btn btn-white btn-xs" type="button"  data-type="queued" disabled>Queued</button>
+                                                      <button class="btn btn-white btn-xs" type="button" data-type="inprogress" disabled>Inprogress</button>
+                                                      <button class="btn btn-success btn-xs" type="button" data-type="complete">Completed</button>
+                                                    </dwhite<% end %>
+                                              </td>
+                                              <% end %>
                                         </tr>
                                     <% end %>
                                 </tbody>
@@ -70,7 +82,9 @@
                                         <th>Record Date</th>
                                         <th>Complaint</th>
                                         <th>Type</th>
-                                        <th>Status</th>
+                                        <% if staff_role != true %>
+                                          <th>Status</th>
+                                        <% end %>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -88,7 +102,9 @@
                           <th>Complaint</th>
                           <th>Type</th>
                           <th>Status</th>
-                          <th>Action</th>
+                          <% if staff_role != true %>
+                            <th>Action</th>
+                          <% end %>
                         </tr>
                         </thead>
                         <tbody>
@@ -100,11 +116,14 @@
                               <td class="ellipsis"><%= appointment.complaint %></td>
                               <td><%= appointment.appointment_type.humanize.titlecase %></td>
                               <td><%= appointment.status.titlecase %></td>
-                              <td class="center" >
-                                <div class="btn-group" data-id="<%= appointment.id %>" data-patient-name="<%= get_patient_by_id(appointment.patient_id) %>">
-                                  <button class="btn btn-success %> btn-xs btn-future-reschedule" type="button">Reschedule</button>
-                                  <button class="btn btn-danger %> btn-xs btn-future-cancel btn-future-status-cancel" type="button">Cancel</button>
-                                </div> </td>
+                              <% if staff_role != true %>
+                                <td class="center" >
+                                  <div class="btn-group" data-id="<%= appointment.id %>" data-patient-name="<%= get_patient_by_id(appointment.patient_id) %>">
+                                    <button class="btn btn-success %> btn-xs btn-future-reschedule" type="button">Reschedule</button>
+                                    <button class="btn btn-danger %> btn-xs btn-future-cancel btn-future-status-cancel" type="button">Cancel</button>
+                                  </div>
+                                </td>
+                              <% end %>
                             </tr>
                         <% end %>
 
@@ -117,7 +136,9 @@
                           <th>Complaint</th>
                           <th>Type</th>
                           <th>Status</th>
-                          <th>Action</th>
+                          <% if staff_role != true %>
+                            <th>Action</th>
+                          <% end %>
                         </tr>
                         </tfoot>
                       </table>
@@ -125,7 +146,6 @@
                   </div>
                   <div id="tab-overdue" class="tab-pane">
                         <div class="panel-body">
-
                           <table class="table table-striped table-bordered table-hover " id="tbl-appointments-all">
                             <thead>
                             <tr>
@@ -135,7 +155,9 @@
                               <th>Complaint</th>
                               <th>Type</th>
                               <th>Status</th>
-                              <th>Action</th>
+                              <% if staff_role != true %>
+                                <th>Action</th>
+                              <% end %>
                             </tr>
                             </thead>
                             <tbody>
@@ -147,12 +169,14 @@
                                   <td class="ellipsis"><%= appointment.complaint %></td>
                                   <td><%= appointment.appointment_type.humanize.titlecase %></td>
                                   <td><%= appointment.status.titlecase %></td>
-                                  <td class="center">
-                                    <div class="btn-group" data-id="<%= appointment.id %>" data-patient-name="<%= get_patient_by_id(appointment.patient_id) %>">
-                                      <button class="btn btn-success %> btn-xs btn-overdue-reschedule" type="button">Reschedule</button>
-                                      <button class="btn btn-danger %> btn-xs btn-overdue-status-cancel" type="button">Cancel</button>
-                                    </div>
-                                  </td>
+                                  <% if staff_role != true %>
+                                    <td class="center">
+                                      <div class="btn-group" data-id="<%= appointment.id %>" data-patient-name="<%= get_patient_by_id(appointment.patient_id) %>">
+                                        <button class="btn btn-success %> btn-xs btn-overdue-reschedule" type="button">Reschedule</button>
+                                        <button class="btn btn-danger %> btn-xs btn-overdue-status-cancel" type="button">Cancel</button>
+                                      </div>
+                                    </td>
+                                    <% end %>
                                 </tr>
                             <% end %>
 
@@ -165,7 +189,9 @@
                               <th>Complaint</th>
                               <th>Type</th>
                               <th>Status</th>
-                              <th>Action</th>
+                              <% if staff_role != true %>
+                                <th>Action</th>
+                              <% end %>
                             </tr>
                             </tfoot>
                           </table>

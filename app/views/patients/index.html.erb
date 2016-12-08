@@ -11,7 +11,9 @@
         </ol>
     </div>
     <div class="col-lg-2">
+      <% if staff_role != true %>
         <a href="<%= new_patient_path %>" class="btn btn-success pull-right" style="margin: 30px 0 0 0;"><i class="fa fa-plus"></i> Add patient</a>
+      <% end %>
     </div>
 </div>
 
@@ -36,24 +38,27 @@
                                 <th>Weight</th>
                                 <th>Height</th>
                                 <th>Address</th>
-                                <!--<th>Action</th>-->
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% @patients.each do |patient|  %>
                                 <tr class="gradeX">
-                                    <td><a href="<%= edit_patient_path(patient.id) %>" ><%= patient.last_name %>, <%= patient.first_name %> <%= patient.middle_name %></a></td>
-                                    <td><%= format_date(patient.birth_date, "%Y %B %d") %></td>
+                                    <td>
+                                        <p><%= patient.last_name %>, <%= patient.first_name %> <%= patient.middle_name %></p>
+                                    </td>
+                                    <td><%= format_date(patient.birth_date, "%Y %B %d") %>
+                                    </td>
                                     <td><%= patient.age %></td>
                                     <td><%= patient.gender.titlecase %></td>
                                     <td><%= patient.civil_status.titlecase %></td>
                                     <td><%= patient.weight %></td>
                                     <td><%= patient.height %></td>
                                     <td><%= patient.address %></td>
-                                    <!--<td class="center">-->
-                                        <!--<a href="<%= edit_patient_path(patient.id) %>" class="btn btn-primary btn-xs" ><i class="fa fa-pencil-square-o"></i></a>-->
-                                        <!--<a href="javascript:void(0);" class="btn btn-danger btn-xs" id="btn-delete"><i class="fa fa-trash"></i></a>-->
-                                    <!--</td>-->
+                                    <td>
+                                      <a href="<%= patient_path(patient.id) %>" type="button" class="btn btn-primary btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                                      <a href="<%= edit_patient_path(patient.id) %>" type="button" class="btn btn-success btn-xs"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                    </td>
                                 </tr>
                             <% end %>
                         </tbody>
@@ -67,7 +72,7 @@
                                 <th>Weight</th>
                                 <th>Height</th>
                                 <th>Address</th>
-                                <!--<th>Action</th>-->
+                                <th>Action</th>
                             </tr>
                         </tfoot>
                     </table>

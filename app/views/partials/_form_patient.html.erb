@@ -1,123 +1,257 @@
-<h3>Patient's personal information <small>(* are all required fields)</small></h3>
+<h3>PATIENT'S PERSONAL INFORMATION <small>(<large class="required">*</large> are all required fields)</small></h3>
 
 <div class="form-group">
   <div class="col-xs-4">
-    <label class="control-label">Health Care Provider<large class="required">*</large></label>
+    <label class="control-label">HEALTH CARE PROVIDER <large class="required">*</large></label>
     <%= f.select(:hmo_id, options_for_select(@hmo.collect{ |k, v| [k.name.titlecase, k.id]}.insert(0, "None"), @patient.hmo_id), {}, { :class => 'form-control m-b' }) %>
   </div>
 </div>
 
 <div class="form-group">
     <div class="col-xs-4">
-        <label class="control-label">Last Name <large class="required">*</large></label>
+        <label class="control-label">LAST NAME <large class="required">*</large></label>
         <%= f.text_field :last_name, autofocus: true, class: "form-control", required: true %>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">First Name <large class="required">*</large></label>
+        <label class="control-label">FIRST NAME <large class="required">*</large></label>
         <%= f.text_field :first_name, autofocus: true, class: "form-control", required: true %>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">Middle Name <large class="required">*</large></label>
+        <label class="control-label">MIDDLE NAME <large class="required">*</large></label>
         <%= f.text_field :middle_name, autofocus: true, class: "form-control", required: true %>
     </div>
 </div>
+
 <div class="form-group">
     <div class="col-xs-4">
-        <label class="control-label">Birth Date</label>
+        <label class="control-label">BIRTH DATE <large class="required">*</large></label>
         <div id="data_3">
             <div class="input-group date">
-                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" name="patient[birth_date]" class="form-control" value="10/11/2013">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <%= f.text_field :birth_date, value: format_date(@patient.birth_date, "%d/%m/%Y"), autofocus: true, class: "form-control", required: true %>
             </div>
         </div>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">Gender <large class="required">*</large></label>
+        <label class="control-label">GENDER <large class="required">*</large></label>
         <br \>
         <% Patient.genders.each do |k, v| %>
             <% if params[:action] == "new" %>
                 <div class="radio radio-info radio-inline">
                     <%= f.radio_button :gender, k, id: k, checked: v == 1 ? "checked" : "" %>
-                    <%= f.label :gender, k == "male" ? "Male" : "Female", :value => v  %>
+                    <%= f.label :gender, k == "male" ? "Male" : "Female", :value => v, :for => k   %>
                 </div>
             <% else %>
                 <div class="radio radio-info radio-inline">
                     <%= f.radio_button :gender, k, checked: @patient.gender == k ? "checked" : "" %>
-                    <%= f.label :gender, k == "male" ? "Male" : "Female", :value => v  %>
+                    <%= f.label :gender, k == "male" ? "Male" : "Female", :value => v, :for =>  k   %>
                 </div>
             <% end %>
         <% end %>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">Civil Status <large class="required">*</large></label>
+        <label class="control-label">CIVIL STATUS <large class="required">*</large></label>
         <%= f.select(:civil_status, options_for_select(Patient.civil_statuses.collect{ |k, v| [k.humanize.titlecase, k]}, @patient.civil_status), {}, { :class => 'form-control m-b' }) %>
     </div>
 </div>
+
 <div class="form-group">
     <div class="col-xs-8">
-        <label class="control-label">Address <large class="required">*</large></label>
+        <label class="control-label">ADDRESS <large class="required">*</large></label>
         <%= f.text_field :address, autofocus: true, class: "form-control", required: true %>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">Contact <large class="required">*</large></label>
+        <label class="control-label">CONTACT <large class="required">*</large></label>
         <%= f.text_field :contact, autofocus: true, class: "form-control", required: true %>
     </div>
 </div>
+
 <div class="form-group">
     <div class="col-xs-12">
-        <label class="control-label">Occupation <large class="required">*</large></label>
+        <label class="control-label">OCCUPATION <large class="required">*</large></label>
         <%= f.text_field :occupation, autofocus: true, class: "form-control", required: true %>
     </div>
 </div>
-<div class="hr-line-dashed"></div>
+
 <div class="form-group">
     <div class="col-xs-4">
-        <label class="control-label">Blood Type</label>
+        <label class="control-label">BLOOD TYPE</label>
         <%= f.text_field :blood_type, autofocus: true, class: "form-control" %>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">Weight (kg) <large class="required">*</large></label>
+        <label class="control-label">WEIGHT (kg) <large class="required">*</large></label>
         <%= f.text_field :weight, autofocus: true, class: "form-control", required: true %>
     </div>
     <div class="col-xs-4">
-        <label class="control-label">Height (ft) <large class="required">*</large></label>
+        <label class="control-label">HEIGHT (ft) <large class="required">*</large></label>
         <%= f.text_field :height, autofocus: true, class: "form-control", required: true %>
     </div>
 </div>
+
+<div class="hr-line-dashed"></div>
+<h3>MEDICAL RECORD <small>(* are all required fields)</small></h3>
+
 <div class="form-group">
-    <div class="col-xs-4">
-        <label class="control-label">Menarche</label>
-        <%= select_year(@patient.medical_record['menarche'].to_i, {:start_year => Time.now.year, :end_year => 1980}, {:class => "form-control m-b", :name => "patient[medical_record][menarche]"})  %>
-    </div>
-    <div class="col-xs-1">
-        <label class="control-label">Gravida</label>
-        <%= text_field_tag "patient[medical_record][gravida]", @patient.medical_record['gravida'], :class => "form-control touchspin" %>
-    </div>
-    <div class="col-xs-1">
-        <label class="control-label">Para</label>
-        <%= text_field_tag "patient[medical_record][para]", @patient.medical_record['para'], :class => "form-control touchspin"%>
-    </div>
-    <div class="col-xs-1">
-        <label class="control-label">T</label>
-        <%= text_field_tag "patient[medical_record][t]", @patient.medical_record['t'], :class => "form-control touchspin" %>
-    </div>
-    <div class="col-xs-1">
-        <label class="control-label">P</label>
-        <%= text_field_tag "patient[medical_record][p]", @patient.medical_record['p'], :class => "form-control touchspin" %>
-    </div>
-    <div class="col-xs-1">
-        <label class="control-label">A</label>
-        <%= text_field_tag "patient[medical_record][a]", @patient.medical_record['a'], :class => "form-control touchspin" %>
-    </div>
-    <div class="col-xs-1">
-        <label class="control-label">L</label>
-        <%= text_field_tag "patient[medical_record][l]", @patient.medical_record['l'], :class => "form-control touchspin" %>
-    </div>
+  <div class="col-xs-12">
+    <label class="control-label">Type <large class="required">*</large></label>
+    <br \>
+    <% if @patient.medical_record["type"] == "ob" %>
+      <div class="radio radio-info radio-inline">
+        <%= radio_button_tag "patient[medical_record][type]", "ob", checked: "checked"  %>
+        <%= label_tag "patient[medical_record][type]", "OB", :value => "ob", :for => "patient_medical_record_type_ob"   %>
+      </div>
+
+      <div class="radio radio-info radio-inline">
+        <%= radio_button_tag "patient[medical_record][type]", "gyne" %>
+        <%= label_tag "patient[medical_record][type]", "Gyne", :value => "gyne", :for => "patient_medical_record_type_gyne"   %>
+      </div>
+
+    <% else %>
+
+        <div class="radio radio-info radio-inline">
+          <%= radio_button_tag "patient[medical_record][type]", "ob"  %>
+          <%= label_tag "patient[medical_record][type]", "OB", :value => "ob", :for => "patient_medical_record_type_ob"   %>
+        </div>
+
+        <div class="radio radio-info radio-inline">
+          <%= radio_button_tag "patient[medical_record][type]", "gyne", checked: "checked" %>
+          <%= label_tag "patient[medical_record][type]", "Gyne", :value => "gyne", :for => "patient_medical_record_type_gyne"   %>
+        </div>
+    <% end %>
+
+  </div>
 </div>
+
+<div class="form-group">
+  <div class="col-xs-4">
+    <label class="control-label">LMS</label>
+    <div id="date_lms">
+      <div class="input-group date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][lmr]",  @patient.medical_record['lmr'],  autofocus: true, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <label class="control-label">ECD</label>
+    <input id="fld-edc-display" type="text" class="form-control" disabled value="<%= @patient.medical_record['edc'] != "" ? DateTime.parse(@patient.medical_record['edc']).strftime("%B %d, %C%y") : "" %>">
+    <%= hidden_field_tag "patient[medical_record][edc]",  @patient.medical_record['edc'], class: "form-control"%>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-xs-4">
+    <label class="control-label">MENARCHE</label>
+    <%= select_year(@patient.medical_record['menarche'].to_i, {:start_year => Time.now.year, :end_year => 1980}, {:class => "form-control m-b", :name => "patient[medical_record][menarche]"})  %>
+  </div>
+  <div class="col-xs-1">
+    <label class="control-label">GRAVIDA</label>
+    <%= select_tag("patient[medical_record][gravida]", options_for_select(0..20, @patient.medical_record['gravida']), :class => 'form-control m-b') %>
+  </div>
+  <div class="col-xs-1">
+    <label class="control-label">PARA</label>
+    <%= select_tag("patient[medical_record][para]", options_for_select(0..20, @patient.medical_record['para']), :class => 'form-control m-b') %>
+  </div>
+  <div class="col-xs-1">
+    <label class="control-label">T</label>
+    <%= select_tag("patient[medical_record][t]", options_for_select(0..20, @patient.medical_record['t']), :class => 'form-control m-b') %>
+  </div>
+  <div class="col-xs-1">
+    <label class="control-label">P</label>
+    <%= select_tag("patient[medical_record][p]", options_for_select(0..20, @patient.medical_record['p']), :class => 'form-control m-b') %>
+  </div>
+  <div class="col-xs-1">
+    <label class="control-label">A</label>
+    <%= select_tag("patient[medical_record][a]", options_for_select(0..20, @patient.medical_record['a']), :class => 'form-control m-b') %>
+  </div>
+  <div class="col-xs-1">
+    <label class="control-label">L</label>
+    <%= select_tag("patient[medical_record][l]", options_for_select(0..20, @patient.medical_record['l']), :class => 'form-control m-b') %>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-xs-12">
+    <label class="control-label">CHIEF COMPLAINT <large class="required">*</large></label>
+    <%= text_area_tag "patient[medical_record][chief_complaint]", @patient.medical_record['chief_complaint'], :class => "form-control", :style => "height: 100px;", :required => true %>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <div class="col-xs-12">
+    <label class="control-label">HISTORY OF PRESENT ILLNESS <large class="required">*</large></label>
+    <%= text_area_tag "patient[medical_record][history_of_present_illness]", @patient.medical_record['history_of_present_illness'], :class => "form-control", :style => "height: 100px;", :required => true %>
+  </div>
+</div>
+
 <div class="form-group">
     <div class="col-xs-12">
-        <label class="control-label">OB History</label>
-        <%= text_area_tag "patient[medical_record][ob_history]", @patient.medical_record['ob_history'], :class => "form-control", :style => "height: 100px;" %>
+        <label class="control-label">OB-GYNE HISTORY <large class="required">*</large></label>
+        <%= text_area_tag "patient[medical_record][ob_history]", @patient.medical_record['ob_history'], :class => "form-control", :style => "height: 100px;", :required => true %>
     </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+<h3>OTHERS <small>(* are all required fields)</small></h3>
+
+<div class="form-group">
+  <div class="col-xs-4">
+    <label class="control-label">RETURN VISIT <large class="required">*</large></label>
+    <div id="fld-return-visit">
+      <div class="input-group date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][return_visit]",  @patient.medical_record["return_visit"],  autofocus: true, class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-4">
+    <label class="control-label">RECORD DATE <large class="required">*</large></label>
+    <div id="fld-record-date">
+      <div class="input-group date">
+        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][record_date]",  @patient.medical_record["record_date"],  autofocus: true, class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-xs-12">
+    <label class="control-label">MANAGEMENT <large class="required">*</large></label>
+    <%= text_area_tag "patient[medical_record][management]", @patient.medical_record['management'], :class => "form-control", :style => "height: 100px;" %>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="col-xs-12">
+    <label class="control-label">RECOMMENDATIONS <large class="required">*</large></label>
+    <%= text_area_tag "patient[medical_record][recommendations]", @patient.medical_record['recommendations'], :class => "form-control", :style => "height: 100px;" %>
+  </div>
+</div>
+
+<div class="hr-line-dashed"></div>
+<h3>ATTACHMENTS <small>(pdf and image files)</small></h3>
+
+<div class="form-group">
+  <div class="col-md-4 col-xs-4">
+    <label class="control-label">PAST MEDICAL HISTORY</label>
+    <input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">
+    <div id="medical-records-container" class="containers">
+
+    </div>
+  </div>
+  <div class="col-md-4 col-xs-4">
+    <label class="control-label">LABORATORY RESULTS</label>
+    <input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">
+    <div id="laboratory-results-container" class="containers">
+
+    </div>
+  </div>
+  <div class="col-md-4 col-xs-4">
+    <label class="control-label">PHYSICAL EXAMINATIONS</label>
+    <input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">
+    <div id="physical-examinations-container" class="containers">
+
+    </div>
+  </div>
 </div>
 
 <div class="hr-line-dashed"></div>
@@ -127,3 +261,114 @@
         <button class="btn btn-success pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>
     </div>
 </div>
+
+
+
+<% content_for :javascript do %>
+
+    <script type="text/javascript">
+
+      <% if params[:action] != "new" %>
+
+        <%
+
+          @past_medical_history_document_array = []
+          @past_medical_history_document_file_name_array = []
+
+          @laboratory_results_array = []
+          @laboratory_results_document_file_name_array = []
+
+          @physical_examination_array = []
+          @physical_examination_document_file_name_array = []
+
+        %>
+
+        <% if !@attachments.nil? %>
+          <% @attachments.each_with_index do |attachment, index| %>
+            <% if attachment.attachment_type == 0 %>
+              <% @past_medical_history_document_array.push(attachment.document.url(:original)) %>
+              <% if attachment.document_content_type == "application/pdf" %>
+                <% @past_medical_history_document_file_name_array.push({type: "pdf", id: attachment, caption: attachment.document_file_name, size: attachment.document_file_size, width: "120px", key: attachment.id}) %>
+              <% else %>
+                <% @past_medical_history_document_file_name_array.push({caption: attachment.document_file_name, size: attachment.document_file_size, width: "120px", key: attachment.id}) %>
+              <% end %>
+            <% elsif attachment.attachment_type == 1 %>
+              <% @laboratory_results_array.push(attachment.document.url(:original)) %>
+              <% if attachment.document_content_type == "application/pdf" %>
+                <% @laboratory_results_document_file_name_array.push({type: "pdf", caption: attachment.document_file_name, size: attachment.document_file_size, width: "120px", key: attachment.id}) %>
+              <% else %>
+                <% @laboratory_results_document_file_name_array.push({caption: attachment.document_file_name, size: attachment.document_file_size, width: "120px", key: attachment.id}) %>
+              <% end %>
+            <% else %>
+              <% @physical_examination_array.push(attachment.document.url(:original)) %>
+              <% if attachment.document_content_type == "application/pdf" %>
+                <% @physical_examination_document_file_name_array.push({type: "pdf", caption: attachment.document_file_name, size: attachment.document_file_size, width: "120px", key: attachment.id}) %>
+              <% else %>
+                <% @physical_examination_document_file_name_array.push({caption: attachment.document_file_name, size: attachment.document_file_size, width: "120px", key: attachment.id}) %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        $("#past-medical-history").fileinput({
+          initialPreview: <%= raw(@past_medical_history_document_array) %>,
+          initialPreviewAsData: true,
+          initialPreviewConfig: <%= raw(@past_medical_history_document_file_name_array.to_json) %>,
+          overwriteInitial: false,
+          showUpload: false,
+          layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {upload}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+          }
+        });
+
+        $("#laboratory-results").fileinput({
+          initialPreview: <%= raw(@laboratory_results_array) %>,
+          initialPreviewAsData: true,
+          initialPreviewConfig: <%= raw(@laboratory_results_document_file_name_array.to_json) %>,
+          overwriteInitial: false,
+          showUpload: false,
+          layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {upload}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+          }
+        });
+
+        $("#physical-examinations").fileinput({
+          initialPreview: <%= raw(@physical_examination_array) %>,
+          initialPreviewAsData: true,
+          initialPreviewConfig: <%= raw(@physical_examination_document_file_name_array.to_json) %>,
+          overwriteInitial: false,
+          showUpload: false,
+          layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {upload}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+          }
+        });
+
+      <% end %>
+
+    </script>
+
+<% end %>

@@ -105,12 +105,12 @@ module ApplicationHelper
         return roles_include(roles.keys[0..1])
     end
 
-    def author_role
-        return roles_include(roles.keys[3])
+    def assistant_role
+        return roles_include(roles.keys[2])
     end
 
-    def editor_role
-        return roles_include(roles.keys[2])
+    def staff_role
+        return roles_include(roles.keys[3])
     end
 
     def roles_include(allowed_roles)
@@ -127,15 +127,15 @@ module ApplicationHelper
                 general: {
                     allowed: [0, 1]
                 },
-                health_maintenance_organizations: {
-                    allowed: [0, 1]
-                },
                 user_management: {
                     allowed: [0, 1]
                 }
             },
             search: {
                 allowed: [:all]
+            },
+            health_maintenance_organizations: {
+                allowed: [0, 1]
             },
             history: {
                 allowed: [:all]
@@ -208,6 +208,10 @@ module ApplicationHelper
             return "white"
         end
 
+    end
+
+    def get_hmo_by_id(id)
+        return HealthMaintenanceOrganization.find(id).name
     end
 
 end

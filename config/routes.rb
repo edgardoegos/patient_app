@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         namespace :v1 do
             resources :appointments
             resources :patients
-            
+
             get 'get_patient_by_name' => 'patients#get_patient_by_name' 
             
         end
@@ -27,7 +27,6 @@ Rails.application.routes.draw do
         put 'general/update'
 
         resources :general
-        resources :health_maintenance_organizations
         resources :categories
 
         get 'user_management/:id/profile' => 'user_management#profile', :as => :user_management_profile
@@ -45,7 +44,9 @@ Rails.application.routes.draw do
     resources :appointments
     resources :history
     resources :follow_ups
+    delete 'patients/attachment_delete/:id' => 'patients#attachment_delete'
     resources :patients
+    resources :health_maintenance_organizations
 
     resources :search
     

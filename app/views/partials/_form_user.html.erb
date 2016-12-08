@@ -85,15 +85,15 @@
                                     <% if params[:action] == "new" %>
                                         <% User.statuses.each do |k, v| %>
                                             <div class="radio radio-primary radio-inline">
-                                                <%= f.radio_button :status, k, checked: v == 0 ? "" : "checked" %>
-                                                <%= f.label :status, k.humanize.titlecase, :value => v  %>
+                                                <%= f.radio_button :status, k, checked: v == 0 ? "" : "checked", :id => k %>
+                                                <%= f.label :status, k.humanize.titlecase, :value => v, :for =>  k %>
                                             </div>
                                         <% end %>
                                     <% else %>
                                         <% User.statuses.each do |k, v| %>
                                             <div class="radio radio-primary radio-inline">
-                                                <%= f.radio_button :status, k, checked: k == @user.status ? "checked" : "" %>
-                                                <%= f.label :status, k.humanize.titlecase, :value => v  %>
+                                                <%= f.radio_button :status, k, checked: k == @user.status ? "checked" : "", :id => k %>
+                                                <%= f.label :status, k.humanize.titlecase, :value => v, :for =>  k  %>
                                             </div>
                                         <% end %>
                                     <% end %>
