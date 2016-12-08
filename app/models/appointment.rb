@@ -11,7 +11,7 @@ class Appointment < ActiveRecord::Base
         # self.appointment_type = 0
         self.status = 0
     end
-    
+
     def self.save_appointment(patient_appointment_params, type)
         
         @appointment = self.new(patient_appointment_params[:appointments])
@@ -38,7 +38,7 @@ class Appointment < ActiveRecord::Base
             @patient.weight = patient_appointment_params[:weight]
             @patient.weight = patient_appointment_params[:weight]
             @patient.medical_record = patient_appointment_params[:medical_record]
-
+            @patient.patient_attachments = patient_appointment_params[:patient_attachments]
             @patient.save
             
             @appointment.patient_id = @patient.id

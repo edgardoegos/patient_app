@@ -2,38 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed356357-155a-4b57-828c-9e1873c9d7e9" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/patients_show.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/patients_show.css.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/patients/show.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/assets/javascripts/application/patients/show.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendor/assets/stylesheets/application/patients/show.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/controllers/settings/health_maintenance_organizations_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/health_maintenance_organizations_controller.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/settings/health_maintenance_organizations/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/health_maintenance_organizations/edit.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/settings/health_maintenance_organizations/index.html.erb" afterPath="$PROJECT_DIR$/app/views/health_maintenance_organizations/index.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/patients_edit.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/patients_edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/patients_new.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/patients_new.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/settings/user_management_edit.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/settings/user_management_edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/patients_edit.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/patients_edit.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/patients_new.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/patients_new.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/api/v1/patients_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/api/v1/patients_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/patients_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/patients_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/helpers/application_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/application_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/patient.rb" afterPath="$PROJECT_DIR$/app/models/patient.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/appointments/index.html.erb" afterPath="$PROJECT_DIR$/app/views/appointments/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_navigation.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/_navigation.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/appointments_new.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/appointments_new.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/appointments_new.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/appointments_new.css.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/appointments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/appointments_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/appointment.rb" afterPath="$PROJECT_DIR$/app/models/appointment.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/_form_appointment.html.erb" afterPath="$PROJECT_DIR$/app/views/partials/_form_appointment.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/_form_patient.html.erb" afterPath="$PROJECT_DIR$/app/views/partials/_form_patient.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/_form_user.html.erb" afterPath="$PROJECT_DIR$/app/views/partials/_form_user.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patients/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/patients/edit.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patients/index.html.erb" afterPath="$PROJECT_DIR$/app/views/patients/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/patients/new.html.erb" afterPath="$PROJECT_DIR$/app/views/patients/new.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/search/index.html" afterPath="$PROJECT_DIR$/app/views/search/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js" afterPath="$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/assets/javascripts/application/patients/edit.js" afterPath="$PROJECT_DIR$/vendor/assets/javascripts/application/patients/edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/assets/javascripts/application/patients/new.js" afterPath="$PROJECT_DIR$/vendor/assets/javascripts/application/patients/new.js" />
     </list>
     <ignored path="patient_doctor_app.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,9 +46,11 @@
       <file leaf-file-name="_form_patient.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/partials/_form_patient.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="946">
-              <caret line="283" column="10" selection-start-line="283" selection-start-column="10" selection-end-line="283" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="270">
+              <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+              <folding>
+                <element signature="e#9257#10190#0#HTML" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -80,86 +58,91 @@
       <file leaf-file-name="patients_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/patients_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="46" column="95" selection-start-line="46" selection-start-column="95" selection-end-line="46" selection-end-column="95" />
+            <state relative-caret-position="216">
+              <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patients_index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/patients_index.js">
+      <file leaf-file-name="appointments_controller.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/appointments_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="22" selection-end-column="40" />
+            <state relative-caret-position="300">
+              <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/assets/stylesheets/application/patients/show.css">
+      <file leaf-file-name="appointment.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/appointment.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/patients/index.js">
+      <file leaf-file-name="_form_appointment.html.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/partials/_form_appointment.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-626">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="8" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/patients/show.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="327">
-              <caret line="449" column="41" selection-start-line="449" selection-start-column="41" selection-end-line="449" selection-end-column="41" />
+            <state relative-caret-position="240">
+              <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
               <folding>
-                <element signature="e#1628#2355#0#HTML" expanded="false" />
-                <element signature="e#2369#2849#0#HTML" expanded="false" />
-                <element signature="e#2863#3534#0#HTML" expanded="false" />
-                <element signature="e#7908#10594#0#HTML" expanded="false" />
+                <element signature="n#div#0;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#3;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#4;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#5;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#5;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#5;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#3;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#4;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#5;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#6;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#7;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#8;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+                <marker date="1481169551000" expanded="false" signature="25806:28837" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patients_show.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/patients_show.js">
+      <file leaf-file-name="patient.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
+            <state relative-caret-position="420">
+              <caret line="28" column="7" selection-start-line="17" selection-start-column="4" selection-end-line="28" selection-end-column="7" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <marker date="1481085411000" expanded="true" signature="656:1072" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/patients/edit.js">
+      <file leaf-file-name="new.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/patients/new.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="53" column="50" selection-start-line="53" selection-start-column="50" selection-end-line="53" selection-end-column="50" />
+            <state relative-caret-position="456">
+              <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="314" selection-end-column="1" />
               <folding>
+                <element signature="e#191#364#0" expanded="false" />
+                <element signature="e#399#520#0" expanded="false" />
+                <element signature="e#572#723#0" expanded="false" />
+                <element signature="e#1671#1822#0" expanded="false" />
+                <element signature="e#1882#2033#0" expanded="false" />
+                <element signature="e#3228#3623#0" expanded="false" />
+                <element signature="e#3669#4064#0" expanded="false" />
                 <element signature="n#!!block;n#processMedicalHistoryFiles#0" expanded="false" />
                 <element signature="n#!!block;n#processLaboratoryResultsFiles#0" expanded="false" />
                 <element signature="n#!!block;n#processPhysicalExaminationFiles#0" expanded="false" />
@@ -168,11 +151,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="patients_edit.css.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/patients_edit.css.scss">
+      <file leaf-file-name="new.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="23" selection-end-column="41" />
+            <state relative-caret-position="328">
+              <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
+              <folding>
+                <element signature="e#4464#4615#0" expanded="false" />
+                <element signature="e#5563#5714#0" expanded="false" />
+                <element signature="e#5774#5925#0" expanded="false" />
+                <element signature="e#7120#7515#0" expanded="false" />
+                <element signature="e#7561#7956#0" expanded="false" />
+                <element signature="e#8602#9763#0" expanded="false" />
+                <element signature="n#!!block;n#populateReview#0" expanded="false" />
+                <element signature="n#!!block;n#populateReviewForExistingPatient#0" expanded="false" />
+                <element signature="n#!!block;n#clearReview#0" expanded="false" />
+                <element signature="n#!!block;n#processMedicalHistoryFiles#0" expanded="false" />
+                <element signature="n#!!block;n#processLaboratoryResultsFiles#0" expanded="false" />
+                <element signature="n#!!block;n#processPhysicalExaminationFiles#0" expanded="false" />
+                <element signature="e#20850#21215#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="patients_new.css.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/patients_new.css.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appointments_new.css.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/appointments_new.css.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -186,9 +203,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/db/seeds.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/settings/health_maintenance_organizations_controller.rb" />
-        <option value="$PROJECT_DIR$/vendor/assets/javascripts/application/settings/health_maintenance_organizations/index.js" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/settings/health_maintenance_organizations_edit.css.scss" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/settings/health_maintenance_organizations_edit.js" />
         <option value="$PROJECT_DIR$/app/views/settings/health_maintenance_organizations/index.html.erb" />
@@ -198,8 +212,6 @@
         <option value="$PROJECT_DIR$/db/migrate/20161017044928_add_hmo_id_to_patients.rb" />
         <option value="$PROJECT_DIR$/app/views/partials/_form_follow_up.html.erb" />
         <option value="$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/index.js" />
-        <option value="$PROJECT_DIR$/app/controllers/appointments_controller.rb" />
-        <option value="$PROJECT_DIR$/app/models/appointment.rb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/dashboard.js" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/dashboards.css.scss" />
         <option value="$PROJECT_DIR$/app/views/dashboard/index.html.erb" />
@@ -208,8 +220,6 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/base/pages.scss" />
         <option value="$PROJECT_DIR$/app/views/layouts/_footer.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/settings/user_management_edit.js" />
-        <option value="$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js" />
-        <option value="$PROJECT_DIR$/app/views/partials/_form_appointment.html.erb" />
         <option value="$PROJECT_DIR$/app/controllers/api/v1/patients_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/partials/_form_user.html.erb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_navigation.html.erb" />
@@ -217,7 +227,6 @@
         <option value="$PROJECT_DIR$/app/controllers/health_maintenance_organizations_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/health_maintenance_organizations/edit.html.erb" />
         <option value="$PROJECT_DIR$/app/views/appointments/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/assets/javascripts/patients_new.js" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/patients_new.css.scss" />
         <option value="$PROJECT_DIR$/app/views/patients/new.html.erb" />
         <option value="$PROJECT_DIR$/db/migrate/20161202063453_create_patient_attachments.rb" />
@@ -237,6 +246,14 @@
         <option value="$PROJECT_DIR$/app/assets/stylesheets/patients_show.css.scss" />
         <option value="$PROJECT_DIR$/app/controllers/patients_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/patients/show.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/search/index.html" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/patients_new.js" />
+        <option value="$PROJECT_DIR$/app/assets/javascripts/appointments_new.js" />
+        <option value="$PROJECT_DIR$/app/assets/stylesheets/appointments_new.css.scss" />
+        <option value="$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js" />
+        <option value="$PROJECT_DIR$/app/controllers/appointments_controller.rb" />
+        <option value="$PROJECT_DIR$/app/models/appointment.rb" />
+        <option value="$PROJECT_DIR$/app/views/partials/_form_appointment.html.erb" />
       </list>
     </option>
   </component>
@@ -491,26 +508,8 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="patient_doctor_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="patient_doctor_app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="stylesheets" />
+              <option name="myItemId" value="models" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -525,14 +524,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -550,7 +541,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -788,12 +779,12 @@
       <workItem from="1479267951586" duration="2693000" />
       <workItem from="1480387701838" duration="16117000" />
       <workItem from="1480720593033" duration="33351000" />
-      <workItem from="1481084952906" duration="22655000" />
+      <workItem from="1481084952906" duration="27680000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="187147000" />
+    <option name="totallyTimeSpent" value="192172000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="31" width="1440" height="839" extended-state="6" />
@@ -861,62 +852,18 @@
           <line>247</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/vendor/assets/javascripts/application/patients/new.js</url>
+          <line>60</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_navigation.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="12" column="25" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/settings/general_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="4" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/health_maintenance_organizations_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="37" column="5" selection-start-line="37" selection-start-column="5" selection-end-line="37" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/health_maintenance_organizations/edit.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="76" column="96" selection-start-line="76" selection-start-column="96" selection-end-line="76" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/health_maintenance_organizations/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="106" column="28" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/kartik-v-bootstrap-fileinput-2c77158/examples/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/migrate/20161202061722_add_attachment_document_type:integer_tag:integer_to_patient_attachments.rb" />
     <entry file="file://$PROJECT_DIR$/db/migrate/20161202061851_add_attachment_document:attachment_type:integer_tag:integer_to_patient_attachments.rb" />
     <entry file="file://$PROJECT_DIR$/db/migrate/20160912122853_create_patients.rb">
@@ -948,13 +895,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="106" column="28" selection-start-line="102" selection-start-column="8" selection-end-line="106" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1021,60 +961,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/patients_new.css.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="21" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/patients/new.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="471">
-          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
-          <folding>
-            <element signature="e#3228#3623#0" expanded="false" />
-            <element signature="e#3669#4064#0" expanded="false" />
-            <element signature="n#!!block;n#processMedicalHistoryFiles#0" expanded="false" />
-            <element signature="n#!!block;n#processLaboratoryResultsFiles#0" expanded="false" />
-            <element signature="n#!!block;n#processPhysicalExaminationFiles#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="16" selection-end-line="15" selection-end-column="16" />
-          <folding>
-            <marker date="1481085411000" expanded="true" signature="656:1072" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/patient_attachment.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/patients_new.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="41" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/patients/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="53" column="82" selection-start-line="53" selection-start-column="82" selection-end-line="53" selection-end-column="82" />
           <folding />
         </state>
       </provider>
@@ -1210,7 +1100,7 @@
         <state relative-caret-position="450">
           <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1247,22 +1137,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/patients_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="46" column="95" selection-start-line="46" selection-start-column="95" selection-end-line="46" selection-end-column="95" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/partials/_form_patient.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="283" column="10" selection-start-line="283" selection-start-column="10" selection-end-line="283" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/patients/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -1273,6 +1147,182 @@
             <element signature="e#2863#3534#0#HTML" expanded="false" />
             <element signature="e#7908#10594#0#HTML" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/patients/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="58" column="63" selection-start-line="58" selection-start-column="51" selection-end-line="58" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/search/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="26" column="58" selection-start-line="26" selection-start-column="58" selection-end-line="26" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/patients_new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="28" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/appointments_new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="41" selection-start-line="25" selection-start-column="41" selection-end-line="25" selection-end-column="41" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/appointments.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/patients/new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="138" column="0" selection-start-line="138" selection-start-column="0" selection-end-line="314" selection-end-column="1" />
+          <folding>
+            <element signature="e#191#364#0" expanded="false" />
+            <element signature="e#399#520#0" expanded="false" />
+            <element signature="e#572#723#0" expanded="false" />
+            <element signature="e#1671#1822#0" expanded="false" />
+            <element signature="e#1882#2033#0" expanded="false" />
+            <element signature="e#3228#3623#0" expanded="false" />
+            <element signature="e#3669#4064#0" expanded="false" />
+            <element signature="n#!!block;n#processMedicalHistoryFiles#0" expanded="false" />
+            <element signature="n#!!block;n#processLaboratoryResultsFiles#0" expanded="false" />
+            <element signature="n#!!block;n#processPhysicalExaminationFiles#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/patient.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="7" selection-start-line="17" selection-start-column="4" selection-end-line="28" selection-end-column="7" />
+          <folding>
+            <marker date="1481085411000" expanded="true" signature="656:1072" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/patients_new.css.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="21" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/_form_patient.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding>
+            <element signature="e#9257#10190#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/appointments_new.css.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="55" selection-start-line="9" selection-start-column="55" selection-end-line="9" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/assets/javascripts/application/appointments/new.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="293" column="0" selection-start-line="293" selection-start-column="0" selection-end-line="293" selection-end-column="0" />
+          <folding>
+            <element signature="e#4464#4615#0" expanded="false" />
+            <element signature="e#5563#5714#0" expanded="false" />
+            <element signature="e#5774#5925#0" expanded="false" />
+            <element signature="e#7120#7515#0" expanded="false" />
+            <element signature="e#7561#7956#0" expanded="false" />
+            <element signature="e#8602#9763#0" expanded="false" />
+            <element signature="n#!!block;n#populateReview#0" expanded="false" />
+            <element signature="n#!!block;n#populateReviewForExistingPatient#0" expanded="false" />
+            <element signature="n#!!block;n#clearReview#0" expanded="false" />
+            <element signature="n#!!block;n#processMedicalHistoryFiles#0" expanded="false" />
+            <element signature="n#!!block;n#processLaboratoryResultsFiles#0" expanded="false" />
+            <element signature="n#!!block;n#processPhysicalExaminationFiles#0" expanded="false" />
+            <element signature="e#20850#21215#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/patients_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="70" column="27" selection-start-line="70" selection-start-column="27" selection-end-line="70" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/partials/_form_appointment.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="38" column="25" selection-start-line="38" selection-start-column="25" selection-end-line="38" selection-end-column="25" />
+          <folding>
+            <element signature="n#div#0;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#div#1;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#3;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#5;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#0;n#div#5;n#div#0;n#fieldset#1;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#6;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#7;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#8;n#div#0;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#3;n#fieldset#2;n#!!top" expanded="false" />
+            <marker date="1481169551000" expanded="false" signature="25806:28837" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/appointments_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="29" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/appointment.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

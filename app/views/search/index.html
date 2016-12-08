@@ -26,7 +26,7 @@
                     <% @patient_results.each do |result| %>
                         <div class="hr-line-dashed"></div>
                         <div class="search-result">
-                            <h3><a href="#"><%= "#{ result.last_name + ", " + result.first_name + " " + result.middle_name  }" %></a></h3>
+                            <h3><a href="<%= patient_path(result.id) %>"><%= "#{ result.last_name + ", " + result.first_name + " " + result.middle_name  }" %></a></h3>
                             <p class="search-link"><%= result.address %></p>
                             <p>
                                 <%= result.medical_record["ob_history"] %>

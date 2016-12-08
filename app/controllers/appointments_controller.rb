@@ -55,7 +55,8 @@ class AppointmentsController < ApplicationController
     def appointment_params
         params.require(:patient).permit(:hmo_id, :last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
             appointments: [:patient_id, :consultation_date, :systolic, :diastolic, :weight, :complaint, :status, :appointment_type],
-            medical_record: [:menarche, :gravida, :para, :t, :p, :a, :l, :ob_history])
+            medical_record: [:menarche, :gravida, :para, :t, :p, :a, :l, :ob_history, :type, :lmr, :edc, :chief_complaint, :history_of_present_illness, :return_visit, :record_date, :management, :recommendations],
+            patient_attachments: [:id, :document, :type, :file_name])
     end
     
     def update_appointment_params

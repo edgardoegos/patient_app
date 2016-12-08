@@ -22,4 +22,7 @@
 //= require jeditable/jquery.jeditable.js
 //= require dataTables/datatables.min.js
 
+//= require fileinput/fileinput.min.js
+//= require fileinput//themes/fa/theme.js
+
 //= require application/appointments/new.js
