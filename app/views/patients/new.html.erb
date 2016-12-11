@@ -35,9 +35,9 @@
           <h5>Note: <small>Labels with * are required</small></h5>
         </div>
         <div class="ibox-content">
-                    <%= form_for @patient, url: { action: "create" }, :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
-                        <%= render partial: partials[:form][:patient], :locals => { :f => f, :title => "New Patient" } %>
-                    <% end %>
+          <%= form_for @patient, url: { action: "create" }, :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
+              <%= render partial: partials[:form][:patient], :locals => { :f => f, :title => "New Patient" } %>
+          <% end %>
         </div>
       </div>
     </div>

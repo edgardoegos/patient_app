@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     end
 
     get '/appointments/history' => 'appointments#history', :as => :appointment_history
-    
+    post '/appointments/filter' => 'appointments#filter_appointment'
     resources :appointments
     resources :history
     resources :follow_ups

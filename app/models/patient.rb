@@ -42,7 +42,7 @@ class Patient < ActiveRecord::Base
     def self.get_patient_latest_complete_appointment_by_patient_id(id)
         return self.select("patients.*, appointments.id as appointment_id, appointments.complaint")
                    .joins("LEFT OUTER JOIN appointments AS appointments ON appointments.patient_id = patients.id")
-                   .where("patients.id = ? AND appointments.consultation_date = ?  AND appointments.status = 2", id, Date.today)
+                   .where("patients.id = ? AND appointments.status = 2", id)
                    .first
     end
 

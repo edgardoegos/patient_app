@@ -56,24 +56,24 @@ module ApplicationHelper
         
         if button == "all"
             if params[:month].present?
-                return "btn-default" 
+                return "btn-default"
             elsif params[:date].present?
                 return "btn-default"
             else
-                return "btn-primary" 
+                return "btn-info"
             end
                 
         else
             if button == "month"
                 if params[:month].present?
-                    return "btn-primary" 
+                    return "btn-info"
                 else
                     return "btn-default" 
                 end
             else 
                 if params[:date].present?
                     if params[:date] == button
-                        return "btn-primary" 
+                        return "btn-info"
                     else
                         return "btn-default" 
                     end
@@ -200,7 +200,7 @@ module ApplicationHelper
     def get_appointment_current_status(status, button_name)
         if status == button_name
             if status == "complete"
-                return "success"
+                return "info"
             else
                 return "warning"
             end
@@ -210,8 +210,29 @@ module ApplicationHelper
 
     end
 
+    def get_active_appointment_tabs(button_name)
+        if !params[:filter].present?
+            if !params[:type].present?
+                if button_name == "all"
+                    return "info"
+                else
+                    return "white"
+                end
+            else
+                return "white"
+            end
+        else
+          if button_name == params[:filter]
+              return "info"
+          else
+              return "white"
+          end
+        end
+    end
+
     def get_hmo_by_id(id)
         return HealthMaintenanceOrganization.find(id).name
     end
+
 
 end

@@ -10,6 +10,39 @@ $(function() {
     $('#tbl-future').dataTable();
     $('#tbl-appointments-all').dataTable();
 
+
+    $("body").delegate("#fld-record-date .input-group.date", "focusin", function(){
+        $(this).datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: 'dd/mm/yyyy'
+        }).on('changeDate', function (e) {
+            $("#filter_record_date").prop('required', true);
+            $('#fld-start').val("");
+            $('#fld-end').val("");
+            $("#fld-start").prop('required', false);
+            $('#fld-end').prop('required', false);
+        });
+    });
+
+    $('#fld-record-date-range .input-daterange').datepicker({
+        keyboardNavigation: false,
+        forceParse: false,
+        autoclose: true,
+        format: 'dd/mm/yyyy'
+    }).on('changeDate', function (e) {
+        $("#fld-start").prop('required', true);
+        $('#fld-end').prop('required', true);
+        $('#fld-record-date .input-group.date').find('input').val("");
+        $('#fld-record-date .input-group.date').find('input').prop('required', false);
+    });
+
+    $('#advance-filter').click(function() {
+        $('#mdl-advance-filter').modal();
+    });
+
     $(document).on('click', '.btn-current-status-complete', function(){
 
         var id = $(this).closest('.btn-group').data('appointment-id');

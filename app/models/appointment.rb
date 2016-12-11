@@ -2,8 +2,8 @@ class Appointment < ActiveRecord::Base
 
     belongs_to :patient
 
-    enum status: [:queued, :inprogress, :complete, :cancel]
-    enum appointment_type: [:appointment, :follow_up]
+    enum status: [:queued, :inprogress, :complete, :overdue, :cancel]
+    enum appointment_type: [:appointment, :return_visit]
 
     before_create :save_default
 
@@ -103,15 +103,49 @@ class Appointment < ActiveRecord::Base
     end
 
     def self.get_current_appointment
+
         @appointment = self.where('consultation_date = ? AND status <> 2', Date.today).order(created_at: :asc)
 
         @appointment_complete = self.where('consultation_date = ? AND status = 2', Date.today).order(created_at: :asc)
 
         return @appointment + @appointment_complete
+
     end
 
     def self.get_future_appointment
         return self.where('consultation_date > ? AND status = 0', Date.today)
+    end
+
+    def self.get_appointments(filter)
+        if filter == "today"
+            return self.where('consultation_date = ?', Date.today)
+        else
+            return self.where('consultation_date = ?', Date.yesterday)
+        end
+    end
+
+    def self.get_filtered_appointments(filter)
+        if filter[:record_date].present?
+            if filter[:status] == "All" && filter[:type] == "All"
+                return self.where('consultation_date = ?', DateTime.parse(filter[:record_date]))
+            elsif filter[:status] != "All" && filter[:type] == "All"
+                return self.where('consultation_date = ? AND status = ?', DateTime.parse(filter[:record_date]), Appointment.statuses[filter[:status]])
+            elsif filter[:status] == "All" && filter[:type] != "All"
+                return self.where('consultation_date = ? AND appointment_type = ?', DateTime.parse(filter[:record_date]), Appointment.appointment_types[filter[:type]])
+            else
+                return self.where('consultation_date = ? AND appointment_type = ? AND status = ?', DateTime.parse(filter[:record_date]), Appointment.appointment_types[filter[:type]], Appointment.statuses[filter[:status]])
+            end
+        else
+            if filter[:status] == "All" && filter[:type] == "All"
+                return self.where(:consultation_date => DateTime.parse(filter[:start])..DateTime.parse(filter[:end]))
+            elsif filter[:status] != "All" && filter[:type] == "All"
+                return self.where(:consultation_date => DateTime.parse(filter[:start])..DateTime.parse(filter[:end]), :status => Appointment.statuses[filter[:status]])
+            elsif filter[:status] == "All" && filter[:type] != "All"
+                return self.where(:consultation_date => DateTime.parse(filter[:start])..DateTime.parse(filter[:end]), :appointment_type => Appointment.appointment_types[filter[:type]])
+            else
+                return self.where(:consultation_date => DateTime.parse(filter[:start])..DateTime.parse(filter[:end]), :appointment_type => Appointment.appointment_types[filter[:type]], :status => Appointment.statuses[filter[:status]])
+            end
+        end
     end
 
 end

@@ -5,9 +5,15 @@ class AppointmentsController < ApplicationController
     before_action :check_authorization, :get_hmo_list
     
     def index
-        @appointments_overdue = Appointment.get_all_overdue_appointment
-        @appointments_current = Appointment.get_current_appointment
-        @appointments_future = Appointment.get_future_appointment
+        if params[:filter].present?
+            @appointments = Appointment.get_appointments(params[:filter])
+        else
+            if params[:type].present?
+                @appointments = Appointment.get_filtered_appointments(params)
+            else
+                @appointments = Appointment.all.order(consultation_date: :desc)
+            end
+        end
     end
     
     def new 
@@ -45,13 +51,25 @@ class AppointmentsController < ApplicationController
             @appointments = Appointment.where('status <> ?', 0).order(:created_at)
         end
     end
-    
+
+    def filter_appointment
+        if filter_params[:record_date].present?
+            redirect_to appointments_path(record_date: filter_params[:record_date], type: filter_params[:type], status: filter_params[:status])
+        else
+            redirect_to appointments_path(start: filter_params[:start], end: filter_params[:end], type: filter_params[:type], status: filter_params[:status])
+        end
+    end
+
     private
 
     def get_hmo_list
         @hmo = HealthMaintenanceOrganization.all
     end
-    
+
+    def filter_params
+        params.require(:filter).permit(:record_date, :start, :end, :type, :status)
+    end
+
     def appointment_params
         params.require(:patient).permit(:hmo_id, :last_name, :first_name, :middle_name, :birth_date, :gender, :age, :civil_status, :address, :contact, :occupation, :blood_type, :height, :weight,
             appointments: [:patient_id, :consultation_date, :systolic, :diastolic, :weight, :complaint, :status, :appointment_type],
