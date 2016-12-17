@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -10,8 +10,8 @@ gem 'font-awesome-rails', '4.3.0.0'
 gem 'devise'
 
 # Use sqlite3 as the database for Active Record
-#gem 'mysql2', '~> 0.3.18'
-gem 'pg', '~> 0.18.4'
+gem 'mysql2', '~> 0.3.18'
+# gem 'pg', '~> 0.18.4'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -34,7 +34,7 @@ gem 'momentjs-rails'
 gem "paperclip", "~> 5.0.0"
 gem 'city-state'
 gem 'will_paginate-bootstrap'
-
+gem 'tzinfo-data'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -59,5 +59,7 @@ end
 
 gem 'rails_12factor', group: :production
 
-ruby "2.2.1"
+ruby "2.2.4"
+
+
 

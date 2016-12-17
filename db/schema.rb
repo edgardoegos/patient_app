@@ -13,102 +13,99 @@
 
 ActiveRecord::Schema.define(version: 20161202063453) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "appointments", force: :cascade do |t|
     t.datetime "consultation_date"
-    t.integer  "systolic"
-    t.integer  "diastolic"
-    t.string   "weight"
-    t.text     "complaint"
-    t.text     "remarks"
-    t.integer  "status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "patient_id"
-    t.integer  "parent_id"
-    t.integer  "appointment_type"
+    t.integer  "systolic",          limit: 4
+    t.integer  "diastolic",         limit: 4
+    t.string   "weight",            limit: 255
+    t.text     "complaint",         limit: 65535
+    t.text     "remarks",           limit: 65535
+    t.integer  "status",            limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "patient_id",        limit: 4
+    t.integer  "parent_id",         limit: 4
+    t.integer  "appointment_type",  limit: 4
   end
 
   create_table "health_maintenance_organizations", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.integer  "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.integer  "status",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "patient_attachments", force: :cascade do |t|
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
+    t.string   "document_file_name",    limit: 255
+    t.string   "document_content_type", limit: 255
+    t.integer  "document_file_size",    limit: 4
     t.datetime "document_updated_at"
-    t.integer  "patient_id"
-    t.integer  "attachment_type"
-    t.integer  "tag"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.integer  "patient_id",            limit: 4
+    t.integer  "attachment_type",       limit: 4
+    t.integer  "tag",                   limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "patients", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "middle_name"
+    t.string   "first_name",     limit: 255
+    t.string   "last_name",      limit: 255
+    t.string   "middle_name",    limit: 255
     t.datetime "birth_date"
-    t.integer  "age"
-    t.integer  "gender"
-    t.integer  "civil_status"
-    t.string   "occupation"
-    t.string   "blood_type"
-    t.string   "weight"
-    t.string   "height"
-    t.string   "address"
-    t.text     "medical_record"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "contact"
-    t.integer  "hmo_id"
+    t.integer  "age",            limit: 4
+    t.integer  "gender",         limit: 4
+    t.integer  "civil_status",   limit: 4
+    t.string   "occupation",     limit: 255
+    t.string   "blood_type",     limit: 255
+    t.string   "weight",         limit: 255
+    t.string   "height",         limit: 255
+    t.string   "address",        limit: 255
+    t.text     "medical_record", limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "contact",        limit: 255
+    t.integer  "hmo_id",         limit: 4
   end
 
   create_table "settings", force: :cascade do |t|
-    t.string   "name"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
+    t.string   "name",              limit: 255
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
-    t.text     "body"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.text     "body",              limit: 65535
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "username"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "role"
-    t.integer  "status"
-    t.integer  "gender",                 default: 0,  null: false
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "username",               limit: 255
+    t.string   "first_name",             limit: 255
+    t.string   "last_name",              limit: 255
+    t.integer  "role",                   limit: 4
+    t.integer  "status",                 limit: 4
+    t.integer  "gender",                 limit: 4,   default: 0,  null: false
     t.datetime "birth_date"
-    t.string   "address"
-    t.string   "country"
-    t.string   "postal_code"
-    t.string   "phone_number"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
+    t.string   "address",                limit: 255
+    t.string   "country",                limit: 255
+    t.string   "postal_code",            limit: 255
+    t.string   "phone_number",           limit: 255
+    t.string   "avatar_file_name",       limit: 255
+    t.string   "avatar_content_type",    limit: 255
+    t.integer  "avatar_file_size",       limit: 4
     t.datetime "avatar_updated_at"
   end
 

@@ -24,7 +24,7 @@ module AngularProject
     config.active_record.raise_in_transactional_callbacks = true
       
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
-      
+
     config.assets.precompile += [ 
         'appviews.css', 
         'cssanimations.css', 
@@ -98,8 +98,8 @@ module AngularProject
         'settings/health_maintenance_organizations_edit.js',
         'settings/general_index.js'
     ]
-      
-      
-      
+
+
+
   end
 end

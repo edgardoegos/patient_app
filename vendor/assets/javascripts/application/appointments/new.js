@@ -251,6 +251,52 @@ $(function() {
         }
     });
 
+    // Review
+    $("#past-medical-history-review").fileinput({
+        showUpload: false,
+        layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {upload}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+        }
+    });
+
+    $("#laboratory-results-review").fileinput({
+        showUpload: false,
+        layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {upload}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+        }
+    });
+
+    $("#physical-examinations-review").fileinput({
+        showUpload: false,
+        layoutTemplates: {
+            main1: "{preview}\n" +
+            "<div class=\'input-group {class}\'>\n" +
+            "   <div class=\'input-group-btn\'>\n" +
+            "       {browse}\n" +
+            "       {upload}\n" +
+            "       {remove}\n" +
+            "   </div>\n" +
+            "   {caption}\n" +
+            "</div>"
+        }
+    });
+
 });
     
 function checkPatientIfRegistered() {
@@ -340,6 +386,7 @@ function populateReview() {
     $('#p-contact').text(form_data['patient[contact]']);
     $('#p-occupation').text(form_data['patient[occupation]']);
     $('#p-blood-type').text(form_data['patient[blood_type]']);
+    $('#p-address').text(form_data['patient[address]']);
     $('#p-weight-2').text(form_data['patient[appointments][weight]']);
     $('#p-height').text(form_data['patient[height]']);
     $('#p-menarche').text(form_data['patient[medical_record][menarche]']);
@@ -350,7 +397,17 @@ function populateReview() {
     $('#p-a').text(form_data['patient[medical_record][a]']);
     $('#p-l').text(form_data['patient[medical_record][l]']);
     $('#p-ob-history').text(form_data['patient[medical_record][ob_history]']);
-    
+
+    $('#p-hmo').text(form_data['patient[medical_record][recommendations]']);
+    $('#p-type').text(form_data['patient[medical_record][type]']);
+    $('#p-lms').text(form_data['patient[medical_record][lmr]']);
+    $('#p-edc').text(form_data['patient[medical_record][edc]']);
+    $('#p-history-of-present-illness').text(form_data['patient[medical_record][history_of_present_illness]']);
+    $('#p-return-visit').text(form_data['patient[medical_record][return_visit]']);
+    $('#p-record-date').text(form_data['patient[medical_record][record_date]']);
+    $('#p-management').text(form_data['patient[medical_record][management]']);
+    $('#p-recommendations').text(form_data['patient[medical_record][recommendations]']);
+
 }
     
 function populateReviewForExistingPatient(patient) {
