@@ -10,10 +10,12 @@ class Patient < ActiveRecord::Base
     
     enum gender: [:male, :female]
     enum civil_status: [:single ,:married, :widowed, :divorced, :separated]
-    
-    serialize :medical_record, JSON
 
     after_save :save_patient_attachments
+
+    serialize :medical_record, JSON
+    
+    # validates :model_name, uniqueness: { scope: [:first_name, :last_name, :middle_name] }
 
     def save_patient_attachments
         if !self.patient_attachments.nil?

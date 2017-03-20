@@ -1,417 +1,143 @@
+<input type="hidden" id="hdn-fld-appointment-weekly" value="<%= @appointments_current_week.to_json %>">
+<input type="hidden" id="hdn-fld-appointment-monthly" value="<%= @appointments_current_month.to_json %>">
+<input type="hidden" id="hdn-fld-appointment-yearly" value="<%= @appointments_current_year.to_json %>">
+
 <div class="wrapper wrapper-content">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-success pull-right">Monthly</span>
-          <h5>Completed</h5>
+          <span class="label label-primary pull-right"></span>
+          <h5>Total Patient</h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">386,200</h1>
-          <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div>
-          <small>Total views</small>
+          <h1 class="no-margins"><%= @patients.count() %></h1>
+          <div class="stat-percent font-bold text-info"></div>
+          <small>Overall Patient Count</small>
         </div>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-info pull-right">Annual</span>
-          <h5>Orders</h5>
+          <span class="label label-success pull-right">OB</span>
+          <h5>Total Patient</h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins">80,800</h1>
-          <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i></div>
-          <small>New orders</small>
+          <h1 class="no-margins"><%= @patient_type_ob.count()  %></h1>
+          <% if @patient_type_ob.count() != 0 %>
+            <div class="stat-percent font-bold text-success"><%= ((@patient_type_ob.count().to_f / @patients.count()) * 100).to_i %>%</div>
+          <% end %>
+          <small>Overall Percentage</small>
         </div>
       </div>
     </div>
-
-    <div class="col-md-3">
+    <div class="col-md-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-primary pull-right">Today</span>
-          <h5>Vistits</h5>
+          <span class="label label-info pull-right">Gyne</span>
+          <h5>Total Patient</h5>
         </div>
         <div class="ibox-content">
-
-          <div class="row">
-            <div class="col-md-6">
-              <h1 class="no-margins">$ 406</h1>
-              <div class="font-bold text-navy">44% <i class="fa fa-level-up"></i> <small>Rapid</small></div>
-            </div>
-            <div class="col-md-6">
-              <h1 class="no-margins">206</h1>
-              <div class="font-bold text-navy">22% <i class="fa fa-level-up"></i> <small>Slow</small></div>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Monthly income</h5>
-          <div class="ibox-tools">
-            <span class="label label-primary">Updated 12.2015</span>
-          </div>
-        </div>
-        <div class="ibox-content no-padding">
-          <div class="flot-chart m-t-lg" style="height: 55px;">
-            <div class="flot-chart-content" id="flot-chart1"></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-8">
-      <div class="ibox float-e-margins">
-        <div class="ibox-content">
-          <div>
-                        <span class="pull-right text-right">
-                            <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                            <br />
-                            All sales: 162,862
-                        </span>
-            <h3 class="font-bold no-margins">
-              Half-year revenue margin
-            </h3>
-            <small>Sales marketing.</small>
-          </div>
-
-          <div class="m-t-sm">
-
-            <div class="row">
-              <div class="col-md-8">
-                <div>
-                  <canvas id="lineChart" height="114"></canvas>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <ul class="stat-list m-t-lg">
-                  <li>
-                    <h2 class="no-margins">2,346</h2>
-                    <small>Total orders in period</small>
-                    <div class="progress progress-mini">
-                      <div class="progress-bar" style="width: 48%;"></div>
-                    </div>
-                  </li>
-                  <li>
-                    <h2 class="no-margins ">4,422</h2>
-                    <small>Orders in last month</small>
-                    <div class="progress progress-mini">
-                      <div class="progress-bar" style="width: 60%;"></div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="m-t-md">
-            <small class="pull-right">
-              <i class="fa fa-clock-o"> </i>
-              Update on 16.07.2015
-            </small>
-            <small>
-              <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-            </small>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <span class="label label-warning pull-right">Data has changed</span>
-          <h5>User activity</h5>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-xs-4">
-              <small class="stats-label">Pages / Visit</small>
-              <h4>236 321.80</h4>
-            </div>
-
-            <div class="col-xs-4">
-              <small class="stats-label">% New Visits</small>
-              <h4>46.11%</h4>
-            </div>
-            <div class="col-xs-4">
-              <small class="stats-label">Last week</small>
-              <h4>432.021</h4>
-            </div>
-          </div>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-xs-4">
-              <small class="stats-label">Pages / Visit</small>
-              <h4>643 321.10</h4>
-            </div>
-
-            <div class="col-xs-4">
-              <small class="stats-label">% New Visits</small>
-              <h4>92.43%</h4>
-            </div>
-            <div class="col-xs-4">
-              <small class="stats-label">Last week</small>
-              <h4>564.554</h4>
-            </div>
-          </div>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-xs-4">
-              <small class="stats-label">Pages / Visit</small>
-              <h4>436 547.20</h4>
-            </div>
-
-            <div class="col-xs-4">
-              <small class="stats-label">% New Visits</small>
-              <h4>150.23%</h4>
-            </div>
-            <div class="col-xs-4">
-              <small class="stats-label">Last week</small>
-              <h4>124.990</h4>
-            </div>
-          </div>
+          <h1 class="no-margins"><%= @patient_type_gyne.count() %></h1>
+          <% if @patient_type_gyne.count() != 0 %>
+            <div class="stat-percent font-bold text-info"><%= ((@patient_type_gyne.count().to_f / @patients.count()) * 100).to_i %>%</div>
+          <% end %>
+          <small>Overall Percentage</small>
         </div>
       </div>
     </div>
 
   </div>
-
   <div class="row">
-
+    <div class="col-md-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <span class="label label-primary pull-right"></span>
+          <h5>Daily Report</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-md-3">
+              <h1 class="no-margins"><%= @daily_appointment.count() %></h1>
+              <small>Total Appointment</small>
+            </div>
+            <div class="col-md-3">
+              <h1 class="no-margins"><%= @daily_appointment_complete.count() %></h1>
+              <small>Completed</small>
+            </div>
+            <div class="col-md-3">
+              <h1 class="no-margins"><%= @daily_appointment_cancelled.count() %></h1>
+              <small>Cancelled</small>
+            </div>
+            <div class="col-md-3">
+              <% if @daily_appointment_complete.count() != 0 %>
+              <h1 class="no-margins"><%= ((@daily_appointment_complete.count().to_f / @daily_appointment.count()) * 100).to_i %>%</h1>
+              <% end %>
+              <small>Overall</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <h5>Custom responsive table </h5>
-          <div class="ibox-tools">
-            <a class="collapse-link">
-              <i class="fa fa-chevron-up"></i>
-            </a>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="fa fa-wrench"></i>
-            </a>
-            <ul class="dropdown-menu dropdown-user">
-              <li>
-                <a href="#">Config option 1</a>
-              </li>
-              <li>
-                <a href="#">Config option 2</a>
-              </li>
-            </ul>
-            <a class="close-link">
-              <i class="fa fa-times"></i>
-            </a>
+          <h5>Patients</h5>
+          <div class="pull-right">
+            <div class="btn-group">
+              <button type="button" class="btn btn-xs btn-white btn-sort active" data-type="0">Weekly</button>
+              <button type="button" class="btn btn-xs btn-white btn-sort" data-type="1">Monthly</button>
+              <button type="button" class="btn btn-xs btn-white btn-sort" data-type="2">Annual</button>
+            </div>
           </div>
         </div>
         <div class="ibox-content">
           <div class="row">
-            <div class="col-sm-9 m-b-xs">
-              <div data-toggle="buttons" class="btn-group">
-                <label class="btn btn-sm btn-white"> <input type="radio" id="option1" name="options"> Day </label>
-                <label class="btn btn-sm btn-white active"> <input type="radio" id="option2" name="options"> Week </label>
-                <label class="btn btn-sm btn-white"> <input type="radio" id="option3" name="options"> Month </label>
+            <div class="col-lg-12">
+              <div class="flot-chart">
+                <div class="flot-chart-content" id="flot-dashboard-chart"></div>
+              </div>
+              <div>
+                <canvas id="lineChart" height="70" class="hidden"></canvas>
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class="input-group">
-                <input type="text" placeholder="Search" class="input-sm form-control"> <span class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-primary"> Go!</button>
-                                </span>
-              </div>
-            </div>
+            <!--<div class="col-lg-3">-->
+              <!--<ul class="stat-list">-->
+                <!--<li>-->
+                  <!--<h2 class="no-margins"></h2>-->
+                  <!--<small>Total completed in period</small>-->
+                  <!--<div class="stat-percent">58% <i class="fa fa-level-up text-navy"></i></div>-->
+                  <!--<div class="progress progress-mini">-->
+                    <!--<div style="width: 58%;" class="progress-bar"></div>-->
+                  <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<h2 class="no-margins ">45</h2>-->
+                  <!--<small>Total patient in period</small>-->
+                  <!--<div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>-->
+                  <!--<div class="progress progress-mini">-->
+                    <!--<div style="width: 60%;" class="progress-bar"></div>-->
+                  <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                  <!--<h2 class="no-margins ">9,180</h2>-->
+                  <!--<small>Overall </small>-->
+                  <!--<div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>-->
+                  <!--<div class="progress progress-mini">-->
+                    <!--<div style="width: 22%;" class="progress-bar"></div>-->
+                  <!--</div>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</div>-->
           </div>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-              <tr>
-
-                <th>#</th>
-                <th>Project </th>
-                <th>Name </th>
-                <th>Phone </th>
-                <th>Company </th>
-                <th>Completed </th>
-                <th>Task</th>
-                <th>Date</th>
-                <th>Action</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>1</td>
-                <td>Project <small>This is example of project</small></td>
-                <td>Patrick Smith</td>
-                <td>0800 051213</td>
-                <td>Inceptos Hymenaeos Ltd</td>
-                <td><span class="pie">0.52/1.561</span></td>
-                <td>20%</td>
-                <td>Jul 14, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Alpha project</td>
-                <td>Alice Jackson</td>
-                <td>0500 780909</td>
-                <td>Nec Euismod In Company</td>
-                <td><span class="pie">6,9</span></td>
-                <td>40%</td>
-                <td>Jul 16, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Betha project</td>
-                <td>John Smith</td>
-                <td>0800 1111</td>
-                <td>Erat Volutpat</td>
-                <td><span class="pie">3,1</span></td>
-                <td>75%</td>
-                <td>Jul 18, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Gamma project</td>
-                <td>Anna Jordan</td>
-                <td>(016977) 0648</td>
-                <td>Tellus Ltd</td>
-                <td><span class="pie">4,9</span></td>
-                <td>18%</td>
-                <td>Jul 22, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Alpha project</td>
-                <td>Alice Jackson</td>
-                <td>0500 780909</td>
-                <td>Nec Euismod In Company</td>
-                <td><span class="pie">6,9</span></td>
-                <td>40%</td>
-                <td>Jul 16, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Project <small>This is example of project</small></td>
-                <td>Patrick Smith</td>
-                <td>0800 051213</td>
-                <td>Inceptos Hymenaeos Ltd</td>
-                <td><span class="pie">0.52/1.561</span></td>
-                <td>20%</td>
-                <td>Jul 14, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Gamma project</td>
-                <td>Anna Jordan</td>
-                <td>(016977) 0648</td>
-                <td>Tellus Ltd</td>
-                <td><span class="pie">4,9</span></td>
-                <td>18%</td>
-                <td>Jul 22, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Project <small>This is example of project</small></td>
-                <td>Patrick Smith</td>
-                <td>0800 051213</td>
-                <td>Inceptos Hymenaeos Ltd</td>
-                <td><span class="pie">0.52/1.561</span></td>
-                <td>20%</td>
-                <td>Jul 14, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Alpha project</td>
-                <td>Alice Jackson</td>
-                <td>0500 780909</td>
-                <td>Nec Euismod In Company</td>
-                <td><span class="pie">6,9</span></td>
-                <td>40%</td>
-                <td>Jul 16, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Betha project</td>
-                <td>John Smith</td>
-                <td>0800 1111</td>
-                <td>Erat Volutpat</td>
-                <td><span class="pie">3,1</span></td>
-                <td>75%</td>
-                <td>Jul 18, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Gamma project</td>
-                <td>Anna Jordan</td>
-                <td>(016977) 0648</td>
-                <td>Tellus Ltd</td>
-                <td><span class="pie">4,9</span></td>
-                <td>18%</td>
-                <td>Jul 22, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Alpha project</td>
-                <td>Alice Jackson</td>
-                <td>0500 780909</td>
-                <td>Nec Euismod In Company</td>
-                <td><span class="pie">6,9</span></td>
-                <td>40%</td>
-                <td>Jul 16, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Project <small>This is example of project</small></td>
-                <td>Patrick Smith</td>
-                <td>0800 051213</td>
-                <td>Inceptos Hymenaeos Ltd</td>
-                <td><span class="pie">0.52/1.561</span></td>
-                <td>20%</td>
-                <td>Jul 14, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Gamma project</td>
-                <td>Anna Jordan</td>
-                <td>(016977) 0648</td>
-                <td>Tellus Ltd</td>
-                <td><span class="pie">4,9</span></td>
-                <td>18%</td>
-                <td>Jul 22, 2013</td>
-                <td><a href="#"><i class="fa fa-check text-navy"></i></a></td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-
         </div>
+
       </div>
     </div>
-
   </div>
-
 
 </div>
 
@@ -421,69 +147,112 @@
 
       $(function() {
 
-        $("span.pie").peity("pie", {
-          fill: ['#1ab394', '#d7d7d7', '#ffffff']
-        })
+        var date = new Date; // get current date
+        var first = date.getDate() - date.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6;
 
-        var d1 = [[1262304000000, 6], [1264982400000, 3057], [1267401600000, 20434], [1270080000000, 31982], [1272672000000, 26602], [1275350400000, 27826], [1277942400000, 24302], [1280620800000, 24237], [1283299200000, 21004], [1285891200000, 12144], [1288569600000, 10577], [1291161600000, 10295]];
-        var d2 = [[1262304000000, 5], [1264982400000, 200], [1267401600000, 1605], [1270080000000, 6129], [1272672000000, 11643], [1275350400000, 19055], [1277942400000, 30062], [1280620800000, 39197], [1283299200000, 37000], [1285891200000, 27000], [1288569600000, 21000], [1291161600000, 17000]];
+        var firstDay = new Date(date.setDate(first));
+        var lastDay = new Date(date.setDate(last));
 
-        var data1 = [
-          { label: "Data 1", data: d1, color: '#17a084' },
-          { label: "Data 2", data: d2, color: '#127e68' }
-        ];
-        $.plot($("#flot-chart1"), data1, {
-          xaxis: {
-            tickDecimals: 0
-          },
-          series: {
-            lines: {
-              show: true,
-              fill: true,
-              fillColor: {
-                colors: [{
-                  opacity: 1
-                }, {
-                  opacity: 1
-                }]
-              },
-            },
-            points: {
-              width: 0.1,
-              show: false
-            },
-          },
-          grid: {
-            show: false,
-            borderWidth: 0
-          },
-          legend: {
-            show: false,
+        var weeklyData = JSON.parse($(' #hdn-fld-appointment-weekly ').val());
+
+        console.log('firstDay: ' + firstDay)
+
+        setGraph(firstDay, lastDay, weeklyData);
+
+        $(".btn-sort").click(function () {
+
+          var type = $( this ).data('type');
+
+          $('.btn-sort').removeClass('active');
+          $( this ).addClass('active');
+
+          var date = new Date();
+
+          var firstDay = "";
+          var lastDay = "";
+
+          if ( type ==  0 ) {
+
+            var first= date.getDate() - date.getDay(); // First day is the day of the month - the day of the week
+            var last = first + 6;
+
+            firstDay = new Date(date.setDate(first));
+            lastDay = new Date(date.setDate(last));
+
+            $('#flot-dashboard-chart').closest('.flot-chart').removeClass('hidden');
+            $('#lineChart').addClass('hidden');
+
+            var rangeData = JSON.parse($(' #hdn-fld-appointment-weekly ').val());
+
+          } else if ( type == 1 ) {
+
+            firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+            $('#flot-dashboard-chart').closest('.flot-chart').removeClass('hidden');
+            $('#lineChart').addClass('hidden');
+
+            var rangeData = JSON.parse($(' #hdn-fld-appointment-monthly ').val());
+
+          } else {
+
+            firstDay = new Date(date.getFullYear(), 1, 1);
+            lastDay = new Date(date.getFullYear(), 12 + 1, 0);
+
+            $('#flot-dashboard-chart').closest('.flot-chart').addClass('hidden');
+            $('#lineChart').removeClass('hidden');
+
           }
+
+          setGraph(firstDay, lastDay, rangeData);
+
         });
 
+        var yearTotal = [0,0,0,0,0,0,0,0,0,0,0,0];
+        var yearCompleted = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+        var dataYear = JSON.parse($(' #hdn-fld-appointment-yearly ').val());
+
+
+
+        $.each(dataYear, function (key, value) {
+          var index = parseInt(moment(value['consultation_date']).format('M')) - 1;
+
+          var newValue = yearTotal[index] += 1
+
+          yearTotal.splice(index, 1, newValue);
+          if (value['status'] == 'complete') {
+            yearCompleted.splice(index, 1, yearCompleted[index] += 1);
+          }
+
+        });
+
+        console.log('yearTotal: ' + JSON.stringify(yearTotal))
+        console.log('yearCompleted: ' + JSON.stringify(yearCompleted))
+
         var lineData = {
-          labels: ["January", "February", "March", "April", "May", "June", "July"],
+          labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
           datasets: [
             {
-              label: "Example dataset",
+              label: "Total",
               fillColor: "rgba(220,220,220,0.5)",
               strokeColor: "rgba(220,220,220,1)",
               pointColor: "rgba(220,220,220,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 40, 51, 36, 25, 40]
+              data: yearTotal
             },
             {
-              label: "Example dataset",
+              label: "Completed",
               fillColor: "rgba(26,179,148,0.5)",
               strokeColor: "rgba(26,179,148,0.7)",
               pointColor: "rgba(26,179,148,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(26,179,148,1)",
-              data: [48, 48, 60, 39, 56, 37, 30]
+              data: yearCompleted
             }
           ]
         };
@@ -508,9 +277,161 @@
         var ctx = document.getElementById("lineChart").getContext("2d");
         var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
 
-
       });
 
+      function setGraph(firstDay, lastDay, rangeData) {
+
+        var dailyTotal      = [];
+        var dailyComplete   = [];
+        var dailyOverdue    = [];
+        var index           = 0;
+
+        var dataset = [
+          {
+            label: "Total Patients",
+            data: dailyTotal,
+            color: "#1ab394",
+            bars: {
+              show: true,
+              align: "center",
+              barWidth: 24 * 60 * 60 * 600,
+              lineWidth: 0
+            }
+
+          }, {
+            label: "Completed",
+            data: dailyComplete,
+            color: "#1C84C6",
+            lines: {
+              lineWidth: 1,
+              show: true,
+              fill: true,
+              fillColor: {
+                colors: [{
+                  opacity: 0.2
+                }, {
+                  opacity: 0.2
+                }]
+              }
+            },
+            splines: {
+              show: false,
+              tension: 0.6,
+              lineWidth: 1,
+              fill: 0.1
+            },
+          }, {
+            label: "Overdue",
+            data: dailyOverdue,
+            color: "#B03060",
+            lines: {
+              lineWidth: 1,
+              show: true,
+              fill: true,
+              fillColor: {
+                colors: [{
+                  opacity: 0.2
+                }, {
+                  opacity: 0.2
+                }]
+              }
+            },
+            splines: {
+              show: false,
+              tension: 0.6,
+              lineWidth: 1,
+              fill: 0.1
+            },
+          }
+        ];
+        var options = {
+          xaxis: {
+            mode: "time",
+            tickSize: [3, "day"],
+            tickLength: 0,
+            axisLabel: "Date",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Arial',
+            axisLabelPadding: 10,
+            color: "#d5d5d5"
+          },
+          yaxes: [{
+            position: "left",
+            max: 20,
+            color: "#d5d5d5",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: 'Arial',
+            axisLabelPadding: 3
+          }, {
+            position: "right",
+            clolor: "#d5d5d5",
+            axisLabelUseCanvas: true,
+            axisLabelFontSizePixels: 12,
+            axisLabelFontFamily: ' Arial',
+            axisLabelPadding: 67
+          }
+          ],
+          legend: {
+            noColumns: 1,
+            labelBoxBorderColor: "#000000",
+            position: "nw"
+          },
+          grid: {
+            hoverable: false,
+            borderWidth: 0
+          }
+        };
+
+        for (var d = new Date(firstDay); d <= lastDay; d.setDate(d.getDate() + 1)) {
+
+          var date = moment(d).format('YYYY-MM-DD').split("-");
+
+          var dailyDataTotal = 0;
+          var dailyDataComplete = 0;
+          var dailyDataOverDue = 0;
+
+          $.each(rangeData, function (key, value) {
+
+            if (moment(new Date(value["consultation_date"])).format('YYYY-MM-DD') == moment(new Date(d)).format('YYYY-MM-DD')) {
+              dailyDataTotal += 1;
+
+              if (value['status'] == "complete") {
+                dailyDataComplete += 1;
+              } else if (new Date() > new Date(value["consultation_date"]) && (value["status"] == "queued" || value["status"] == "inprogress")) {
+                dailyDataOverDue += 1;
+              }
+
+            }
+
+          });
+
+          var dataTotal = [gd(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])), dailyDataTotal];
+          var dataComplete = [gd(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])), dailyDataComplete];
+          var dataOverdue = [gd(parseInt(date[0]), parseInt(date[1]), parseInt(date[2])), dailyDataOverDue];
+
+          dailyTotal.push(dataTotal);
+          dailyComplete.push(dataComplete);
+          dailyOverdue.push(dataOverdue);
+
+          index ++;
+        }
+
+        $.plot($("#flot-dashboard-chart"), dataset, options);$.plot($("#flot-dashboard-chart"), dataset, options);
+
+      }
+
+      function get_ajax_daily_total(date, callback) {
+        $.get( "/api/v1/get_appointments_by_date", { date: date } )
+            .done(function( data ) {
+              callback(data)
+            });
+      }
+
+      function gd(year, month, day) {
+        return new Date(year, month - 1, day).getTime();
+      }
 
     </script>
 

@@ -1,11 +1,31 @@
 <h1>Appointment</h1>
 <fieldset>
-  <h2>Appointment Information</h2>
+    <div class="row">
+        <div class="col-md-10 mp0i">
+            <div class="col-xs-9 pull-left">
+                <h2>Appointment Information</h2>
+            </div>
+            <div class="col-xs-3 pull-right">
+              <%= select_tag("", options_for_select(['New Patient', 'Existing Patient'], :selected => "New"), { :id => 'fld-option', :class => 'form-control m-b' }) %>
+            </div>
+        </div>
+    </div>
   <div class="row">
+    <input type="hidden" id="hdn-fld-patients" value="<%= @patients.to_json %>">
     <div class="col-md-10">
+
+    <div class="form-group">
+        <div class="row">
+                <%= hidden_field_tag "patient[appointments][patient_id]", 0, :class => "form-control", :data => { :name => "patient-id" } %>
+                <div id="patient-name-container" >
+
+                </div>
+            </div>
+      </div>
+
       <div class="form-group">
         <div class="row">
-          <div class="col-xs-12">
+          <div class="col-xs-9">
             <label class="control-label lbl-consultation-date">Consultation Date *</label>
             <div id="fld-consultation-date">
               <div class="input-group date">
@@ -14,39 +34,49 @@
               </div>
             </div>
           </div>
+          <div class="col-xs-3">
+            <label class="control-label">Type <large>*</large></label>
+            <%= select_tag("patient[appointments][medical_records][type]", options_for_select(Appointment.medical_record_types.collect{ |k, v| [k.humanize.upcase, k]}), { :class => 'form-control m-b' }) %>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-4">
+            <label class="control-label lbl-lmp">LMP *</label>
+            <div id="date_lmp">
+              <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[appointments][medical_records][lmp]", "",  autofocus: true, class: "form-control", :data => { :name => "lmp" } %>
+              </div>
+            </div>
+          </div>
+          <div id="edc-container" class="col-xs-4">
+            <label class="control-label">EDC</label>
+            <input id="fld-edc-display" type="text" class="form-control" disabled value="" />
+            <%= hidden_field_tag "patient[appointments][medical_records][edc]", "", class: "form-control"%>
+          </div>
+          <div id="aog-container" class="col-xs-4">
+            <label class="control-label">AOG</label>
+            <input id="fld-aog-display" type="text" class="form-control" disabled value="" />
+            <%= hidden_field_tag "patient[appointments][medical_records][aog]", "", class: "form-control"%>
+          </div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="row">
           <div class="col-md-4">
-            <label class="control-label lbl-last-name">Last Name *</label>
-            <%= hidden_field_tag "patient[appointments][patient_id]", 0, :class => "form-control", :data => { :name => "patient-id" } %>
-            <%= text_field_tag "patient[appointments][last_name]", "", :class => "form-control required", :data => { :name => "last-name" } %>
+            <label class="control-label lbl-systolic">Systolic *</label>
+            <%= text_field_tag "patient[appointments][systolic]", "", :class => "form-control required", :data => { :name => "systolic" } %>
           </div>
           <div class="col-md-4">
-            <label class="control-label lbl-first-name">First Name *</label>
-            <%= text_field_tag "patient[appointments][first_name]", "", :class => "form-control required", :data => { :name => "first-name" } %>
+            <label class="control-label lbl-diastolic">Diastolic *</label>
+            <%= text_field_tag "patient[appointments][diastolic]", "", :class => "form-control required", :data => { :name => "diastolic" } %>
           </div>
           <div class="col-md-4">
-            <label class="control-label lbl-middle-name">Middle Name *</label>
-            <%= text_field_tag "patient[appointments][middle_name]", "", :class => "form-control required", :data => { :name => "middle-name" } %>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-md-4">
-            <label class="control-label lbl-last-systolic">Systolic *</label>
-            <%= text_field_tag "patient[appointments][systolic]", "", :class => "form-control touchspin required", :data => { :name => "systolic" } %>
-          </div>
-          <div class="col-md-4">
-            <label class="control-label lbl-first-diastolic">Diastolic *</label>
-            <%= text_field_tag "patient[appointments][diastolic]", "", :class => "form-control touchspin required", :data => { :name => "diastolic" } %>
-          </div>
-          <div class="col-md-4">
-            <label class="control-label lbl-middle-weight">Weight (kg) *</label>
+            <label class="control-label lbl-weight">Weight (kg) *</label>
             <%= text_field_tag "patient[appointments][weight]", "", :class => "form-control required", :data => { :name => "weight" } %>
           </div>
         </div>
@@ -54,12 +84,165 @@
 
       <div class="form-group">
         <div class="row">
-          <div class="col-md-12">
-            <label class="control-label lbl-complaint">Chief Complaint</label>
-            <%= text_area_tag "patient[appointments][complaint]", "", :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" } %>
+          <div class="col-xs-12">
+            <label class="control-label lbl-chief-complaint">Chief Complaint <large class="required">*</large></label>
+            <%= text_area_tag "patient[appointments][medical_records][chief_complaint]", "", :class => "form-control", :style => "height: 100px;", :required => true, :data => { :name => "chief-complaint" } %>
           </div>
         </div>
       </div>
+
+      <div class="hr-line-dashed"></div>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-xs-2">
+            <label class="control-label">Menarche</label>
+            <%= select_tag("patient[appointments][medical_records][menarche]", options_for_select(0..20, 0), :class => "form-control m-b") %>
+          </div>
+          <div class="col-xs-2">
+            <label class="control-label">GRAVIDA</label>
+            <%= select_tag("patient[appointments][medical_records][gravida]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
+          </div>
+          <div class="col-xs-2">
+            <label class="control-label">PARA</label>
+            <%= select_tag("patient[appointments][medical_records][para]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
+          </div>
+          <div class="col-xs-1" style="padding-right: 0;">
+            <label class="control-label">T</label>
+            <%= select_tag("patient[appointments][medical_records][t]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
+          </div>
+          <div class="col-xs-1" style="padding-right: 0;">
+            <label class="control-label">P</label>
+            <%= select_tag("patient[appointments][medical_records][p]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
+          </div>
+          <div class="col-xs-1" style="padding-right: 0;">
+            <label class="control-label">A</label>
+            <%= select_tag("patient[appointments][medical_records][a]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
+          </div>
+          <div class="col-xs-1" style="padding-right: 0;">
+            <label class="control-label">L</label>
+            <%= select_tag("patient[appointments][medical_records][l]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="row">
+
+        <div class="col-md-12">
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">History Of Present Illness</label>
+                <%= text_area_tag "patient[appointments][medical_records][history_of_present_illness]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label lbl-ob-history">Ob-Gyne History</label>
+                <%= text_area_tag "patient[appointments][medical_records][ob_history]", "", :class => "form-control", :style => "height: 100px;", :data => { :name => "ob-history" }%>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label lbl-ob-history">Diagnosis</label>
+                <%= text_area_tag "patient[appointments][medical_records][diagnosis]", "", :class => "form-control", :style => "height: 100px;", :data => { :name => "ob-history" }%>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">Past Medical History</label>
+                <%= text_area_tag "patient[appointments][medical_records][past_medical_history]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">Laboratory Results</label>
+                <%= text_area_tag "patient[appointments][medical_records][laboratory_results]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">Physical Examinations</label>
+                <%= text_area_tag "patient[appointments][medical_records][physical_examinations]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hr-line-dashed"></div>
+
+      <h3>Doctor's Remarks</h3>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-6">
+                <label class="control-label">RETURN VISIT</label>
+                <div id="fld-return-visit">
+                  <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[appointments][medical_records][return_visit]", "",  autofocus: true, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6">
+                <label class="control-label">RECORD DATE</label>
+                <div id="fld-record-date">
+                  <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[appointments][record_date]", DateTime.now.to_date.strftime('%d/%m/%Y'),  autofocus: true, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">MANAGEMENT</label>
+                <%= text_area_tag "patient[appointments][management]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">RECOMMENDATIONS</label>
+                <%= text_area_tag "patient[appointments][recommendations]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+            
+         <div class="form-group">
+            <div class="row">
+              <div class="col-xs-12">
+                <label class="control-label">SUMMARY</label>
+                <%= text_area_tag "patient[appointments][summary]", "", :class => "form-control", :style => "height: 100px;" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="col-lg-2">
       <div class="text-center">
@@ -117,15 +300,14 @@
                               </div>
                           </div>
                       </div>
-                      <div class="col-xs-4">
+                      <div class="col-xs-2">
+                        <label class="control-label">AGE <large class="required">*</large></label>
+                        <%= text_field_tag "", "", id: "display_field_age", class: "form-control", disabled: true %>
+                        <%= hidden_field_tag "patient[age]", "" %>
+                      </div>
+                      <div class="col-xs-2">
                           <label class="control-label">Gender <large>*</large></label>
-                          <br \>
-                          <% Patient.genders.each do |k, v| %>
-                              <div class="radio radio-info radio-inline">
-                                  <%= radio_button_tag "patient[gender]", k, id: k, checked: v == 1 ? "checked" : "" %>
-                                  <%= label_tag "patient[gender]", k == "male" ? "Male" : "Female", :value => v  %>
-                              </div>
-                          <% end %>
+                          <%= select_tag("patient[gender]", options_for_select(Patient.genders.collect{ |k, v| [k.humanize.titlecase, k]}), { :class => 'form-control m-b' }) %>
                       </div>
                       <div class="col-xs-4">
                           <label class="control-label">Civil Status <large>*</large></label>
@@ -142,7 +324,7 @@
                   </div>
                   <div class="col-xs-4">
                       <label class="control-label lbl-contact">Contact <large>*</large></label>
-                      <%= text_field_tag "patient[contact]", "", autofocus: true, class: "form-control required", data: { mask: "(99) 9999?9-9999", :name => "contact" } %>
+                      <%= text_field_tag "patient[contact]", "", autofocus: true, class: "form-control required", data: { :name => "contact" } %>
                       <span class="help-block">(09) 99999-9999</span>
                   </div>
               </div>
@@ -178,189 +360,34 @@
           </div>
         </div>
 
-        <div class="hr-line-dashed"></div>
+        <!--<div class="hr-line-dashed"></div>-->
+        <!--<h3>ATTACHMENTS <small>(pdf and image files)</small></h3>-->
 
-        <h3>Medical Record <small>(* are all required fields)</small></h3>
+        <!--<div class="row">-->
+          <!--<div class="form-group">-->
+            <!--<div class="col-md-4 col-xs-4">-->
+              <!--<label class="control-label">PAST MEDICAL HISTORY</label>-->
+              <!--<input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">-->
+              <!--<div id="medical-records-container" class="containers">-->
 
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12">
-                <label class="control-label">Type <large class="required">*</large></label>
-                <br \>
-                <div class="radio radio-info radio-inline">
-                  <%= radio_button_tag "patient[medical_record][type]", "ob", checked: "checked"  %>
-                  <%= label_tag "patient[medical_record][type]", "OB", :value => "ob", :for => "patient_medical_record_type_ob"   %>
-                </div>
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 col-xs-4">-->
+              <!--<label class="control-label">LABORATORY RESULTS</label>-->
+              <!--<input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">-->
+              <!--<div id="laboratory-results-container" class="containers">-->
 
-                <div class="radio radio-info radio-inline">
-                  <%= radio_button_tag "patient[medical_record][type]", "gyne" %>
-                  <%= label_tag "patient[medical_record][type]", "Gyne", :value => "gyne", :for => "patient_medical_record_type_gyne"   %>
-                </div>
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 col-xs-4">-->
+              <!--<label class="control-label">PHYSICAL EXAMINATIONS</label>-->
+              <!--<input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">-->
+              <!--<div id="physical-examinations-container" class="containers">-->
 
-              </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-4">
-                  <label class="control-label">LMS</label>
-                  <div id="date_lms">
-                    <div class="input-group date">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][lmr]", "",  autofocus: true, class: "form-control" %>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-4">
-                <label class="control-label">ECD</label>
-                <input id="fld-edc-display" type="text" class="form-control" disabled value="" />
-                <%= hidden_field_tag "patient[medical_record][edc]", "", class: "form-control"%>
-              </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-4">
-                  <label class="control-label">Menarche</label>
-                  <%= select_year(0, {:start_year => Time.now.year, :end_year => 1980}, {:class => "form-control m-b", :name => "patient[medical_record][menarche]"})  %>
-                </div>
-                <div class="col-xs-1">
-                  <label class="control-label">GRAVIDA</label>
-                  <%= select_tag("patient[medical_record][gravida]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
-                </div>
-                <div class="col-xs-1">
-                  <label class="control-label">PARA</label>
-                  <%= select_tag("patient[medical_record][para]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
-                </div>
-                <div class="col-xs-1">
-                  <label class="control-label">T</label>
-                  <%= select_tag("patient[medical_record][t]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
-                </div>
-                <div class="col-xs-1">
-                  <label class="control-label">P</label>
-                  <%= select_tag("patient[medical_record][p]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
-                </div>
-                <div class="col-xs-1">
-                  <label class="control-label">A</label>
-                  <%= select_tag("patient[medical_record][a]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
-                </div>
-                <div class="col-xs-1">
-                  <label class="control-label">L</label>
-                  <%= select_tag("patient[medical_record][l]", options_for_select(0..20, 0), :class => 'form-control m-b') %>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12">
-                  <label class="control-label">CHIEF COMPLAINT <large class="required">*</large></label>
-                  <%= text_area_tag "patient[medical_record][chief_complaint]", "", :class => "form-control", :style => "height: 100px;", :required => true %>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12">
-                  <label class="control-label">HISTORY OF PRESENT ILLNESS <large class="required">*</large></label>
-                  <%= text_area_tag "patient[medical_record][history_of_present_illness]", "", :class => "form-control", :style => "height: 100px;", :required => true %>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12">
-                  <label class="control-label lbl-ob-history">Ob-Gyne History</label>
-                  <%= text_area_tag "patient[medical_record][ob_history]", "", :class => "form-control", :style => "height: 100px;", :data => { :name => "ob-history" }%>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hr-line-dashed"></div>
-
-        <h3>Others <small>(* are all required fields)</small></h3>
-
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-4">
-                  <label class="control-label">RETURN VISIT <large class="required">*</large></label>
-                  <div id="fld-return-visit">
-                    <div class="input-group date">
-                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][return_visit]", "",  autofocus: true, class: "form-control", required: true %>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-4">
-                <label class="control-label">RECORD DATE <large class="required">*</large></label>
-                <div id="fld-record-date">
-                  <div class="input-group date">
-                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][record_date]", "",  autofocus: true, class: "form-control", required: true %>
-                  </div>
-                </div>
-              </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12">
-                  <label class="control-label">MANAGEMENT <large class="required">*</large></label>
-                  <%= text_area_tag "patient[medical_record][management]", "", :class => "form-control", :style => "height: 100px;" %>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-xs-12">
-                  <label class="control-label">RECOMMENDATIONS <large class="required">*</large></label>
-                  <%= text_area_tag "patient[medical_record][recommendations]", "", :class => "form-control", :style => "height: 100px;" %>
-                </div>
-              </div>
-          </div>
-          </div>
-        </div>
-
-
-        <div class="hr-line-dashed"></div>
-        <h3>ATTACHMENTS <small>(pdf and image files)</small></h3>
-
-        <div class="row">
-          <div class="form-group">
-            <div class="col-md-4 col-xs-4">
-              <label class="control-label">PAST MEDICAL HISTORY</label>
-              <input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">
-              <div id="medical-records-container" class="containers">
-
-              </div>
-            </div>
-            <div class="col-md-4 col-xs-4">
-              <label class="control-label">LABORATORY RESULTS</label>
-              <input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">
-              <div id="laboratory-results-container" class="containers">
-
-              </div>
-            </div>
-            <div class="col-md-4 col-xs-4">
-              <label class="control-label">PHYSICAL EXAMINATIONS</label>
-              <input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">
-              <div id="physical-examinations-container" class="containers">
-
-              </div>
-            </div>
-          </div>
-        </div>
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
 
     </div>
   <div id="dv-patient-container" class="hidden">
@@ -435,7 +462,7 @@
                         <label class="control-label lbl-consultation-date">Chief Complaint:</label>
                     </div>
                     <div class="col-md-8 mp0i">
-                        <p id="p-complaint" class="review-display">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <p id="p-complaint" class="review-display"></p>
                     </div>
                 </div>
             </div>
@@ -567,10 +594,10 @@
             <div class="form-group">
               <div class="col-md-6 mp0i">
                 <div class="col-md-6">
-                  <label class="control-label lbl-consultation-date">LMS: </label>
+                  <label class="control-label lbl-consultation-date">LMP: </label>
                 </div>
                 <div class="col-md-6 mp0i">
-                  <p id="p-lms" class="review-display"></p>
+                  <p id="p-lmp" class="review-display"></p>
                 </div>
               </div>
               <div class="col-md-6 mp0i">
@@ -579,6 +606,15 @@
                 </div>
                 <div class="col-md-4 mp0i">
                   <p id="p-edc" class="review-display"></p>
+                </div>
+              </div>
+
+              <div class="col-md-6 mp0i">
+                <div class="col-md-8">
+                  <label class="control-label lbl-consultation-date">AOG: </label>
+                </div>
+                <div class="col-md-4 mp0i">
+                  <p id="p-aog" class="review-display"></p>
                 </div>
               </div>
             </div>
@@ -675,6 +711,34 @@
           </div>
         </div>
 
+      <div class="col-md-12 mp0i">
+        <div class="col-md-12">
+          <label class="control-label lbl-history-of-present-illness">Diagnosis:</label>
+          <p id="p-diagnosis" class="review-display"></p>
+        </div>
+      </div>
+
+        <div class="col-md-12 mp0i">
+          <div class="col-md-12">
+            <label class="control-label lbl-consultation-date">Past Medical History:</label>
+            <p id="p-past-medical-history" class="review-display"></p>
+          </div>
+        </div>
+
+        <div class="col-md-12 mp0i">
+          <div class="col-md-12">
+            <label class="control-label lbl-history-of-present-illness">Laboratory Results:</label>
+            <p id="p-laboratory-results" class="review-display"></p>
+          </div>
+        </div>
+
+        <div class="col-md-12 mp0i">
+          <div class="col-md-12">
+            <label class="control-label lbl-management">Physical Examinations:</label>
+            <p id="p-physical-examinations" class="review-display"></p>
+          </div>
+        </div>
+
         <div class="col-md-12 mp0i">
           <div class="col-md-12">
             <label class="control-label lbl-management">Management:</label>
@@ -686,6 +750,13 @@
             <div class="col-md-12">
                 <label class="control-label lbl-recomendations">Recomendations:</label>
                 <p id="p-recommendations" class="review-display"></p>
+            </div>
+        </div>
+        
+        <div class="col-md-12 mp0i">
+            <div class="col-md-12">
+                <label class="control-label lbl-recomendations">Summary:</label>
+                <p id="p-summary" class="review-display"></p>
             </div>
         </div>
     </div>

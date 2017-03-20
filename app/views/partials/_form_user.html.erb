@@ -66,7 +66,7 @@
                             <div class="form-group">
                                   <div class="col-md-8">
                                       <label class="control-label">Country *</label>
-                                      <%= f.select(:country, options_for_select(@countries.collect{ |k, v| [v, v]}), {}, { :class => 'select2_demo_1 form-control' }) %>
+                                      <%= f.select(:country, options_for_select(@countries.collect{ |k, v| [v, v]}, @user.country), {}, { :class => 'select2_demo_1 form-control' }) %>
                                   </div>
                                   <div class="col-md-4">
                                     <label class="control-label">Postal *</label>

@@ -28,9 +28,9 @@ window.onload = function () {
 $(function() {
 
     $(document).on('click', '#btn-delete', function(){
-        var user = $( this ).data('user')
-        $("#frm-delete").attr("action", "/settings/users/" + user.id);
-        $('#spn-name').text(toTitleCase(user.first_name) + " " + toTitleCase(user.last_name));
+        var user = $( this ).data('patient')
+        $("#frm-delete").attr("action", "/patients/" + user.id);
+        $('#spn-name').text(user.last_name + ", " + user.first_name + " " + user.middle_name);
         $('#mdl-delete').modal()
     });
 
@@ -53,11 +53,13 @@ $(function() {
                 }
             }
         ]
-
+        
     });
 
     /* Init DataTables */
-    var oTable = $('#tbl-patient').dataTable();
+    var oTable = $('#tbl-patient').dataTable({
+        "pageLength": 25
+    });
 
 
 });

@@ -37,7 +37,6 @@
                                 <th>Civil Status</th>
                                 <th>Weight</th>
                                 <th>Height</th>
-                                <th>Address</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -54,30 +53,38 @@
                                     <td><%= patient.civil_status.titlecase %></td>
                                     <td><%= patient.weight %></td>
                                     <td><%= patient.height %></td>
-                                    <td><%= patient.address %></td>
                                     <td>
-                                      <a href="<%= patient_path(patient.id) %>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</a>
-                                      <a href="<%= edit_patient_path(patient.id) %>" type="button" class="btn btn-info btn-xs"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                      <a href="<%= patient_path(patient.id) %>" type="button" class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                      <a href="<%= edit_patient_path(patient.id) %>" type="button" class="btn btn-info btn-xs"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-danger btn-xs" id="btn-delete" data-patient="<%= patient.to_json  %>"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <% end %>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Name</th>
-                                <th>Birth Date</th>
-                                <th>Age</th>
-                                <th>Gender</th>
-                                <th>Civil Status</th>
-                                <th>Weight</th>
-                                <th>Height</th>
-                                <th>Address</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
                     </table>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div id="mdl-delete" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+          <p>Are you sure you want to delete <span id="spn-name">ascc</span>?</p>
+          <p>All appointments for this patient will also be deleted.</p>
+      </div>
+      <div class="modal-footer">
+          <%= form_tag({}, {:method => :delete, :id => "frm-delete"}) do %>
+              <button type="submit" class="btn btn-danger" >Delete</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <% end %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

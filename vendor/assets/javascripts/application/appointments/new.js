@@ -1,11 +1,11 @@
+// window.onload = initFunction();
+
 $(function() {
 
     var dateToday = new Date();
     dateToday.setDate(dateToday.getDate() + 1);
 
     $("#wizard").steps();
-
-
 
     $("#frm-appointment").steps({
         bodyTag: "fieldset",
@@ -14,6 +14,24 @@ $(function() {
             if (currentIndex > newIndex) {
                 return true;
             }
+
+            // var last_name           = $('#patient_appointments_last_name').val();
+            // var first_name          = $('#patient_appointments_first_name').val();
+            // var middle_name         = $('#patient_appointments_middle_name').val();
+            // var consultation_date   = $('#patient_appointments_consultation_date').val();
+            //
+            //
+            // var myfunction = function(data){
+            //     console.log('data: ' + data)
+            //     return false
+            // }
+            //
+            // $.get( "/api/v1/get_patient_by_name_and_consultation_date", { last_name: last_name, first_name: first_name, middle_name: middle_name, consultation_date: consultation_date} )
+            //     .done(function( data ) {
+            //         //
+            //         myfunction(data)
+            //
+            //     });
 
             // Forbid suppressing "Warning" step if the user is to young
             if (newIndex === 3 && Number($("#age").val()) < 18) {
@@ -36,24 +54,24 @@ $(function() {
             return form.valid();
         },
         onStepChanged: function (event, currentIndex, priorIndex) {
-        
+
             if (currentIndex == 1 && priorIndex == 0) {
-                checkPatientIfRegistered(); 
+                checkPatientIfRegistered();
             }
-            
+
             if (currentIndex == 2 &&  priorIndex == 1) {
                 $('.actions').find('li:nth-child(3)').removeClass('hidden');
-                
+
                 populateReview();
             } else {
                 $('.actions').find('li:nth-child(3)').addClass('hidden');
 //                clearReview();
             }
-            
+
             // Suppress (skip) "Warning" step if the user is old enough.
             if (currentIndex === 2 && Number($("#age").val()) >= 18) {
                 $(this).steps("next");
-                
+
             }
 
             // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
@@ -68,7 +86,7 @@ $(function() {
             // Disable validation on fields that are disabled.
             // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
             form.validate().settings.ignore = ":disabled";
-            
+
             // Start validation; Prevent form submission if false
             return form.valid();
         },
@@ -83,10 +101,10 @@ $(function() {
     }).validate({
         errorPlacement: function (error, element) {
 //            element.before(error);
-            
+
             var element_name = element.data("name")
             error.insertAfter(".lbl-" + element_name);
-                
+
         },
         rules: {
             confirm: {
@@ -95,18 +113,15 @@ $(function() {
         }
     });
 
-    var dateToday = new Date();
-    dateToday.setDate(dateToday.getDate() + 1);
-
     $('.actions').find('li:nth-child(3)').addClass('hidden');
     // $('.actions').find('li:nth-child(4) a').attr("href", "/appointments");
-    $('#fld-consultation-date .input-group.date').datepicker({
-        todayBtn: "linked",
-        keyboardNavigation: false,
-        forceParse: false,
-        autoclose: true,
-        format: 'dd/mm/yyyy'
-    });
+    // $('#fld-consultation-date .input-group.date').datepicker({
+    //     todayBtn: "linked",
+    //     keyboardNavigation: false,
+    //     forceParse: false,
+    //     autoclose: true,
+    //     format: 'dd/mm/yyyy'
+    // });
 
     $(".touchspin").TouchSpin({
         verticalbuttons: true,
@@ -117,7 +132,8 @@ $(function() {
 
     $('#fld-consultation-date .input-group.date').datepicker({
         todayBtn: "linked",
-        startDate: dateToday,
+        // startDate: dateToday,
+        minDate: new Date(),
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true,
@@ -132,12 +148,30 @@ $(function() {
         forceParse: false,
         autoclose: true,
         format: 'dd/mm/yyyy'
+    }).on('changeDate', function (e) {
+        var date = $('#fld-birth-date').find('input').val().split('/');
+
+        var day = date[0];
+        var month = date[1];
+        var year = date[2];
+
+        var dob = new Date(month + "/" + day + "/" + year );
+
+        var today = new Date();
+        var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+
+        console.log('dob: ' + $('#data_3').find('input').val());
+
+        $('#patient_age').val(age);
+        $('#display_field_age').val(age);
+    });;
+
+    $(".select2_demo_1").select2({
+        tag: true
     });
 
-    $(".select2_demo_1").select2();
 
-
-    $('#date_lms .input-group.date').datepicker({
+    $('#date_lmp .input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,
         forceParse: false,
@@ -145,13 +179,16 @@ $(function() {
         format: 'dd/mm/yyyy'
     }).on('changeDate', function (e) {
 
-        var date = $('#date_lms').find('input').val().split('/');
+        var date = $('#date_lmp').find('input').val().split('/');
 
         var day = date[0];
         var month = date[1];
         var year = date[2];
 
         var newDate = new Date(month + "/" + day + "/" + year );
+        var aogNewDate = new Date(month + "/" + day + "/" + year );
+
+        var dateForWeeks =  new Date(year + "/" + month + "/" + day );
 
         var less3Months = new Date(newDate.setMonth(newDate.getMonth() - 3));
         var add7Days = new Date(less3Months.setDate(new Date(moment(less3Months).format('L')).getDate() + 7));
@@ -161,8 +198,18 @@ $(function() {
         var edcDate = moment(add1Year).format("L");
         var formatEDCDate = edcDate.split('/')[1] + "/" + edcDate.split('/')[0] + "/" + edcDate.split('/')[2]
 
-        $('#fld-edc-display').val(displayDate)
-        $('#patient_medical_record_edc').val(formatEDCDate)
+        var aogAdd33Date = new Date(aogNewDate.setDate(aogNewDate.getDate() + 33));
+        var aogDate = moment(aogAdd33Date).format("L");
+        var aogDisplayDate = moment(aogAdd33Date).format("LL");
+        var formatAOGDate = aogDate.split('/')[1] + "/" + aogDate.split('/')[0] + "/" + aogDate.split('/')[2];
+
+        var totalWeeks = moment(new Date()).diff(moment(dateForWeeks), 'weeks');
+
+        $('#fld-edc-display').val(displayDate);
+        $('#patient_appointments_medical_records_edc').val(formatEDCDate);
+
+        $('#fld-aog-display').val(totalWeeks);
+        $('#patient_appointments_medical_records_aog').val(totalWeeks);
 
     });
 
@@ -171,11 +218,13 @@ $(function() {
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true,
-        format: 'dd/mm/yyyy'
+        format: 'dd/mm/yyyy',
+        showOn: 'button'
     });
 
     $('#fld-return-visit .input-group.date').datepicker({
         todayBtn: "linked",
+        startDate: dateToday,
         keyboardNavigation: false,
         forceParse: false,
         autoclose: true,
@@ -297,7 +346,154 @@ $(function() {
         }
     });
 
+    $('#patient_appointments_medical_records_type').change(function() {
+        console.log('type: ' + $( this ).val())
+        if ($( this ).val() == 'gyne') {
+
+            $('#edc-container').addClass('hidden');
+            $('#aog-container').addClass('hidden');
+
+            $('#edc-container').find('input').val("");
+            $('#aog-container').find('input').val("");
+
+        } else {
+
+            $('#edc-container').removeClass('hidden');
+            $('#aog-container').removeClass('hidden');
+
+            if ($('#date_lmp').find('input').val() != "") {
+                var date = $('#date_lmp').find('input').val().split('/');
+
+                var day = date[0];
+                var month = date[1];
+                var year = date[2];
+
+                var newDate = new Date(month + "/" + day + "/" + year );
+                var aogNewDate = new Date(month + "/" + day + "/" + year );
+
+                var dateForWeeks =  new Date(year + "/" + month + "/" + day );
+
+                var less3Months = new Date(newDate.setMonth(newDate.getMonth() - 3));
+                var add7Days = new Date(less3Months.setDate(new Date(moment(less3Months).format('L')).getDate() + 7));
+                var add1Year = new Date(add7Days.setFullYear(new Date(moment(add7Days).format('L')).getFullYear() + 1));
+
+                var displayDate = moment(add1Year).format("LL");
+                var edcDate = moment(add1Year).format("L");
+                var formatEDCDate = edcDate.split('/')[1] + "/" + edcDate.split('/')[0] + "/" + edcDate.split('/')[2];
+
+                var aogAdd33Date = new Date(aogNewDate.setDate(aogNewDate.getDate() + 33));
+                var aogDate = moment(aogAdd33Date).format("L");
+                var aogDisplayDate = moment(aogAdd33Date).format("LL");
+                var formatAOGDate = aogDate.split('/')[1] + "/" + aogDate.split('/')[0] + "/" + aogDate.split('/')[2];
+
+                var totalWeeks = moment(new Date()).diff(moment(dateForWeeks), 'weeks');
+
+                $('#fld-edc-display').val(displayDate);
+                $('#patient_appointments_medical_records_edc').val(formatEDCDate);
+
+                $('#fld-aog-display').val(totalWeeks);
+                $('#patient_appointments_medical_records_aog').val(totalWeeks);
+            }
+        }
+    });
+
+    $('#fld-option').change(function () {
+        setPatientFields($(this).val());
+    });
+
+    initFunction();
 });
+
+function initFunction() {
+    if (window.location.search) {
+        var first_name = getUrlParameter('first_name');
+        var last_name = getUrlParameter('last_name');
+        var middle_name = getUrlParameter('middle_name');
+
+        // $('#fld-option option[value="Existing Patient"]').prop('selected', true);
+        $('#fld-option').val('Existing Patient').trigger('change');
+        $('#appointment_patient_id').select2().select2('val', last_name + ',' + first_name + ',' +middle_name);
+
+
+        $('#patient_appointments_last_name').val(last_name);
+        $('#patient_appointments_first_name').val(first_name);
+        $('#patient_appointments_middle_name').val(middle_name);
+
+    } else {
+        setPatientFields('New Patient');
+    }
+}
+
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+
+function setPatientFields(option) {
+
+    var html = '';
+
+    if (option == "New Patient") {
+        html += '<div class="col-md-4">';
+        html += '<label class="control-label lbl-last-name">Last Name *</label>';
+        html += '<input type="text" id="patient_appointments_last_name" name="patient[appointments][last_name]" class="form-control required" value="" data-last-name="">';
+        html += '</div>';
+        html += '<div class="col-md-4">';
+        html += '<label class="control-label lbl-first-name">First Name *</label>';
+        html += '<input type="text" id="patient_appointments_first_name" name="patient[appointments][first_name]" class="form-control required" value="" data-first-name="">';
+        html += '</div>';
+        html += '<div class="col-md-4">';
+        html += '<label class="control-label lbl-middle-name">Middle Name *</label>';
+        html += '<input type="text" id="patient_appointments_middle_name" name="patient[appointments][middle_name]" class="form-control required" value="" data-middle-name="">';
+        html += '</div>';
+    } else {
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label lbl-last-name">Patient Full Name *</label>';
+        html += '<select name="patient[appointments][last_name]" id="appointment_patient_id" required="required" class="select2_demo_1 form-control m-b">';
+        html += '</select>';
+        html += '<div class="hdn-container">';
+        html += '<input type="hidden" id="patient_appointments_last_name" name="patient[appointments][last_name]" class="form-control required" value="" data-last-name="">';
+        html += '<input type="hidden" id="patient_appointments_first_name" name="patient[appointments][first_name]" class="form-control required" value="" data-first-name="">';
+        html += '<input type="hidden" id="patient_appointments_middle_name" name="patient[appointments][middle_name]" class="form-control required" value="" data-middle-name="">';
+        html += '</div>';
+        html += '</div>';
+    }
+    var data =[];
+    // var data = JSON.parse($('#hdn-fld-patients').val());
+    //
+    // console.log('data: ' + JSON.stringify(data))
+    $.each( JSON.parse($('#hdn-fld-patients').val()), function( key, value ) {
+        data.push({id: value.last_name + "," + value.first_name + "," + value.middle_name,text: value.last_name + ", " + value.first_name + " " + value.middle_name});
+    });
+
+    console.log('html: ' + html);
+    $('#patient-name-container').empty();
+    $('#patient-name-container').append(html);
+    $('#appointment_patient_id').select2({
+        placeholder: "SELECT A PATIENT",
+        allowClear: true,
+        data: data
+    }).on("select2:select", function (e) {
+        var name = $(this).val().split(',');
+
+        $('#patient_appointments_last_name').val(name[0]);
+        $('#patient_appointments_first_name').val(name[1]);
+        $('#patient_appointments_middle_name').val(name[2]);
+
+        console.log("select2:select :", $(this).val());
+    });
+
+}
     
 function checkPatientIfRegistered() {
     var last_name       = $('#patient_appointments_last_name').val();
@@ -335,7 +531,7 @@ function checkPatientIfRegistered() {
                 $('#patient_weight').val("");
 
                 populateReviewForExistingPatient(data);
-                
+
             } else {
 
                 var last_name       = $('#patient_appointments_last_name').val();
@@ -362,6 +558,7 @@ function checkPatientIfRegistered() {
             }
 
     });
+
 }
 
 function populateReview() {
@@ -374,7 +571,7 @@ function populateReview() {
     $('#p-systolic').text(form_data['patient[appointments][systolic]']);
     $('#p-diastolic').text(form_data['patient[appointments][diastolic]']);
     $('#p-weight').text(form_data['patient[appointments][weight]']);
-    $('#p-complaint').text(form_data['patient[appointments][complaint]']);
+    $('#p-complaint').text(form_data['patient[appointments][medical_records][chief_complaint]']);
     
     $('#p-name').text(name);
     
@@ -389,25 +586,30 @@ function populateReview() {
     $('#p-address').text(form_data['patient[address]']);
     $('#p-weight-2').text(form_data['patient[appointments][weight]']);
     $('#p-height').text(form_data['patient[height]']);
-    $('#p-menarche').text(form_data['patient[medical_record][menarche]']);
-    $('#p-gravida').text(form_data['patient[medical_record][gravida]']);
-    $('#p-para').text(form_data['patient[medical_record][para]']);
-    $('#p-t').text(form_data['patient[medical_record][t]']);
-    $('#p-p').text(form_data['patient[medical_record][p]']);
-    $('#p-a').text(form_data['patient[medical_record][a]']);
-    $('#p-l').text(form_data['patient[medical_record][l]']);
-    $('#p-ob-history').text(form_data['patient[medical_record][ob_history]']);
+    $('#p-menarche').text(form_data['patient[appointments][medical_records][menarche]']);
+    $('#p-gravida').text(form_data['patient[appointments][medical_records][gravida]']);
+    $('#p-para').text(form_data['patient[appointments][medical_records][para]']);
+    $('#p-t').text(form_data['patient[appointments][medical_records][t]']);
+    $('#p-p').text(form_data['patient[appointments][medical_records][p]']);
+    $('#p-a').text(form_data['patient[appointments][medical_records][a]']);
+    $('#p-l').text(form_data['patient[appointments][medical_records][l]']);
+    $('#p-ob-history').text(form_data['patient[appointments][medical_records][ob_history]']);
 
-    $('#p-hmo').text(form_data['patient[medical_record][recommendations]']);
-    $('#p-type').text(form_data['patient[medical_record][type]']);
-    $('#p-lms').text(form_data['patient[medical_record][lmr]']);
-    $('#p-edc').text(form_data['patient[medical_record][edc]']);
-    $('#p-history-of-present-illness').text(form_data['patient[medical_record][history_of_present_illness]']);
-    $('#p-return-visit').text(form_data['patient[medical_record][return_visit]']);
-    $('#p-record-date').text(form_data['patient[medical_record][record_date]']);
-    $('#p-management').text(form_data['patient[medical_record][management]']);
-    $('#p-recommendations').text(form_data['patient[medical_record][recommendations]']);
-
+    $('#p-hmo').text(form_data['patient[appointments][medical_records][recommendations]']);
+    $('#p-type').text(form_data['patient[appointments][medical_records][type]']);
+    $('#p-lmp').text(form_data['patient[appointments][medical_records][lmp]']);
+    $('#p-edc').text(form_data['patient[appointments][medical_records][edc]']);
+    $('#p-aog').text(form_data['patient[appointments][medical_records][aog]']);
+    $('#p-history-of-present-illness').text(form_data['patient[appointments][medical_records][history_of_present_illness]']);
+    $('#p-diagnosis').text(form_data['patient[appointments][medical_records][diagnosis]']);
+    $('#p-return-visit').text(form_data['patient[appointments][medical_records][return_visit]']);
+    $('#p-record-date').text(form_data['patient[appointments][medical_records][record_date]']);
+    $('#p-past-medical-history').text(form_data['patient[appointments][medical_records][past_medical_history]']);
+    $('#p-laboratory-results').text(form_data['patient[appointments][medical_records][laboratory_results]']);
+    $('#p-physical-examinations').text(form_data['patient[appointments][medical_records][physical_examinations]']);
+    $('#p-management').text(form_data['patient[appointments][management]']);
+    $('#p-recommendations').text(form_data['patient[appointments][recommendations]']);
+    $('#p-summary').text(form_data['patient[appointments][summary]']);
 }
     
 function populateReviewForExistingPatient(patient) {

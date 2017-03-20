@@ -99,7 +99,5 @@ module AngularProject
         'settings/general_index.js'
     ]
 
-
-
   end
 end

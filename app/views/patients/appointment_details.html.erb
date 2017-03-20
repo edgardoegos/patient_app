@@ -1,0 +1,366 @@
+<style>
+  .input-group-btn-vertical .bootstrap-touchspin-down {
+    margin: -7px 0 0 -1px !important;
+  }
+
+  .required {
+    color: #ca4440;
+  }
+
+  .mp0i {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .inline-group label,
+  inline-group p {
+    display:inline;
+  }
+
+
+  /*.record-container {*/
+
+    /*min-height: 230px;*/
+  /*}*/
+
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Appointment Details</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="<%= root_url %>">Home</a>
+      </li>
+      <li>
+        <a href="<%= patients_path %>">Patients</a>
+      </li>
+      <li class="active">
+        <strong>Appointment Details</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+      <a href="<%= patient_path(@appointment.patient_id) %>" class="btn btn-info btn-sm pull-right" style="margin: 32px -5px 0 0;"><i class="fa fa-arrow-left"></i> Back to Patient Details</a>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="ibox-title">
+              <h5>Medical Record: </h5>
+            </div>
+            <div class="ibox-content">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row record-container">
+                      <% if @appointment.appointment_type == "return_visit" %>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="inline-group col-xs-3" style="white-space:nowrap">
+                              <p><label class="control-label">Record Date: </label>
+                                <%= @appointment.record_date %></p>
+                            </div>
+                        </div>
+                    </div>
+                      
+                    <div class="col-md-12">
+                      <div class="form-group">
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">Type: </label>
+                          <%= @appointment_prev.medical_records["type"].titlecase %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap" >
+                          <p><label class="control-label">LMP: </label>
+                            <%= @appointment_prev.medical_records["lmp"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">EDC: </label>
+                            <%= @appointment_prev.medical_records["edc"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">AOG: </label>
+                            <%= @appointment_prev.medical_records["aog"] %></p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">Menarche: </label>
+                          <%= @appointment_prev.medical_records["menarche"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-2" style="white-space:nowrap">
+                          <p><label class="control-label">Gravida: </label>
+                          <%= @appointment_prev.medical_records["gravida"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">Para: </label>
+                          <%= @appointment_prev.medical_records["para"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">T: </label>
+                          <%= @appointment_prev.medical_records["t"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">P: </label>
+                          <%= @appointment_prev.medical_records["p"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">A: </label>
+                          <%= @appointment_prev.medical_records["a"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p> <label class="control-label">L: </label>
+                          <%= @appointment_prev.medical_records["l"] %></p>
+                        </div>
+
+                      </div>
+                    </div>
+                      <% else %>
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="inline-group col-xs-3" style="white-space:nowrap">
+                              <p><label class="control-label">Record Date: </label>
+                                <%= @appointment.record_date %></p>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="col-md-12">
+                      <div class="form-group">
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">Type: </label>
+                          <%= @appointment.medical_records["type"].titlecase %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap" >
+                          <p><label class="control-label">LMP: </label>
+                            <%= @appointment.medical_records["lmp"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">EDC: </label>
+                            <%= @appointment.medical_records["edc"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">AOG: </label>
+                            <%= @appointment.medical_records["aog"] %></p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+
+                        <div class="inline-group col-xs-3" style="white-space:nowrap">
+                          <p><label class="control-label">Menarche: </label>
+                          <%= @appointment.medical_records["menarche"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-2" style="white-space:nowrap">
+                          <p><label class="control-label">Gravida: </label>
+                          <%= @appointment.medical_records["gravida"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">Para: </label>
+                          <%= @appointment.medical_records["para"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">T: </label>
+                          <%= @appointment.medical_records["t"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">P: </label>
+                          <%= @appointment.medical_records["p"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p><label class="control-label">A: </label>
+                          <%= @appointment.medical_records["a"] %></p>
+                        </div>
+
+                        <div class="inline-group col-xs-1" style="white-space:nowrap">
+                          <p> <label class="control-label">L: </label>
+                          <%= @appointment.medical_records["l"] %></p>
+                        </div>
+
+                      </div>
+                    </div>
+                      
+                      <% end %>
+                  </div>
+
+                    
+                    
+                  <div class="hr-line-dashed"></div>
+                  <div class="well">
+                    <div class="row">
+                        <% if @appointment.appointment_type == "return_visit" %>
+                        
+                          <div class="col-md-6">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <div class="inline-group col-xs-12">
+                                    <label class="control-label">Previous Complaint : </label>
+                                    <p><%= @appointment_prev.medical_records['chief_complaint'] %></p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <% end %>
+                        
+                    <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Chief Complaint : </label>
+                                <p><%= @appointment.medical_records['chief_complaint'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">History of Present Illness: </label>
+                                <p><%= @appointment.medical_records['history_of_present_illness'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Ob-Gyne History: </label>
+                                <p><%= @appointment.medical_records['ob_history'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Diagnosis: </label>
+                                <p><%= @appointment.medical_records['diagnosis'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Past Medical History: </label>
+                                <p><%= @appointment.medical_records['past_medical_history'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Laboratory Results: </label>
+                                <p><%= @appointment.medical_records['laboratory_results'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Physical Examinations: </label>
+                                <p><%= @appointment.medical_records['physical_examinations'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Management: </label>
+                                <p><%= @appointment.management %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Recomendations: </label>
+                                <p><%= @appointment.recommendations  %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,10 +14,17 @@ Rails.application.routes.draw do
 
     namespace :api, defaults: {format: 'json'} do
         namespace :v1 do
+
             resources :appointments
+
+            get 'get_appointment_by_patient_id' => 'appointments#get_appointment_by_patient_id'
+            get 'get_appointment_by_id' => 'appointments#get_appointment_by_id'
+            get 'get_appointments_by_date' => 'appointments#get_appointments_by_date'
+
             resources :patients
 
-            get 'get_patient_by_name' => 'patients#get_patient_by_name' 
+            get 'get_patient_by_name' => 'patients#get_patient_by_name'
+            get 'get_patient_by_name_and_consultation_date' => 'patients#get_patient_by_name_and_consultation_date'
             
         end
     end
@@ -43,8 +50,10 @@ Rails.application.routes.draw do
     post '/appointments/filter' => 'appointments#filter_appointment'
     resources :appointments
     resources :history
+    get '/history/appointment_details/:id' => 'history#appointment_details', :as => :history_appointment_details
     resources :follow_ups
     delete 'patients/attachment_delete/:id' => 'patients#attachment_delete'
+    get '/patients/appointment_details/:id' => 'patients#appointment_details', :as => :patient_appointment_details
     resources :patients
     resources :health_maintenance_organizations
 

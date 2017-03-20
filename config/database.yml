@@ -6,23 +6,23 @@
 #
 default: &default
   adapter: mysql2
-  encodeing: utf8
-  pool: 5
-  timeout: 5000
+  encoding: utf8
   username: root
-  host: localhost
+  password: EDgardoegos17
+  host: 127.0.0.1
+  port: 3307
 
 development:
   <<: *default
-  database: patient_record
+  database: patient_record_production
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: test_patient_record
+  database: test_patient_record_production
 
 production:
   <<: *default
-  database: prod_patient_record
+  database: prod_patient_record_production

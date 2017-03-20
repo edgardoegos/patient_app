@@ -197,6 +197,15 @@ module ApplicationHelper
 
     end
 
+    def get_patient_details_by_id(id)
+
+        @patient = Patient.find(id)
+
+        if !@patient.nil?
+            return @patient
+        end
+    end
+
     def get_appointment_current_status(status, button_name)
         if status == button_name
             if status == "complete"
@@ -234,5 +243,8 @@ module ApplicationHelper
         return HealthMaintenanceOrganization.find(id).name
     end
 
+def get_appointment_prev(id)
+    return Appointment.find(id)
+end
 
 end

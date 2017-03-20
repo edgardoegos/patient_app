@@ -5,7 +5,7 @@ $(function() {
 
     /* Init DataTables */
     $('#tbl-appointments').dataTable({
-        "bSort": false
+        "pageLength": 25
     });
     $('#tbl-future').dataTable();
     $('#tbl-appointments-all').dataTable();
@@ -71,20 +71,21 @@ $(function() {
 
     $(document).on('click', '.btn-overdue-status-cancel', function(){
 
-        var id = $(this).closest('.btn-group').data('id');
-        var name = $(this).closest('.btn-group').data('patient-name');
+        var id = $(this).closest('.btn-group').data('appointment-id');
+        var name = $(this).closest('.btn-group').data('patient');
 
-        $('#mdl-btn-complete').addClass('hidden');
+        $('#mdl-btn-complete-2').addClass('hidden');
         $('#mdl-btn-cancel').removeClass('hidden');
 
-        $('#mdl-message').text('Are you sure you want to cancel ' + name + ' appointment complete? This process is irreversible.');
+        $('#mdl-message').text('Are you sure you want to cancel ' + name + ' appointment? This process is irreversible.');
         $('#fld-hdn-appointment-id').val(id);
         $('#mdl-appointment').modal();
     });
 
-    $('#mdl-btn-complete').click(function () {
+    $('#mdl-btn-complete-2').click(function () {
         var id = $('#fld-hdn-appointment-id').val();
         var self = $(this);
+
 
         var data = {
             appointment: {
@@ -144,7 +145,7 @@ $(function() {
 
     $(document).on('click', '#btn-delete', function(){
         var user = $( this ).data('user')
-        $("#frm-delete").attr("action", "/settings/users/" + user.id);
+        $("#frm-delete").attr("action", "/patients/" + user.id);
         $('#spn-name').text(toTitleCase(user.first_name) + " " + toTitleCase(user.last_name));
         $('#mdl-delete').modal()
     });

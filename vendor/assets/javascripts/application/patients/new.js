@@ -12,8 +12,23 @@ $(function() {
         forceParse: false,
         autoclose: true,
         format: 'dd/mm/yyyy'
-    });
+    }).on('changeDate', function (e) {
+        var date = $('#data_3').find('input').val().split('/');
 
+        var day = date[0];
+        var month = date[1];
+        var year = date[2];
+
+        var dob = new Date(month + "/" + day + "/" + year );
+
+        var today = new Date();
+        var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+
+        console.log('dob: ' + $('#data_3').find('input').val());
+
+        $('#patient_age').val(age);
+        $('#display_field_age').val(age);
+    });
 
     $(".touchspin").TouchSpin({
         verticalbuttons: true,
@@ -21,7 +36,7 @@ $(function() {
         buttonup_class: 'btn btn-white'
     });
 
-    $('#date_lms .input-group.date').datepicker({
+    $('#date_lmp .input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,
         forceParse: false,
@@ -29,13 +44,16 @@ $(function() {
         format: 'dd/mm/yyyy'
     }).on('changeDate', function (e) {
 
-        var date = $('#date_lms').find('input').val().split('/');
+        var date = $('#date_lmp').find('input').val().split('/');
 
         var day = date[0];
         var month = date[1];
         var year = date[2];
 
         var newDate = new Date(month + "/" + day + "/" + year );
+        var aogNewDate = new Date(month + "/" + day + "/" + year );
+
+        var dateForWeeks =  new Date(year + "/" + month + "/" + day );
 
         var less3Months = new Date(newDate.setMonth(newDate.getMonth() - 3));
         var add7Days = new Date(less3Months.setDate(new Date(moment(less3Months).format('L')).getDate() + 7));
@@ -43,10 +61,20 @@ $(function() {
 
         var displayDate = moment(add1Year).format("LL");
         var edcDate = moment(add1Year).format("L");
-        var formatEDCDate = edcDate.split('/')[1] + "/" + edcDate.split('/')[0] + "/" + edcDate.split('/')[2]
+        var formatEDCDate = edcDate.split('/')[1] + "/" + edcDate.split('/')[0] + "/" + edcDate.split('/')[2];
 
-        $('#fld-edc-display').val(displayDate)
-        $('#patient_medical_record_edc').val(formatEDCDate)
+        var aogAdd33Date = new Date(aogNewDate.setDate(aogNewDate.getDate() + 33));
+        var aogDate = moment(aogAdd33Date).format("L");
+        var aogDisplayDate = moment(aogAdd33Date).format("LL");
+        var formatAOGDate = aogDate.split('/')[1] + "/" + aogDate.split('/')[0] + "/" + aogDate.split('/')[2];
+
+        var totalWeeks = moment(new Date()).diff(moment(dateForWeeks), 'weeks');
+
+        $('#fld-edc-display').val(displayDate);
+        $('#patient_medical_record_edc').val(formatEDCDate);
+
+        $('#fld-aog-display').val(totalWeeks);
+        $('#patient_medical_record_aog').val(totalWeeks);
 
     });
 
@@ -134,6 +162,57 @@ $(function() {
             "</div>"
         }
     });
+
+    $('input[type=radio][name="patient[medical_record][type]"]').change(function() {
+        if ($( this ).val() == 'gyne') {
+
+            $('#edc-container').addClass('hidden');
+            $('#aog-container').addClass('hidden');
+
+            $('#edc-container').find('input').val("");
+            $('#aog-container').find('input').val("");
+
+        } else {
+
+            $('#edc-container').removeClass('hidden');
+            $('#aog-container').removeClass('hidden');
+
+            if ($('#date_lmp').find('input').val() != "") {
+                var date = $('#date_lmp').find('input').val().split('/');
+
+                var day = date[0];
+                var month = date[1];
+                var year = date[2];
+
+                var newDate = new Date(month + "/" + day + "/" + year );
+                var aogNewDate = new Date(month + "/" + day + "/" + year );
+
+                var dateForWeeks =  new Date(year + "/" + month + "/" + day );
+
+                var less3Months = new Date(newDate.setMonth(newDate.getMonth() - 3));
+                var add7Days = new Date(less3Months.setDate(new Date(moment(less3Months).format('L')).getDate() + 7));
+                var add1Year = new Date(add7Days.setFullYear(new Date(moment(add7Days).format('L')).getFullYear() + 1));
+
+                var displayDate = moment(add1Year).format("LL");
+                var edcDate = moment(add1Year).format("L");
+                var formatEDCDate = edcDate.split('/')[1] + "/" + edcDate.split('/')[0] + "/" + edcDate.split('/')[2];
+
+                var aogAdd33Date = new Date(aogNewDate.setDate(aogNewDate.getDate() + 33));
+                var aogDate = moment(aogAdd33Date).format("L");
+                var aogDisplayDate = moment(aogAdd33Date).format("LL");
+                var formatAOGDate = aogDate.split('/')[1] + "/" + aogDate.split('/')[0] + "/" + aogDate.split('/')[2];
+
+                var totalWeeks = moment(new Date()).diff(moment(dateForWeeks), 'weeks');
+
+                $('#fld-edc-display').val(displayDate);
+                $('#patient_medical_record_edc').val(formatEDCDate);
+
+                $('#fld-aog-display').val(totalWeeks);
+                $('#patient_medical_record_aog').val(totalWeeks);
+            }
+        }
+    });
+
 });
 
 function processMedicalHistoryFiles(files) {

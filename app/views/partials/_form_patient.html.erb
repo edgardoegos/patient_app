@@ -32,22 +32,14 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-4">
+    <div class="col-xs-2">
+      <label class="control-label">AGE <large class="required">*</large></label>
+      <%= text_field_tag "", @patient.age, id: "display_field_age", class: "form-control", disabled: true %>
+      <%= f.hidden_field :age, autofocus: true, class: "form-control" %>
+    </div>
+    <div class="col-xs-2">
         <label class="control-label">GENDER <large class="required">*</large></label>
-        <br \>
-        <% Patient.genders.each do |k, v| %>
-            <% if params[:action] == "new" %>
-                <div class="radio radio-info radio-inline">
-                    <%= f.radio_button :gender, k, id: k, checked: v == 1 ? "checked" : "" %>
-                    <%= f.label :gender, k == "male" ? "Male" : "Female", :value => v, :for => k   %>
-                </div>
-            <% else %>
-                <div class="radio radio-info radio-inline">
-                    <%= f.radio_button :gender, k, checked: @patient.gender == k ? "checked" : "" %>
-                    <%= f.label :gender, k == "male" ? "Male" : "Female", :value => v, :for =>  k   %>
-                </div>
-            <% end %>
-        <% end %>
+        <%= f.select(:gender, options_for_select(Patient.genders.collect{ |k, v| [k.humanize.titlecase, k]}, @patient.civil_status), {}, { :class => 'form-control m-b' }) %>
     </div>
     <div class="col-xs-4">
         <label class="control-label">CIVIL STATUS <large class="required">*</large></label>
@@ -88,174 +80,46 @@
     </div>
 </div>
 
-<div class="hr-line-dashed"></div>
-<h3>MEDICAL RECORD <small>(* are all required fields)</small></h3>
 
 <div class="form-group">
   <div class="col-xs-12">
-    <label class="control-label">Type <large class="required">*</large></label>
-    <br \>
-    <% if @patient.medical_record["type"] == "ob" %>
-      <div class="radio radio-info radio-inline">
-        <%= radio_button_tag "patient[medical_record][type]", "ob", checked: "checked"  %>
-        <%= label_tag "patient[medical_record][type]", "OB", :value => "ob", :for => "patient_medical_record_type_ob"   %>
-      </div>
-
-      <div class="radio radio-info radio-inline">
-        <%= radio_button_tag "patient[medical_record][type]", "gyne" %>
-        <%= label_tag "patient[medical_record][type]", "Gyne", :value => "gyne", :for => "patient_medical_record_type_gyne"   %>
-      </div>
-
-    <% else %>
-
-        <div class="radio radio-info radio-inline">
-          <%= radio_button_tag "patient[medical_record][type]", "ob"  %>
-          <%= label_tag "patient[medical_record][type]", "OB", :value => "ob", :for => "patient_medical_record_type_ob"   %>
-        </div>
-
-        <div class="radio radio-info radio-inline">
-          <%= radio_button_tag "patient[medical_record][type]", "gyne", checked: "checked" %>
-          <%= label_tag "patient[medical_record][type]", "Gyne", :value => "gyne", :for => "patient_medical_record_type_gyne"   %>
-        </div>
-    <% end %>
-
+    <label class="control-label">REMARKS</label>
+    <%= text_area_tag "patient[medical_record][remarks]", @patient.medical_record['remarks'], :class => "form-control", :style => "height: 100px;" %>
   </div>
 </div>
 
-<div class="form-group">
-  <div class="col-xs-4">
-    <label class="control-label">LMS</label>
-    <div id="date_lms">
-      <div class="input-group date">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][lmr]",  @patient.medical_record['lmr'],  autofocus: true, class: "form-control" %>
-      </div>
-    </div>
-  </div>
-  <div class="col-xs-4">
-    <label class="control-label">ECD</label>
-    <input id="fld-edc-display" type="text" class="form-control" disabled value="<%= @patient.medical_record['edc'] != "" ? DateTime.parse(@patient.medical_record['edc']).strftime("%B %d, %C%y") : "" %>">
-    <%= hidden_field_tag "patient[medical_record][edc]",  @patient.medical_record['edc'], class: "form-control"%>
-  </div>
-</div>
+<!--<div class="hr-line-dashed"></div>-->
+<!--<h3>ATTACHMENTS <small>(pdf and image files)</small></h3>-->
 
-<div class="form-group">
-  <div class="col-xs-4">
-    <label class="control-label">MENARCHE</label>
-    <%= select_year(@patient.medical_record['menarche'].to_i, {:start_year => Time.now.year, :end_year => 1980}, {:class => "form-control m-b", :name => "patient[medical_record][menarche]"})  %>
-  </div>
-  <div class="col-xs-1">
-    <label class="control-label">GRAVIDA</label>
-    <%= select_tag("patient[medical_record][gravida]", options_for_select(0..20, @patient.medical_record['gravida']), :class => 'form-control m-b') %>
-  </div>
-  <div class="col-xs-1">
-    <label class="control-label">PARA</label>
-    <%= select_tag("patient[medical_record][para]", options_for_select(0..20, @patient.medical_record['para']), :class => 'form-control m-b') %>
-  </div>
-  <div class="col-xs-1">
-    <label class="control-label">T</label>
-    <%= select_tag("patient[medical_record][t]", options_for_select(0..20, @patient.medical_record['t']), :class => 'form-control m-b') %>
-  </div>
-  <div class="col-xs-1">
-    <label class="control-label">P</label>
-    <%= select_tag("patient[medical_record][p]", options_for_select(0..20, @patient.medical_record['p']), :class => 'form-control m-b') %>
-  </div>
-  <div class="col-xs-1">
-    <label class="control-label">A</label>
-    <%= select_tag("patient[medical_record][a]", options_for_select(0..20, @patient.medical_record['a']), :class => 'form-control m-b') %>
-  </div>
-  <div class="col-xs-1">
-    <label class="control-label">L</label>
-    <%= select_tag("patient[medical_record][l]", options_for_select(0..20, @patient.medical_record['l']), :class => 'form-control m-b') %>
-  </div>
-</div>
+<!--<div class="form-group">-->
+  <!--<div class="col-md-4 col-xs-4">-->
+    <!--<label class="control-label">PAST MEDICAL HISTORY</label>-->
+    <!--<input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">-->
+    <!--<div id="medical-records-container" class="containers">-->
 
-<div class="form-group">
-  <div class="col-xs-12">
-    <label class="control-label">CHIEF COMPLAINT <large class="required">*</large></label>
-    <%= text_area_tag "patient[medical_record][chief_complaint]", @patient.medical_record['chief_complaint'], :class => "form-control", :style => "height: 100px;", :required => true %>
-  </div>
-</div>
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-md-4 col-xs-4">-->
+    <!--<label class="control-label">LABORATORY RESULTS</label>-->
+    <!--<input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">-->
+    <!--<div id="laboratory-results-container" class="containers">-->
 
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-md-4 col-xs-4">-->
+    <!--<label class="control-label">PHYSICAL EXAMINATIONS</label>-->
+    <!--<input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">-->
+    <!--<div id="physical-examinations-container" class="containers">-->
 
-<div class="form-group">
-  <div class="col-xs-12">
-    <label class="control-label">HISTORY OF PRESENT ILLNESS <large class="required">*</large></label>
-    <%= text_area_tag "patient[medical_record][history_of_present_illness]", @patient.medical_record['history_of_present_illness'], :class => "form-control", :style => "height: 100px;", :required => true %>
-  </div>
-</div>
-
-<div class="form-group">
-    <div class="col-xs-12">
-        <label class="control-label">OB-GYNE HISTORY <large class="required">*</large></label>
-        <%= text_area_tag "patient[medical_record][ob_history]", @patient.medical_record['ob_history'], :class => "form-control", :style => "height: 100px;", :required => true %>
-    </div>
-</div>
-
-<div class="hr-line-dashed"></div>
-<h3>OTHERS <small>(* are all required fields)</small></h3>
-
-<div class="form-group">
-  <div class="col-xs-4">
-    <label class="control-label">RETURN VISIT <large class="required">*</large></label>
-    <div id="fld-return-visit">
-      <div class="input-group date">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][return_visit]",  @patient.medical_record["return_visit"],  autofocus: true, class: "form-control", required: true %>
-      </div>
-    </div>
-  </div>
-  <div class="col-xs-4">
-    <label class="control-label">RECORD DATE <large class="required">*</large></label>
-    <div id="fld-record-date">
-      <div class="input-group date">
-        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "patient[medical_record][record_date]",  @patient.medical_record["record_date"],  autofocus: true, class: "form-control", required: true %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-xs-12">
-    <label class="control-label">MANAGEMENT <large class="required">*</large></label>
-    <%= text_area_tag "patient[medical_record][management]", @patient.medical_record['management'], :class => "form-control", :style => "height: 100px;" %>
-  </div>
-</div>
-
-<div class="form-group">
-  <div class="col-xs-12">
-    <label class="control-label">RECOMMENDATIONS <large class="required">*</large></label>
-    <%= text_area_tag "patient[medical_record][recommendations]", @patient.medical_record['recommendations'], :class => "form-control", :style => "height: 100px;" %>
-  </div>
-</div>
-
-<div class="hr-line-dashed"></div>
-<h3>ATTACHMENTS <small>(pdf and image files)</small></h3>
-
-<div class="form-group">
-  <div class="col-md-4 col-xs-4">
-    <label class="control-label">PAST MEDICAL HISTORY</label>
-    <input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">
-    <div id="medical-records-container" class="containers">
-
-    </div>
-  </div>
-  <div class="col-md-4 col-xs-4">
-    <label class="control-label">LABORATORY RESULTS</label>
-    <input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">
-    <div id="laboratory-results-container" class="containers">
-
-    </div>
-  </div>
-  <div class="col-md-4 col-xs-4">
-    <label class="control-label">PHYSICAL EXAMINATIONS</label>
-    <input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">
-    <div id="physical-examinations-container" class="containers">
-
-    </div>
-  </div>
-</div>
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 
 <div class="hr-line-dashed"></div>
 <div class="form-group">
+    <div class="col-md-6 pull-left">
+        <label> <input type="checkbox" class="i-checks" name="patient[to_appointments]"> Continue to appointment</label>
+    </div>
     <div class="col-md-6 pull-right">
         <a href="<%= patients_path %>" class="btn btn-white pull-right">Cancel</a>
         <button class="btn btn-info pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>

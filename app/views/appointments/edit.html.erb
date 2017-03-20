@@ -15,62 +15,243 @@
     </div>
 </div>
 
-<div class="wrapper wrapper-content animated fadeInRight">
+<% if @appointment.appointment_type == "appointment" %>
+
+  <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3><%= get_patient_by_id(@appointment.patient_id) %></h3>
+                            <h1>Appointment Information</h1>
+                            <h3>appointment: <%= get_patient_by_id(@appointment.patient_id) %></h3>
+                            <br />
+                            <br />
                             <%= form_for @appointment, url: { action: "update" }, :html => { :multipart => true, :class => "wizard-big", :id => "frm-edit-appointment"} do |f| %>
                                 <div class="form-group">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-9">
                                             <label class="control-label lbl-consultation-date">Consultation Date *</label>
                                             <div id="fld-consultation-date">
                                                 <div class="input-group date">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <%= f.text_field :consultation_date, value: format_date(@appointment.consultation_date, "%d/%m/%Y"), autofocus: true, class: "form-control ", required: true %>
+                                                    <%= f.text_field :consultation_date, value: format_date(@appointment.consultation_date, "%d/%m/%Y"), class: "form-control ", required: true %>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <label class="control-label lbl-complaint">Status</label>
-                                            <%= select_tag("appointment[status]", options_for_select(Appointment.statuses.collect{ |k, v| [k.humanize.titlecase, k]}, @appointment.status), { :class => 'select2_demo_1 form-control' }) %>
+                                        <div class="col-xs-3">
+                                          <label class="control-label">Medical Record Type <large>*</large></label>
+                                          <%= select_tag("appointment[medical_records][type]", options_for_select(Appointment.medical_record_types.collect{ |k, v| [k.humanize.upcase, k]}, @appointment.medical_records['type']), { :class => 'form-control m-b' }) %>
                                         </div>
                                     </div>
                                 </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <label class="control-label lbl-systolic">Systolic *</label>
+                                    <%= f.text_field :systolic, autofocus: true, class: "form-control"%>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <label class="control-label lbl-diastolic">Diastolic *</label>
+                                    <%= f.text_field :diastolic, autofocus: true, class: "form-control" %>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <label class="control-label lbl-weight">Weight (kg) *</label>
+                                    <%= f.text_field :weight, autofocus: true, class: "form-control" %>
+                                  </div>
+                                </div>
+                              </div>
+
                                 <div class="form-group">
-                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="control-label lbl-systolic">Systolic *</label>
-                                            <%= f.text_field :systolic, autofocus: true, class: "form-control touchspin required", required: true %>
+                                  <div class="row">
+                                    <div class="col-xs-4">
+                                      <label class="control-label">LMP</label>
+                                      <div id="date_lmp">
+                                        <div class="input-group date">
+                                          <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "appointment[medical_records][lmp]",  @appointment.medical_records['lmp'],  autofocus: true, class: "form-control" %>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label class="control-label lbl-diastolic">Diastolic *</label>
-                                            <%= f.text_field :diastolic, autofocus: true, class: "form-control touchspin required", required: true %>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="control-label lbl-weight">Weight (kg) *</label>
-                                            <%= f.text_field :weight, autofocus: true, class: "form-control  required", required: true %>
-                                        </div>
+                                      </div>
                                     </div>
+
+                                    <div id="edc-container" class="col-xs-4 <%= @appointment.medical_records['type'] == 'ob' ? "" : "hidden" %>">
+                                      <label class="control-label">EDC</label>
+                                      <input id="fld-edc-display" type="text" class="form-control" disabled value="<%= @appointment.medical_records['edc'] != "" ? @appointment.medical_records['edc'] : "" %>">
+                                      <%= hidden_field_tag "appointment[medical_records][edc]",  @appointment.medical_records['edc'], class: "form-control" %>
+                                    </div>
+
+                                    <div id="aog-container" class="col-xs-4 <%= @appointment.medical_records['type'] == 'ob' ? "" : "hidden" %>">
+                                      <label class="control-label">AOG</label>
+                                      <input id="fld-aog-display" type="text" class="form-control" disabled value="<%= @appointment.medical_records['aog'] != "" ? @appointment.medical_records['aog'] : "" %>">
+                                      <%= hidden_field_tag "appointment[medical_records][aog]",  @appointment.medical_records['aog'], class: "form-control"%>
+                                    </div>
+                                  </div>
                                 </div>
+
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <label class="control-label lbl-complaint">Chief Complaint</label>
-                                            <%= text_area_tag "appointment[complaint]", @appointment['complaint'], :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" } %>
+                                            <%= text_area_tag "appointment[medical_records][chief_complaint]", @appointment.medical_records['chief_complaint'], :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" } %>
                                         </div>
                                     </div>
                                 </div>
+
+
+                              <div class="hr-line-dashed"></div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-2">
+                                    <label class="control-label">MENARCHE</label>
+                                    <%= select_tag("appointment[medical_records][menarche]", options_for_select(0..20, @appointment.medical_records['menarche']), :class => "form-control m-b") %>
+                                  </div>
+                                  <div class="col-xs-2">
+                                    <label class="control-label">GRAVIDA</label>
+                                    <%= select_tag("appointment[medical_records][gravida]", options_for_select(0..20, @appointment.medical_records['gravida']), :class => 'form-control m-b') %>
+                                  </div>
+                                  <div class="col-xs-2">
+                                    <label class="control-label">PARA</label>
+                                    <%= select_tag("appointment[medical_records][para]", options_for_select(0..20, @appointment.medical_records['para']), :class => 'form-control m-b') %>
+                                  </div>
+                                  <div class="col-xs-1">
+                                    <label class="control-label">T</label>
+                                    <%= select_tag("appointment[medical_records][t]", options_for_select(0..20, @appointment.medical_records['t']), :class => 'form-control m-b') %>
+                                  </div>
+                                  <div class="col-xs-1">
+                                    <label class="control-label">P</label>
+                                    <%= select_tag("appointment[medical_records][p]", options_for_select(0..20, @appointment.medical_records['p']), :class => 'form-control m-b') %>
+                                  </div>
+                                  <div class="col-xs-1">
+                                    <label class="control-label">A</label>
+                                    <%= select_tag("appointment[medical_records][a]", options_for_select(0..20, @appointment.medical_records['a']), :class => 'form-control m-b') %>
+                                  </div>
+                                  <div class="col-xs-1">
+                                    <label class="control-label">L</label>
+                                    <%= select_tag("appointment[medical_records][l]", options_for_select(0..20, @appointment.medical_records['l']), :class => 'form-control m-b') %>
+                                  </div>
+                                  </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">HISTORY OF PRESENT ILLNESS</label>
+                                    <%= text_area_tag "appointment[medical_records][history_of_present_illness]", @appointment.medical_records['history_of_present_illness'], :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">OB-GYNE HISTORY</label>
+                                    <%= text_area_tag "appointment[medical_records][ob_history]", @appointment.medical_records['ob_history'], :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">DIAGNOSIS</label>
+                                    <%= text_area_tag "appointment[medical_records][diagnosis]", @appointment.medical_records['diagnosis'], :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">PAST MEDICAL HISTORY</label>
+                                    <%= text_area_tag "appointment[medical_records][past_medical_history]", @appointment.medical_records['past_medical_history'], :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">LABORATORY RESULTS</label>
+                                    <%= text_area_tag "appointment[medical_records][laboratory_results]", @appointment.medical_records['laboratory_results'], :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">PHYSICAL EXAMINATIONS</label>
+                                    <%= text_area_tag "appointment[medical_records][physical_examinations]", @appointment.medical_records['physical_examinations'], :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="hr-line-dashed"></div>
+                              <h1>DOCTOR'S REMARKS</h1>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-4">
+                                    <label class="control-label">RETURN VISIT <large class="required">*</large></label>
+                                    <div id="fld-return-visit">
+                                      <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "appointment[medical_ecords][return_visit]", "",  autofocus: true, class: "form-control" %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-xs-4">
+                                    <label class="control-label">RECORD DATE <large class="required">*</large></label>
+                                    <div id="fld-record-date">
+                                      <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "appointment[record_date]", format_date(@appointment.record_date, "%d/%m/%Y"),  autofocus: true, class: "form-control" %>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-xs-4">
+                                  <label class="control-label lbl-complaint">Status</label>
+                                  <%= select_tag("appointment[status]", options_for_select(Appointment.statuses.collect{ |k, v| [k.humanize.titlecase, k]}, @appointment.status), { :class => 'select2_demo_1 form-control' }) %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">MANAGEMENT <large class="required">*</large></label>
+                                    <%= text_area_tag "appointment[management]", @appointment.management, :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <div class="row">
+                                  <div class="col-xs-12">
+                                    <label class="control-label">RECOMMENDATIONS <large class="required">*</large></label>
+                                    <%= text_area_tag "appointment[recommendations]", @appointment.recommendations, :class => "form-control", :style => "height: 100px;" %>
+                                  </div>
+                                </div>
+                              </div>
+                            
+ <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">SUMMARY <large class="required">*</large></label>
+                            <%= text_area_tag "appointment[summary]", @appointment.summary, :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
+                                  <div class="row">
                                     <div class="col-md-6 pull-right">
-                                        <a href="<%= appointments_path %>" class="btn btn-white pull-right">Cancel</a>
+                                        <a href="<%= appointments_path(filter: "today") %>" class="btn btn-white pull-right">Cancel</a>
                                         <button class="btn btn-success pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>
                                     </div>
+                                  </div>
                                 </div>
                           <% end%>
                         </div>
@@ -80,3 +261,263 @@
         </div>
     </div>
 </div>
+
+<% else %>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="ibox float-e-margins">
+            <div class="ibox-content">
+              <div class="row">
+                <div class="col-sm-12">
+                  <h1>Appointment Information</h1>
+                  <h3>appointment: <%= get_patient_by_id(@appointment.patient_id) %></h3>
+                  <br />
+                  <br />
+                  <%= form_for @appointment, url: { action: "update" }, :html => { :multipart => true, :class => "wizard-big", :id => "frm-edit-appointment"} do |f| %>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-9">
+                            <label class="control-label lbl-consultation-date">Consultation Date *</label>
+                            <div id="fld-consultation-date">
+                              <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <%= f.text_field :consultation_date, value: format_date(@appointment.consultation_date, "%d/%m/%Y"), class: "form-control ", required: true %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-3">
+                            <label class="control-label">Medical Record Type <large>*</large></label>
+                            <%= select_tag("appointment[medical_records][type]", options_for_select(Appointment.medical_record_types.collect{ |k, v| [k.humanize.upcase, k]}, @appointment.medical_records['type']), { :class => 'form-control m-b', :disabled => true }) %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label class="control-label lbl-systolic">Systolic *</label>
+                            <%= f.text_field :systolic, value: @appointment.systolic, autofocus: true, class: "form-control" %>
+                          </div>
+                          <div class="col-md-4">
+                            <label class="control-label lbl-diastolic">Diastolic *</label>
+                            <%= f.text_field :diastolic, value: @appointment.diastolic, autofocus: true, class: "form-control" %>
+                          </div>
+                          <div class="col-md-4">
+                            <label class="control-label lbl-weight">Weight (kg) *</label>
+                            <%= f.text_field :weight, value: @appointment.weight, autofocus: true, class: "form-control" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-4">
+                            <label class="control-label">LMP</label>
+                            <div id="date_lmp">
+                              <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "appointment[medical_records][lmp]",  @appointment_prev.medical_records['lmp'],  autofocus: true, class: "form-control", :disabled => true %>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div id="edc-container" class="col-xs-4 <%= @appointment_prev.medical_records['type'] == 'ob' ? "" : "hidden" %>">
+                            <label class="control-label">EDC</label>
+                            <input id="fld-edc-display" type="text" class="form-control" disabled value="<%= @appointment.medical_records['edc'] != "" ? @appointment_prev.medical_records['edc'] : "" %>">
+
+                          </div>
+
+                          <div id="aog-container" class="col-xs-4 <%= @appointment_prev.medical_records['type'] == 'ob' ? "" : "hidden" %>">
+                            <label class="control-label">AOG</label>
+                            <input id="fld-aog-display" type="text" class="form-control" disabled value="<%= @appointment.medical_records['aog'] != "" ? @appointment_prev.medical_records['aog'] : "" %>">
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <label class="control-label lbl-complaint">Previous Complaint</label>
+                            <%= text_area_tag "appointment[medical_records][chief_complaint]", @appointment_prev.medical_records['chief_complaint'], :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" }, :disabled => true %>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="hr-line-dashed"></div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-2">
+                            <label class="control-label">MENARCHE</label>
+                            <%= select_tag("appointment[medical_records][menarche]", options_for_select(0..20, @appointment_prev.medical_records['menarche']), :class => "form-control m-b", :disabled => true) %>
+                          </div>
+                          <div class="col-xs-2">
+                            <label class="control-label">GRAVIDA</label>
+                            <%= select_tag("appointment[medical_records][gravida]", options_for_select(0..20, @appointment_prev.medical_records['gravida']), :class => 'form-control m-b', :disabled => true) %>
+                          </div>
+                          <div class="col-xs-2">
+                            <label class="control-label">PARA</label>
+                            <%= select_tag("appointment[medical_records][para]", options_for_select(0..20, @appointment_prev.medical_records['para']), :class => 'form-control m-b', :disabled => true) %>
+                          </div>
+                          <div class="col-xs-1">
+                            <label class="control-label">T</label>
+                            <%= select_tag("appointment[medical_records][t]", options_for_select(0..20, @appointment_prev.medical_records['t']), :class => 'form-control m-b', :disabled => true) %>
+                          </div>
+                          <div class="col-xs-1">
+                            <label class="control-label">P</label>
+                            <%= select_tag("appointment[medical_records][p]", options_for_select(0..20, @appointment_prev.medical_records['p']), :class => 'form-control m-b', :disabled => true) %>
+                          </div>
+                          <div class="col-xs-1">
+                            <label class="control-label">A</label>
+                            <%= select_tag("appointment[medical_records][a]", options_for_select(0..20, @appointment_prev.medical_records['a']), :class => 'form-control m-b', :disabled => true) %>
+                          </div>
+                          <div class="col-xs-1">
+                            <label class="control-label">L</label>
+                            <%= select_tag("appointment[medical_records][l]", options_for_select(0..20, @appointment_prev.medical_records['l']), :class => 'form-control m-b', :disabled => true) %>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <label class="control-label lbl-complaint">Chief Complaint</label>
+                            <%= text_area_tag "appointment[medical_records][chief_complaint]", @appointment.medical_records['chief_complaint'], :class => "form-control required", :style => "height: 100px;", :data => { :name => "complaint" } %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">HISTORY OF PRESENT ILLNESS</label>
+                            <%= text_area_tag "appointment[medical_records][history_of_present_illness]", @appointment.medical_records['history_of_present_illness'], :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                    
+                    
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">OB-GYNE HISTORY</label>
+                            <%= text_area_tag "appointment[medical_records][ob_history]", @appointment.medical_records['ob_history'], :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">DIAGNOSIS</label>
+                            <%= text_area_tag "appointment[medical_records][diagnosis]", @appointment.medical_records['diagnosis'], :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">PAST MEDICAL HISTORY</label>
+                            <%= text_area_tag "appointment[medical_records][past_medical_history]", @appointment.medical_records['past_medical_history'], :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">LABORATORY RESULTS</label>
+                            <%= text_area_tag "appointment[medical_records][laboratory_results]", @appointment.medical_records['laboratory_results'], :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">PHYSICAL EXAMINATIONS</label>
+                            <%= text_area_tag "appointment[medical_records][physical_examinations]", @appointment.medical_records['physical_examinations'], :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="hr-line-dashed"></div>
+                      <h1>DOCTOR'S REMARKS</h1>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-4">
+                            <label class="control-label">RETURN VISIT <large class="required">*</large></label>
+                            <div id="fld-return-visit">
+                              <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "appointment[medical_records][return_visit]", "",  autofocus: true, class: "form-control" %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <label class="control-label">RECORD DATE <large class="required">*</large></label>
+                            <div id="fld-record-date">
+                              <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><%= text_field_tag "appointment[record_date]", format_date(@appointment.record_date, "%d/%m/%Y"),  autofocus: true, class: "form-control" %>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xs-4">
+                            <label class="control-label lbl-complaint">Status</label>
+                            <%= select_tag("appointment[status]", options_for_select(Appointment.statuses.collect{ |k, v| [k.humanize.titlecase, k]}, @appointment.status), { :class => 'select2_demo_1 form-control' }) %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">MANAGEMENT <large class="required">*</large></label>
+                            <%= text_area_tag "appointment[management]", @appointment.management, :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">RECOMMENDATIONS <large class="required">*</large></label>
+                            <%= text_area_tag "appointment[recommendations]", @appointment.recommendations, :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+                    
+                    <div class="form-group">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <label class="control-label">SUMMARY <large class="required">*</large></label>
+                            <%= text_area_tag "appointment[summary]", @appointment.summary, :class => "form-control", :style => "height: 100px;" %>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="hr-line-dashed"></div>
+                      <div class="form-group">
+                        <div class="row">
+                          <div class="col-md-6 pull-right">
+                            <a href="<%= appointments_path(filter: "today") %>" class="btn btn-white pull-right">Cancel</a>
+                            <button class="btn btn-success pull-right" type="submit" style="margin: 0 5px 0 0px;"><%= params[:action] == "new" ? "Create" : "Update" %></button>
+                          </div>
+                        </div>
+                      </div>
+                  <% end%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

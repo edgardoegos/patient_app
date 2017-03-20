@@ -38,16 +38,16 @@
                     <i class="fa fa-th-large"></i> <span class="nav-label" data-i18n="nav.metrics">Dashboard</span>
                 <% end %>
             </li>
-            
+
+            <li class="<%= is_active_controller('appointments') %>">
+              <%= link_to appointments_path(filter: 'today') do %>
+                  <i class="fa fa-calendar"></i> <span class="nav-label" data-i18n="nav.metrics">Appointments</span>
+              <% end %>
+            </li>
+
             <li class="<%= is_active_controller('patients') %>">
                 <%= link_to patients_path do %>
                     <i class="fa fa-users"></i> <span class="nav-label" data-i18n="nav.metrics">Patients</span>
-                <% end %>
-            </li>
-            
-            <li class="<%= is_active_controller('appointments') %>">
-                <%= link_to appointments_path do %>
-                    <i class="fa fa-calendar"></i> <span class="nav-label" data-i18n="nav.metrics">Appointments</span>
                 <% end %>
             </li>
 

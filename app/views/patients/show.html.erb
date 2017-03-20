@@ -22,11 +22,15 @@
 
     min-height: 230px;
   }
-
+@media print {
+      body, html, #wrapper {
+          width: 100%;
+      }
+}
 </style>
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2>Edit Patient</h2>
+    <h2>Patient Details</h2>
     <ol class="breadcrumb">
       <li>
         <a href="<%= root_url %>">Home</a>
@@ -39,17 +43,21 @@
       </li>
     </ol>
   </div>
+    <div class="col-lg-2">
+        <button class="btn btn-info btn-sm pull-right" style="margin: 32px 0 0 0;" onclick="printDiv('printableArea')"><i class="fa fa-print"></i> Print Patient Information</button> 
+    </div>
 </div>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-5">
+    <div id="contentArea">
+        <div class="row">
+    <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>Personal Information: </h5>
         </div>
         <div class="ibox-content">
-          <div class="row record-container">
+          <div class="row record-container">    
 
             <div class="col-md-12">
               <div class="form-group">
@@ -119,240 +127,47 @@
       </div>
     </div>
 
-    <div class="col-lg-7">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Medical Record: </h5>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row record-container">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <div class="inline-group col-xs-6">
-                      <label class="control-label">Health Care Provider: </label>
-                      <p><%= @patient.hmo_id == 0 ? "None" : get_hmo_by_id(@patient.hmo_id) %></p>
-                    </div>
+    <!--<div class="col-lg-12">-->
+      <!--<div class="ibox float-e-margins">-->
+        <!--<div class="ibox-title">-->
+          <!--<h5>Attachments: </h5>-->
+        <!--</div>-->
+        <!--<div class="ibox-content">-->
+          <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+              <!--<div class="row">-->
+                <!--<div class="form-group">-->
+                  <!--<div class="col-md-4 col-xs-4">-->
+                    <!--<label class="control-label">PAST MEDICAL HISTORY</label>-->
+                    <!--<input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">-->
+                    <!--<div id="medical-records-container" class="containers">-->
 
-                    <div class="inline-group col-xs-4">
-                      <label class="control-label">Type: </label>
-                      <p><%= @patient.medical_record["type"].titlecase %></p>
-                    </div>
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-md-4 col-xs-4">-->
+                    <!--<label class="control-label">LABORATORY RESULTS</label>-->
+                    <!--<input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">-->
+                    <!--<div id="laboratory-results-container" class="containers">-->
 
-                  </div>
-                </div>
+                    <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="col-md-4 col-xs-4">-->
+                    <!--<label class="control-label">PHYSICAL EXAMINATIONS</label>-->
+                    <!--<input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">-->
+                    <!--<div id="physical-examinations-container" class="containers">-->
 
-
-                <div class="col-md-12">
-                  <div class="form-group">
-
-                    <div class="inline-group col-xs-6">
-                      <label class="control-label">LMS: </label>
-                      <p><%= @patient.medical_record["lmr"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-4">
-                      <label class="control-label">EDC: </label>
-                      <p><%= @patient.medical_record["edc"] %></p>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="form-group">
-
-                    <div class="inline-group col-xs-3">
-                      <label class="control-label">Menarche: </label>
-                      <p><%= @patient.medical_record["menarche"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-2">
-                      <label class="control-label">Gravida: </label>
-                      <p><%= @patient.medical_record["gravida"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-1">
-                      <label class="control-label">Para: </label>
-                      <p><%= @patient.medical_record["para"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-1">
-                      <label class="control-label">T: </label>
-                      <p><%= @patient.medical_record["t"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-1">
-                      <label class="control-label">P: </label>
-                      <p><%= @patient.medical_record["p"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-1">
-                      <label class="control-label">A: </label>
-                      <p><%= @patient.medical_record["a"] %></p>
-                    </div>
-
-                    <div class="inline-group col-xs-1">
-                      <label class="control-label">L: </label>
-                      <p><%= @patient.medical_record["l"] %></p>
-                    </div>
-
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="forn-group">
-                    <div class="inline-group col-xs-6">
-                      <label class="control-label">Return Visit: </label>
-                      <p><%= @patient.medical_record["return_visit"] %></p>
-                    </div>
-                  </div>
-                  <div class="forn-group">
-                    <div class="inline-group col-xs-6">
-                      <label class="control-label">Record Date: </label>
-                      <p><%= @patient.medical_record["record_date"] %></p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="hr-line-dashed"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                    <!--</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
 
 
-
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Medical Record Continuation: </h5>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-md-12">
-
-              <div class="well">
-                <div class="row">
-
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div class="inline-group col-xs-12">
-                          <label class="control-label">Chief Complaint : </label>
-                          <p><%= @patient.medical_record['chief_complaint'] %></p>
-                        </div>
-                      </div>
-                    </div>
-                    </div>
-                  </div>
-
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div class="inline-group col-xs-12">
-                          <label class="control-label">History of Present Illness: </label>
-                          <p><%= @patient.medical_record['history_of_present_illness'] %></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div class="inline-group col-xs-12">
-                          <label class="control-label">Ob-Gyne History: </label>
-                          <p><%= @patient.medical_record['ob_history'] %></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div class="inline-group col-xs-12">
-                          <label class="control-label">Management: </label>
-                          <p><%= @patient.medical_record['management'] %></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <div class="inline-group col-xs-12">
-                          <label class="control-label">Recomendations: </label>
-                          <p><%= @patient.medical_record['recommendations'] %></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-12">
-      <div class="ibox float-e-margins">
-        <div class="ibox-title">
-          <h5>Attachments: </h5>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="form-group">
-                  <div class="col-md-4 col-xs-4">
-                    <label class="control-label">PAST MEDICAL HISTORY</label>
-                    <input id="past-medical-history" name="" type="file" multiple="" class="file-loading" data-type="medical-records" data-index="0">
-                    <div id="medical-records-container" class="containers">
-
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-xs-4">
-                    <label class="control-label">LABORATORY RESULTS</label>
-                    <input id="laboratory-results" name="" type="file" multiple="" class="file-loading" data-type="laboratory-results" data-index="1">
-                    <div id="laboratory-results-container" class="containers">
-
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-xs-4">
-                    <label class="control-label">PHYSICAL EXAMINATIONS</label>
-                    <input id="physical-examinations" name="" type="file" multiple="" class="file-loading" data-type="physical-examinations" data-index="2">
-                    <div id="physical-examinations-container" class="containers">
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-lg-12">
+        <div class="col-lg-12">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <h5>Appointments: </h5>
@@ -367,24 +182,25 @@
                     <th>Complaint</th>
                     <th>Record Date</th>
                     <th>Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
                   <% @appointments.each do |appointment|  %>
                       <tr class="gradeX">
-                        <td class="ellipsis"><%= appointment.complaint %></td>
+                        <td class="ellipsis"><%= appointment.medical_records["chief_complaint"] %></td>
                         <td><%= format_date(appointment.consultation_date, "%Y %B %d") %></td>
                         <td><%= appointment.appointment_type.humanize.titlecase %></td>
+                        <td><%= appointment.status.humanize.titlecase %></td>
+                        <td>
+                          <div class="btn-group">
+                            <a href="<%= patient_appointment_details_path(appointment.id) %>" class="btn btn-white btn-xs">View Details</a>
+                          </div>
+                        </td>
                       </tr>
                   <% end %>
                   </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Complaint</th>
-                    <th>Record Date</th>
-                    <th>Type</th>
-                  </tr>
-                  </tfoot>
                 </table>
 
               </div>
@@ -393,7 +209,334 @@
         </div>
       </div>
     </div>
-  </div>
+    </div>
+    </div>  
+    <div id="printableArea" class="hidden">
+        <div class="col-lg-12">
+            <h3>Patient Information</h3>
+            <div class="col-md-12" style="border-bottom: 1px dashed black;margin-bottom: 10px;"></div>
+            <div class="col-md-12" style="margin:0 !important; padding: 0 !important;">
+                <label class="control-label">Patient: </label>
+                <p><%= "#{ @patient.last_name }, #{@patient.first_name } #{@patient.middle_name }" %></p>
+            </div>
+            <div class="col-md-12" style="margin:0 !important; padding: 0 !important;">
+                <label class="control-label">Occupation: </label>
+                <p><%= @patient.occupation %></p>
+            </div>
+            <div class="col-md-12" style="margin:0 !important; padding: 0 !important;">
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Birthdate: </label>
+                  <p><%= format_date(@patient.birth_date, "%d/%m/%Y") %></p>
+                </div>
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Gender: </label>
+                  <p><%= @patient.gender.titlecase %></p>
+                </div>
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Civil Status: </label>
+                  <p><%= @patient.civil_status.titlecase %></p>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin:0 !important; padding: 0 !important;">
+                <div class="col-xs-8" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Address: </label>
+                  <p><%= @patient.address %></p>
+                </div>
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Contact: </label>
+                  <p><%= @patient.contact %></p>
+                </div>
+            </div>
+            <div class="col-md-12" style="margin:0 !important; padding: 0 !important;">
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Blood Type: </label>
+                  <p><%= @patient.blood_type %></p>
+                </div>
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Weight: </label>
+                  <p><%= @patient.weight %></p>
+                </div>
+                <div class="col-xs-4" style="margin:0 !important; padding: 0 !important;">
+                  <label class="control-label">Height: </label>
+                  <p><%= @patient.height %></p>
+                </div>
+            </div>
+            <h3>Appointments</h3>
+            <div class="col-md-12" style="border-bottom: 1px dashed black;margin-bottom: 10px;"></div>
+            <% @appointments.each do |appointment|  %>
+                <div class="row" style="margin-top:25px !important;">
+                    <div class="col-md-12" style="">
+                        <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                            <h4><span style="color:#ABAB"><%= format_date(appointment.consultation_date, "%Y %B %d") %></span> - <%= appointment.appointment_type.humanize.titlecase %></h4>
+                        </div>
+                        <div class="col-md-12" style="border-bottom: 1px dashed black;margin-bottom: 10px;padding: 0 !important;"></div>
+                        <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                            <% if appointment.appointment_type == "return_visit" %>
+
+                                <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+
+                                    <div class="col-xs-3" style="margin:0 !important; padding: 0 !important;">
+                                      <p><label class="control-label">Type: </label>
+                                      <%= get_appointment_prev(appointment.parent_id).medical_records["type"].titlecase %></p>
+                                    </div>
+
+                                    <div class="col-xs-3" style="margin:0 !important; padding: 0 !important;">
+                                      <p><label class="control-label">LMP: </label>
+                                        <%= get_appointment_prev(appointment.parent_id).medical_records["lmp"] %></p>
+                                    </div>
+
+                                    <div class="col-xs-3" style="margin:0 !important; padding: 0 !important;">
+                                      <p><label class="control-label">EDC: </label>
+                                        <%= get_appointment_prev(appointment.parent_id).medical_records["edc"] %></p>
+                                    </div>
+                                    <div class="col-xs-3" style="margin:0 !important; padding: 0 !important;">
+                                      <p><label class="control-label">AOG: </label>
+                                        <%= get_appointment_prev(appointment.parent_id).medical_records["aog"] %></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+
+                                <div class="col-xs-3" style="margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Menarche: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["menarche"] %></p>
+                                </div>
+
+                                <div class="col-xs-2" style="margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Gravida: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["gravida"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="white-space:nowrap;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Para: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["para"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">T: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["t"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">P: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["p"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">A: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["a"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="margin:0 !important; padding: 0 !important;">
+                                  <p> <label class="control-label">L: </label>
+                                  <%= get_appointment_prev(appointment.parent_id).medical_records["l"] %></p>
+                                </div>
+
+                            </div>
+                            <% else %>
+
+                                <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+
+                                <div class="col-xs-3" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Type: </label>
+                                  <%= appointment.medical_records["type"].titlecase %></p>
+                                </div>
+
+                                <div class="col-xs-3" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;" >
+                                  <p><label class="control-label">LMP: </label>
+                                    <%= appointment.medical_records["lmp"] %></p>
+                                </div>
+
+                                <div class="col-xs-3" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">EDC: </label>
+                                    <%= appointment.medical_records["edc"] %></p>
+                                </div>
+
+                                <div class="col-xs-3" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">AOG: </label>
+                                    <%= appointment.medical_records["aog"] %></p>
+                                </div>
+
+                            </div>
+                                <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+
+                                <div class="col-xs-3" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Menarche: </label>
+                                  <%= appointment.medical_records["menarche"] %></p>
+                                </div>
+
+                                <div class="col-xs-2" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Gravida: </label>
+                                  <%= appointment.medical_records["gravida"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">Para: </label>
+                                  <%= appointment.medical_records["para"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">T: </label>
+                                  <%= appointment.medical_records["t"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">P: </label>
+                                  <%= appointment.medical_records["p"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p><label class="control-label">A: </label>
+                                  <%= appointment.medical_records["a"] %></p>
+                                </div>
+
+                                <div class="col-xs-1" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                                  <p> <label class="control-label">L: </label>
+                                  <%= appointment.medical_records["l"] %></p>
+                                </div>
+                            </div>
+                            <% end %>
+                        </div>
+</div>
+                    <div class="col-md-12" style="margin:0 !important; padding: 0 !important;">
+                        <% if appointment.appointment_type == "return_visit" %>
+                        
+                          <div class="col-md-6" style="margin:0 !important; padding: 0 !important;">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <div class="inline-group col-xs-12">
+                                    <label class="control-label">Previous Complaint : </label>
+                                    <p><%= get_appointment_prev(appointment.parent_id).medical_records['chief_complaint'] %></p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <% end %>
+                        
+                    <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Chief Complaint : </label>
+                                <p><%= appointment.medical_records['chief_complaint'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">History of Present Illness: </label>
+                                <p><%= appointment.medical_records['history_of_present_illness'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Ob-Gyne History: </label>
+                                <p><%= appointment.medical_records['ob_history'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Diagnosis: </label>
+                                <p><%= appointment.medical_records['diagnosis'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Past Medical History: </label>
+                                <p><%= appointment.medical_records['past_medical_history'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Laboratory Results: </label>
+                                <p><%= appointment.medical_records['laboratory_results'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Physical Examinations: </label>
+                                <p><%= appointment.medical_records['physical_examinations'] %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Management: </label>
+                                <p><%= appointment.management %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-12" style="page-break-inside:avoid;margin:0 !important; padding: 0 !important;">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <div class="inline-group col-xs-12">
+                                <label class="control-label">Recomendations: </label>
+                                <p><%= appointment.recommendations  %></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
 </div>
 
 <% content_for :javascript do %>
